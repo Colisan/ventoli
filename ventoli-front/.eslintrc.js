@@ -11,6 +11,7 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.ts"]}],
   },
   parserOptions: {
     parser: '@typescript-eslint/parser',
@@ -18,7 +19,7 @@ module.exports = {
   overrides: [
     {
       files: [
-        '**/__tests__/*.{j,t}s?(x)',
+        '**/*.test.ts',
       ],
       env: {
         mocha: true,

@@ -5,8 +5,15 @@
     "tasks": [
         {
             "type": "npm",
-            "script": "test:unit",
+            "script": "test",
             "path": "ventoli-front/",
+            "problemMatcher": []
+        },
+        {
+            "type": "npm",
+            "script": "test:watch",
+            "path": "ventoli-front/",
+            "group": "build",
             "problemMatcher": []
         }
     ]
