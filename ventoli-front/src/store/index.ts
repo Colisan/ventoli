@@ -1,15 +1,11 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import store from '@/store/storeFront';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
+    store,
   },
 });
