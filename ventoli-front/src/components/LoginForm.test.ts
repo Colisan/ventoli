@@ -11,7 +11,7 @@ import store from '@/store/';
 chai.use(sinonChai);
 Vue.use(Vuex);
 
-describe('LoginForm.vue', () => {
+describe('LoginForm component', () => {
   const wrapper = shallowMount(LoginForm, { store });
 
   it('renders something', () => {

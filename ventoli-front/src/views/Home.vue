@@ -1,5 +1,6 @@
 <template>
   <div>
+    <router-link to="/login">Log in</router-link>
     Hello
   </div>
 </template>

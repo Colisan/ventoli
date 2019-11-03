@@ -1,7 +1,8 @@
 <template>
-    <div>
-        <LoginForm />
-    </div>
+  <div>
+    <router-link to="/">Home</router-link>
+    <LoginForm />
+  </div>
 </template>
 
 

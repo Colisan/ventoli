@@ -3,8 +3,10 @@ import { expect } from 'chai';
 import { shallowMount, mount } from '@vue/test-utils';
 import LoginForm from '@/components/LoginForm.vue';
 import Login from '@/views/Login.vue';
+import { routes } from '@/router';
+import { testWrapperForRouterPath } from '@/helpers/helperTests';
 
-describe('Login.vue', () => {
+describe('Login view', () => {
   const wrapper = shallowMount(Login, {});
 
   it('renders something', () => {
@@ -13,5 +15,9 @@ describe('Login.vue', () => {
 
   it('has a LoginForm component as child', () => {
     expect(wrapper.find(LoginForm).exists()).to.equal(true);
+  });
+
+  it('renders a link to the home view', () => {
+    testWrapperForRouterPath(wrapper, 'Home');
   });
 });
