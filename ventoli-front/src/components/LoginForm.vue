@@ -16,9 +16,6 @@ export default class LoginForm extends Vue {
 
   public ID_PASSWORD: string = 'login_input_password';
 
-  // @Getter login!: string
-  // @Mutation setLogin!: any
-
   beforeCreate() {
     helperStores.defaultModel(this, 'login');
     helperStores.defaultModel(this, 'password');

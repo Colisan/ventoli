@@ -15,14 +15,14 @@ describe('LoginForm.vue', () => {
     expect(wrapper.html()).not.to.equal(undefined);
   });
 
-  it('renders two input', () => {
-    const matches = wrapper.html().match(/<input/g) || [];
-    expect(matches).to.have.lengthOf(2);
+  it('renders a login input', () => {
+    const inputWrapper = wrapper.find(`#${wrapper.vm.$data.ID_LOGIN}`);
+    expect(inputWrapper.exists()).to.be.true;
   });
 
   it('renders a password input', () => {
-    const matches = wrapper.html().match(/<input[^>]*type=['"]password/g) || [];
-    expect(matches).to.have.lengthOf(1);
+    const inputWrapper = wrapper.find(`#${wrapper.vm.$data.ID_PASSWORD}`);
+    expect(inputWrapper.exists()).to.be.true;
   });
 
   it('synchronizes its login input with the store login', () => {
