@@ -28,7 +28,7 @@ describe('LoginForm.vue', () => {
   it('synchronizes its login input with the store login', () => {
     let newValue = 'tintin le lapin';
     store.commit('setLogin', newValue);
-    const inputWrapper = wrapper.find("input[id='input_login']");
+    const inputWrapper = wrapper.find(`#${wrapper.vm.$data.ID_LOGIN}`);
     const inputElement = inputWrapper.element as HTMLInputElement;
     expect(inputElement.value).to.equal(newValue);
 
@@ -40,7 +40,7 @@ describe('LoginForm.vue', () => {
   it('synchronizes its password input with the store password', () => {
     let newValue = 'secret';
     store.commit('setPassword', newValue);
-    const inputWrapper = wrapper.find("input[id='input_password']");
+    const inputWrapper = wrapper.find(`#${wrapper.vm.$data.ID_PASSWORD}`);
     const inputElement = inputWrapper.element as HTMLInputElement;
     expect(inputElement.value).to.equal(newValue);
 

@@ -1,7 +1,7 @@
 <template>
     <div>
-        <input id='input_login' v-model="loginModel">
-        <input id='input_password' type='password' v-model="passwordModel">
+        <input :id="ID_LOGIN" v-model="loginModel">
+        <input :id="ID_PASSWORD" type='password' v-model="passwordModel">
     </div>
 </template>
 
@@ -12,6 +12,10 @@ import helperStores from '@/helpers/helperStores';
 
 @Component
 export default class LoginForm extends Vue {
+  public ID_LOGIN: string = 'login_input_login';
+
+  public ID_PASSWORD: string = 'login_input_password';
+
   // @Getter login!: string
   // @Mutation setLogin!: any
 
