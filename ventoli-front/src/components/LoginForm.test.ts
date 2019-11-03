@@ -14,8 +14,8 @@ Vue.use(Vuex);
 describe('LoginForm.vue', () => {
   const wrapper = shallowMount(LoginForm, { store });
 
-  it('can be mounted', () => {
-    expect(wrapper.html()).not.to.equal(undefined);
+  it('renders something', () => {
+    expect(wrapper.html()).not.to.be.undefined;
   });
 
   it('renders a login input', () => {

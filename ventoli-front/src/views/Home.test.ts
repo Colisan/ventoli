@@ -1,17 +1,16 @@
 /* eslint-disable no-unused-expressions */
 import { expect } from 'chai';
 import { shallowMount, mount } from '@vue/test-utils';
-import LoginForm from '@/components/LoginForm.vue';
-import Login from '@/views/Login.vue';
+import Home from '@/views/Home.vue';
 
 describe('Login.vue', () => {
-  const wrapper = shallowMount(Login, {});
+  const wrapper = shallowMount(Home, {});
 
   it('renders something', () => {
     expect(wrapper.html()).not.to.be.undefined;
   });
 
-  it('has a LoginForm component as child', () => {
-    expect(wrapper.find(LoginForm).exists()).to.equal(true);
+  it('is polite', () => {
+    expect(wrapper.html()).to.include('Hello');
   });
 });
