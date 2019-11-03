@@ -1,0 +1,24 @@
+    image: node:latest
+
+    stages:
+      - build
+      - test
+
+    cache:
+      paths:
+        - ventoli-front/node_modules/
+
+    install_dependencies:
+      stage: build
+      script:
+        - cd ventoli-front
+        - npm install
+      artifacts:
+        paths:
+          - node_modules/
+
+    testing_testing:
+      stage: test
+      script: 
+        - cd ventoli-front
+        - npm test
