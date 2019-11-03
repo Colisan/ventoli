@@ -2,10 +2,13 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { shallowMount } from '@vue/test-utils';
-import { expect } from 'chai';
+import chai, { expect } from 'chai';
+import sinon from 'sinon';
+import sinonChai from 'sinon-chai';
 import LoginForm from '@/components/LoginForm.vue';
 import store from '@/store/';
 
+chai.use(sinonChai);
 Vue.use(Vuex);
 
 describe('LoginForm.vue', () => {
@@ -47,5 +50,17 @@ describe('LoginForm.vue', () => {
     newValue = 'méga secret';
     inputWrapper.setValue(newValue);
     expect(wrapper.vm.$store.state.store.password).to.equal(newValue);
+  });
+
+  it('renders a submit button', () => {
+    const inputWrapper = wrapper.find('input[type=submit]');
+    expect(inputWrapper.exists()).to.be.true;
+  });
+
+  it('calls store\'s login action when form submitted', () => {
+    const inputWrapper = wrapper.find('form');
+    const actionSpy = sinon.spy(wrapper.vm.$store, 'dispatch');
+    inputWrapper.trigger('submit');
+    expect(actionSpy).to.have.been.called;
   });
 });
