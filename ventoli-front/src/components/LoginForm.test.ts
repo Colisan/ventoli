@@ -34,7 +34,7 @@ describe('LoginForm.vue', () => {
 
     newValue = 'tata le petit chat';
     inputWrapper.setValue(newValue);
-    expect(wrapper.vm.$store.getters.login).to.equal(newValue);
+    expect(wrapper.vm.$store.state.store.login).to.equal(newValue);
   });
 
   it('synchronizes its password input with the store password', () => {
@@ -46,6 +46,6 @@ describe('LoginForm.vue', () => {
 
     newValue = 'méga secret';
     inputWrapper.setValue(newValue);
-    expect(wrapper.vm.$store.getters.password).to.equal(newValue);
+    expect(wrapper.vm.$store.state.store.password).to.equal(newValue);
   });
 });

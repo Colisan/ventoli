@@ -29,13 +29,19 @@ export default {
     });
     return res;
   },
-  defaultModel(vueComponent: Vue, propName: string) {
-    Object.defineProperty(vueComponent, `${propName}Model`, {
+  defaultModel(vueComponent: Vue,
+    stateOrGetterName:string,
+    mutationName = `set${ucfirst(stateOrGetterName)}`,
+    modelName = `${stateOrGetterName}Model`) {
+    Object.defineProperty(vueComponent, `${modelName}`, {
       get(): any {
-        return vueComponent.$store && vueComponent.$store.getters[propName];
+        return vueComponent.$store && (
+          vueComponent.$store.state.store[stateOrGetterName]
+          || vueComponent.$store.getters[stateOrGetterName]
+        );
       },
       set(value: any): void {
-        if (vueComponent.$store) vueComponent.$store.commit(`set${ucfirst(propName)}`, value);
+        if (vueComponent.$store) vueComponent.$store.commit(mutationName, value);
       },
     });
   },

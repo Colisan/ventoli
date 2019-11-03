@@ -14,7 +14,6 @@ const mutations = {
 };
 
 const getters = {
-  ...helperStores.defaultGetters(initialState),
 };
 
 export default {
