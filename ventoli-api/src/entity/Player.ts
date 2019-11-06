@@ -1,16 +1,9 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  Unique,
-  CreateDateColumn,
-  UpdateDateColumn
-} from "typeorm";
-import { Length } from "class-validator";
-import * as bcrypt from "bcryptjs";
+import { Entity, PrimaryGeneratedColumn, Column, Unique, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { Length } from 'class-validator';
+import * as bcrypt from 'bcryptjs';
 
 @Entity()
-@Unique(["name"])
+@Unique(['name'])
 export default class Player {
   @PrimaryGeneratedColumn()
   id: number;
@@ -35,7 +28,7 @@ export default class Player {
     this.password = bcrypt.hashSync(this.password, 8);
   }
 
-  checkIfUnencryptedPasswordIsValid(unencryptedPassword: string) {
-    return bcrypt.compareSync(unencryptedPassword, this.password);
+  isClearPasswordValid(clearPassword: string) {
+    return bcrypt.compareSync(clearPassword, this.password);
   }
 }

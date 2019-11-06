@@ -4,41 +4,45 @@
   "private": true,
   "scripts": {
     "tsc": "tsc",
+    "lint": "tsc --noEmit && eslint ./src/**/*.{js,ts,tsx} --quiet --fix",
     "start": "set debug=* && ts-node-dev --respawn --transpileOnly ./src/index.ts",
     "prod": "tsc && node ./build/app.js",
     "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run"
   },
   "dependencies": {
     "@types/bcryptjs": "^2.4.2",
-    "@types/body-parser": "^1.17.0",
-    "@types/cors": "^2.8.4",
+    "@types/body-parser": "^1.17.1",
+    "@types/cors": "^2.8.6",
     "@types/helmet": "0.0.42",
-    "@types/jsonwebtoken": "^8.3.0",
+    "@types/jsonwebtoken": "^8.3.5",
+    "@types/swagger-ui-express": "^3.0.1",
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.18.1",
+    "body-parser": "^1.19.0",
     "class-validator": "^0.9.1",
     "cors": "^2.8.5",
-    "express": "^4.15.4",
-    "helmet": "^3.15.0",
-    "jsonwebtoken": "^8.4.0",
+    "express": "^4.17.1",
+    "helmet": "^3.21.2",
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "^2.17.1",
     "reflect-metadata": "^0.1.10",
-    "ts-node-dev": "^1.0.0-pre.32",
+    "swagger-jsdoc": "^3.4.0",
+    "swagger-ui-express": "^4.1.2",
+    "ts-node-dev": "^1.0.0-pre.44",
     "typeorm": "0.2.12"
   },
   "devDependencies": {
-    "@types/node": "^8.0.29",
-    "ts-node": "3.3.0",
-    "typescript": "2.5.2",
-    "eslint": "^5.16.0",
-    "lint-staged": "^9.4.2"
-  },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,ts}": [
-      "npm run lint",
-      "git add"
-    ]
+    "@types/node": "^8.10.58",
+    "@typescript-eslint/eslint-plugin": "^2.6.1",
+    "@typescript-eslint/parser": "^2.6.1",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.1",
+    "mocha": "^6.2.2",
+    "prettier": "^1.18.2",
+    "ts-mocha": "^6.0.0",
+    "ts-node": "^3.3.0",
+    "typescript": "^3.7.2"
   }
 }

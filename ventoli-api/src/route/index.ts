@@ -1,10 +1,35 @@
-import { Router } from "express";
-import auth from "./auth";
-import player from "./player";
+import { Router } from 'express';
+import AuthController from '../controller/AuthController';
+import PlayerController from '../controller/PlayerController';
+import { validateJwt } from '../middleware/validateJwt';
 
-const routes = Router();
+const router = Router();
 
-routes.use("/auth", auth);
-routes.use("/player", player);
+/**
+ * @swagger
+ *
+ * /api/auth/login:
+ *   post:
+ *     $ref: '#/definitions/AuthController_login'
+ */
+router.post('/auth/login', AuthController.login);
 
-export default routes;
+/**
+ * @swagger
+ *
+ * /api/player/:
+ *   get:
+ *     $ref: '#/definitions/PlayerController_findOneByName'
+ */
+router.get('/player/:name(.{4,})', [validateJwt], PlayerController.findOneByName);
+
+/**
+ * @swagger
+ *
+ * /api/player/:
+ *   post:
+ *     $ref: '#/definitions/PlayerController_newPlayer'
+ */
+router.post('/player/', PlayerController.newPlayer);
+
+export default router;
