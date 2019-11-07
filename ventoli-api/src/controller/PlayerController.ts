@@ -10,15 +10,14 @@ class PlayerController {
    *
    * definitions:
    *   PlayerController_findOneByName:
-   *     description: Find a player's public informations
    *     produces:
    *       - application/json
    *     parameters:
-   *       - name: playername
-   *         description: Username to search for.
-   *         in: path
+   *       - in: path
+   *         name: playername
    *         required: true
-   *         type: string
+   *         schema:
+   *           type: string
    *     responses:
    *       200:
    *         description: Here it is!
@@ -26,13 +25,14 @@ class PlayerController {
    *         description: Player not found
    */
   static findOneByName = async (req: Request, res: Response) => {
-    const { name } = req.params;
+    console.log(req, req.params);
+    const { playername } = req.params;
 
     const playerRepository = getRepository(Player);
     try {
       const player = await playerRepository.findOneOrFail({
         select: ['id', 'name'],
-        where: { name },
+        where: { name: playername },
       });
       res.send(player);
     } catch (error) {
@@ -45,20 +45,22 @@ class PlayerController {
    *
    * definitions:
    *   PlayerController_newPlayer:
-   *     description: Register a new player
    *     produces:
    *       - application/json
-   *     parameters:
-   *       - name: playername
-   *         description: Username to register.
-   *         in: body
-   *         required: true
-   *         type: string
-   *       - name: password
-   *         description: User's password.
-   *         in: body
-   *         required: true
-   *         type: string
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             type: object
+   *             properties:
+   *               playername:
+   *                 type: string
+   *               password:
+   *                 type: string
+   *             required:
+   *               - playername
+   *               - password
    *     responses:
    *       201:
    *         description: It's all done!
@@ -68,12 +70,9 @@ class PlayerController {
    *         description: Username not avaliable
    */
   static newPlayer = async (req: Request, res: Response) => {
-    const { name, password } = req.body;
-    console.log(req);
-    console.log('creating name : ', name);
-    console.log('creating password : ', password);
+    const { playername, password } = req.body;
     const player = new Player();
-    player.name = name;
+    player.name = playername;
     player.password = password;
 
     const errors = await validate(player);

@@ -7,10 +7,11 @@ module.exports = {
   username: config.db_username,
   password: config.db_password,
   database: config.db_database,
+  timezone: '+00:00',
   synchronize: true,
   logging: false,
-  entities: ['build/entity/**/*.js'],
-  migrations: ['build/migration/**/*.js'],
+  entities: ['src/entity/**/*.ts'],
+  migrations: ['src/migration/**/*.ts'],
   subscribers: ['src/subscriber/**/*.ts'],
   cli: {
     entitiesDir: 'src/entity',

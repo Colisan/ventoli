@@ -20,6 +20,8 @@ const docOptions = {
 };
 const swaggerDoc = swaggerJsdoc(docOptions);
 
+process.env.TZ = 'utc';
+
 createConnection()
   .then(async connection => {
     const app = express();
