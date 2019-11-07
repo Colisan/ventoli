@@ -1,9 +1,9 @@
 <template>
-    <form @submit="loginWithCredentials">
-      <input :id="ID_LOGIN" v-model="loginModel">
-      <input :id="ID_PASSWORD" type='password' v-model="passwordModel">
-      <input type='submit' value='Enter the castle!'>
-    </form>
+  <form @submit="loginWithCredentials">
+    <input :id="ID_LOGIN" v-model="loginModel" />
+    <input :id="ID_PASSWORD" type="password" v-model="passwordModel" />
+    <input type="submit" value="Enter the castle!" />
+  </form>
 </template>
 
 <script lang="ts">
@@ -24,5 +24,4 @@ export default class LoginForm extends Vue {
     helperStores.defaultModel(this, 'password');
   }
 }
-
 </script>

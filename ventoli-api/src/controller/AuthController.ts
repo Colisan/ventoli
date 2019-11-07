@@ -9,21 +9,24 @@ export default class AuthController {
    * @swagger
    *
    * definitions:
-   *   AuthController_Login:
+   *   AuthController_login:
    *     description: Login to the application
    *     produces:
    *       - application/json
-   *     parameters:
-   *       - name: playername
-   *         description: Username to use for login.
-   *         in: body
-   *         required: true
-   *         type: string
-   *       - name: password
-   *         description: User's password.
-   *         in: body
-   *         required: true
-   *         type: string
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             type: object
+   *             properties:
+   *               playername:
+   *                 type: string
+   *               password:
+   *                 type: string
+   *             required:
+   *               - playername
+   *               - password
    *     responses:
    *       200:
    *         description: You're good to go!

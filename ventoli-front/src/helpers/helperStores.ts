@@ -1,4 +1,3 @@
-
 import { Vue } from 'vue-property-decorator';
 
 function ucfirst(input: string): string {
@@ -7,16 +6,16 @@ function ucfirst(input: string): string {
 
 export default {
   // todo passer en annotations
-  defaultMutations(initialState: {[key: string]: any}) {
+  defaultMutations(initialState: { [key: string]: any }) {
     const res = <any>{};
-    Object.keys(initialState).forEach((prop) => {
+    Object.keys(initialState).forEach(prop => {
       const mutationName = `set${ucfirst(prop)}`;
-      res[mutationName] = (state: {[key: string]: any}, newValue: any) => {
+      res[mutationName] = (state: { [key: string]: any }, newValue: any) => {
         state[prop] = newValue;
       };
     });
-    res.resetStore = (state: {[key: string]: any}) => {
-      Object.keys(initialState).forEach((prop) => {
+    res.resetStore = (state: { [key: string]: any }) => {
+      Object.keys(initialState).forEach(prop => {
         state[prop] = initialState[prop];
       });
     };
@@ -24,20 +23,22 @@ export default {
   },
   defaultGetters(initialState: any) {
     const res = <any>{};
-    Object.keys(initialState).forEach((prop) => {
-      res[prop] = (state: {[key: string]: any}) => state[prop];
+    Object.keys(initialState).forEach(prop => {
+      res[prop] = (state: { [key: string]: any }) => state[prop];
     });
     return res;
   },
-  defaultModel(vueComponent: Vue,
-    stateOrGetterName:string,
+  defaultModel(
+    vueComponent: Vue,
+    stateOrGetterName: string,
     mutationName = `set${ucfirst(stateOrGetterName)}`,
-    modelName = `${stateOrGetterName}Model`) {
+    modelName = `${stateOrGetterName}Model`
+  ) {
     Object.defineProperty(vueComponent, `${modelName}`, {
       get(): any {
-        return vueComponent.$store && (
-          vueComponent.$store.state.store[stateOrGetterName]
-          || vueComponent.$store.getters[stateOrGetterName]
+        return (
+          vueComponent.$store &&
+          (vueComponent.$store.state.store[stateOrGetterName] || vueComponent.$store.getters[stateOrGetterName])
         );
       },
       set(value: any): void {
