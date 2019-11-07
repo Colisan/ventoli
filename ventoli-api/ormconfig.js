@@ -1,6 +1,6 @@
-import config from '../config';
+const config = require('./config');
 
-export = {
+module.exports = {
   type: 'mariadb',
   host: config.db_host,
   port: config.db_port,
@@ -9,8 +9,8 @@ export = {
   database: config.db_database,
   synchronize: true,
   logging: false,
-  entities: ['src/entity/**/*.ts'],
-  migrations: ['src/migration/**/*.ts'],
+  entities: ['build/entity/**/*.js'],
+  migrations: ['build/migration/**/*.js'],
   subscribers: ['src/subscriber/**/*.ts'],
   cli: {
     entitiesDir: 'src/entity',

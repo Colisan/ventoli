@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, getRepository } from 'typeorm';
 import Player from '../entity/Player';
-import config from '../../../config';
+import config from '../../config';
 
 export default class CreateAdminPlayer1572977585998 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<any> {

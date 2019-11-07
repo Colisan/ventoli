@@ -69,6 +69,9 @@ class PlayerController {
    */
   static newPlayer = async (req: Request, res: Response) => {
     const { name, password } = req.body;
+    console.log(req);
+    console.log('creating name : ', name);
+    console.log('creating password : ', password);
     const player = new Player();
     player.name = name;
     player.password = password;

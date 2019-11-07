@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import * as jwt from 'jsonwebtoken';
-import config from '../../../config';
+import config from '../../config';
 import JwtPayload from '../model/JwtPayload';
 
 export const validateJwt = (req: Request, res: Response, next: NextFunction) => {

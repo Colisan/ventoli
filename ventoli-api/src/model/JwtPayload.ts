@@ -1,6 +1,6 @@
 import * as jwt from 'jsonwebtoken';
 import Player from '../entity/Player';
-import config from '../../../config';
+import config from '../../config';
 
 export default class JwtPayload {
   playerid: number;
