@@ -57,10 +57,11 @@ describe('LoginForm component', () => {
     expect(inputWrapper.exists()).to.be.true;
   });
 
-  it("calls store's login action when form submitted", () => {
+  it("calls store's loginWithCredentials action when form submitted", () => {
     const inputWrapper = wrapper.find('form');
-    const actionSpy = sinon.spy(wrapper.vm.$store, 'dispatch');
+    const actionStub = sinon.stub(wrapper.vm.$store, 'dispatch');
     inputWrapper.trigger('submit');
-    expect(actionSpy).to.have.been.called;
+    expect(actionStub).to.have.been.calledWith('loginWithCredentials');
+    sinon.restore();
   });
 });

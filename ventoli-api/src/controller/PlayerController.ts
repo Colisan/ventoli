@@ -25,7 +25,6 @@ class PlayerController {
    *         description: Player not found
    */
   static findOneByName = async (req: Request, res: Response) => {
-    console.log(req, req.params);
     const { playername } = req.params;
 
     const playerRepository = getRepository(Player);

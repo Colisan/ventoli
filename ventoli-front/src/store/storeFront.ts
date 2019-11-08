@@ -1,35 +1,30 @@
 import { ActionTree, MutationTree, GetterTree } from 'vuex';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import helperStores from '@/helpers/helperStores';
 
-const getInitialState = () => ({
+export const getInitialState = () => ({
   login: '',
   password: '',
-  isConnected: false,
+  authToken: '',
 });
 const initialState = getInitialState();
 
-const actions: ActionTree<any, any> = {
-  loginWithCredentials(store: any) {
-    axios
-      .post(`${process.env.VUE_APP_VENTOLI_API_URL}/auth/login`, {
-        playername: store.state.login,
-        password: store.state.password,
-      })
-      .then(res => {
-        console.log(res);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+export const actions = {
+  async loginWithCredentials(store: any): Promise<AxiosResponse<any>> {
+    const res = await axios.post(`${process.env.VUE_APP_VENTOLI_API_URL}/auth/login`, {
+      playername: store.state.login,
+      password: store.state.password,
+    });
+    store.commit('setAuthToken', res.data);
+    return res;
   },
 };
 
-const mutations: MutationTree<any> = {
+export const mutations = {
   ...helperStores.defaultMutations(initialState),
 };
 
-const getters: GetterTree<any, any> = {};
+export const getters = {};
 
 export default {
   state: initialState,
