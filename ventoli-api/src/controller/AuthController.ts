@@ -54,7 +54,7 @@ export default class AuthController {
       return;
     }
 
-    const payload = new JwtPayload(player);
-    res.send(payload.sign());
+    const payload = JwtPayload.fromPlayer(player);
+    res.send(payload.getSignedToken());
   };
 }

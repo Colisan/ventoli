@@ -2,24 +2,35 @@ import * as jwt from 'jsonwebtoken';
 import Player from '../entity/Player';
 import * as config from '../../config.js';
 
-export default class JwtPayload {
+interface PayloadData {
   playerid: number;
-
   playername: string;
+}
 
-  constructor(player: Player) {
-    this.playerid = player.id;
-    this.playername = player.name;
+export default class JwtPayload {
+  datas: PayloadData;
+
+  constructor(datas?: any) {
+    if (datas) this.datas = datas as PayloadData;
+    else
+      this.datas = {
+        playerid: undefined,
+        playername: undefined,
+      };
   }
 
-  public sign(): string {
-    return jwt.sign(
-      {
-        playerid: this.playerid,
-        playername: this.playername,
-      },
-      config.jwt_secret,
-      { expiresIn: '1h' }
-    );
+  public getSignedToken(): string {
+    return jwt.sign(this.datas, config.jwt_secret, { expiresIn: '1h' });
+  }
+
+  static fromPlayer(player: Player) {
+    const res = new JwtPayload();
+    res.datas.playerid = player.id;
+    res.datas.playername = player.name;
+    return res;
+  }
+
+  static fromSignedToken(token: string) {
+    return new JwtPayload(jwt.verify(token, config.jwt_secret) as PayloadData);
   }
 }
