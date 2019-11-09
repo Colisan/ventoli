@@ -1,12 +1,12 @@
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
-import * as express from 'express';
-import * as bodyParser from 'body-parser';
-import * as helmet from 'helmet';
-import * as cors from 'cors';
+import express from 'express';
+import bodyParser from 'body-parser';
+import helmet from 'helmet';
+import cors from 'cors';
 import router from './route';
-import * as swaggerUi from 'swagger-ui-express';
-import * as swaggerJsdoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
+import swaggerJsdoc from 'swagger-jsdoc';
 
 const docOptions = {
   definition: {

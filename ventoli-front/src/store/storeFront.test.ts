@@ -12,7 +12,7 @@ describe('loginWithCredentials action', () => {
     expect(actions.loginWithCredentials).not.to.be.undefined;
   });
 
-  it('calls axios with login and password andset authToken with the result', async () => {
+  it('calls axios with login and password and set authToken with the result', async () => {
     const postStub = sinon.stub(axios, 'post');
     const postData = 'fetchedToken';
     postStub.returns(
@@ -22,8 +22,8 @@ describe('loginWithCredentials action', () => {
     );
     const store = {
       state: {
-        login: 'Santa the papa',
-        password: 'niceSecret',
+        login: 'LuXxor te RoxXor',
+        password: 'p4ssw0rd',
       },
       commit: sinon.stub(),
     };

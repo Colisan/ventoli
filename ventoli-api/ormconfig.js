@@ -10,9 +10,9 @@ module.exports = {
   timezone: '+00:00',
   synchronize: true,
   logging: false,
-  entities: ['src/entity/**/*.ts'],
-  migrations: ['src/migration/**/*.ts'],
-  subscribers: ['src/subscriber/**/*.ts'],
+  entities: ['src/entity/**/!(*.test).ts'],
+  migrations: ['src/migration/**/!(*.test).ts'],
+  subscribers: ['src/subscriber/**/!(*.test).ts'],
   cli: {
     entitiesDir: 'src/entity',
     migrationsDir: 'src/migration',

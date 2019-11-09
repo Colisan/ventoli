@@ -1,24 +1,32 @@
-    image: node:latest
+image: node:latest
 
-    stages:
-      - build
-      - test
+stages:
+  - build
+  - test
 
-    cache:
-      paths:
-        - ventoli-front/node_modules/
+cache:
+  paths:
+    - ventoli-front/node_modules/
+    - ventoli-api/node_modules/
 
-    install_dependencies:
-      stage: build
-      script:
-        - cd ventoli-front
-        - npm install
-      artifacts:
-        paths:
-          - node_modules/
+install_dependencies:
+  stage: build
+  script:
+    - cd ventoli-front
+    - npm install
+    - cd ..
+    - cd ventoli-api
+    - npm install
+  artifacts:
+    paths:
+      - ventoli-front/node_modules/
+      - ventoli-api/node_modules/
 
-    testing_testing:
-      stage: test
-      script: 
-        - cd ventoli-front
-        - npm run test
+testing_testing:
+  stage: test
+  script:
+    - cd ventoli-front
+    - npm run test
+    - cd ..
+    - cd ventoli-api
+    - npm run test
