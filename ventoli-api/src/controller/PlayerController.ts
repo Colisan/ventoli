@@ -1,10 +1,16 @@
 import { Request, Response } from 'express';
-import { getRepository } from 'typeorm';
+import { getRepository, Repository } from 'typeorm';
 import { validate } from 'class-validator';
 
 import Player from '../entity/Player';
 
-class PlayerController {
+export default class PlayerController {
+  playerRepository: Repository<Player>;
+
+  constructor(playerRepoInjection = getRepository(Player)) {
+    this.playerRepository = playerRepoInjection;
+  }
+
   /**
    * @swagger
    *
@@ -24,12 +30,11 @@ class PlayerController {
    *       404:
    *         description: Player not found
    */
-  static findOneByName = async (req: Request, res: Response) => {
+  async findOneByName(req: Request, res: Response) {
     const { playername } = req.params;
 
-    const playerRepository = getRepository(Player);
     try {
-      const player = await playerRepository.findOneOrFail({
+      const player = await this.playerRepository.findOneOrFail({
         select: ['id', 'name'],
         where: { name: playername },
       });
@@ -37,7 +42,7 @@ class PlayerController {
     } catch (error) {
       res.status(404).send('Player not found');
     }
-  };
+  }
 
   /**
    * @swagger
@@ -68,7 +73,7 @@ class PlayerController {
    *       409:
    *         description: Username not avaliable
    */
-  static newPlayer = async (req: Request, res: Response) => {
+  async newPlayer(req: Request, res: Response) {
     const { playername, password } = req.body;
     const player = new Player();
     player.name = playername;
@@ -82,16 +87,13 @@ class PlayerController {
 
     player.hashPassword();
 
-    const playerRepository = getRepository(Player);
     try {
-      await playerRepository.save(player);
+      await this.playerRepository.save(player);
     } catch (e) {
-      res.status(409).send('playername already in use');
+      res.status(409).send('Playername already in use');
       return;
     }
 
     res.status(201).send('Player created');
-  };
+  }
 }
-
-export default PlayerController;

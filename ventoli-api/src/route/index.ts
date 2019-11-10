@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import AuthController from '../controller/AuthController';
 import PlayerController from '../controller/PlayerController';
-// import { validateJwt } from '../middleware/validateJwt';
 
 const router = Router();
+const playerController = new PlayerController();
 
 /**
  * @swagger
@@ -21,7 +21,7 @@ router.post('/auth/login', AuthController.login);
  *   get:
  *     $ref: '#/definitions/PlayerController_findOneByName'
  */
-router.get('/player/:playername', PlayerController.findOneByName);
+router.get('/player/:playername', playerController.findOneByName);
 
 /**
  * @swagger
@@ -30,6 +30,6 @@ router.get('/player/:playername', PlayerController.findOneByName);
  *   post:
  *     $ref: '#/definitions/PlayerController_newPlayer'
  */
-router.post('/player/', PlayerController.newPlayer);
+router.post('/player/', playerController.newPlayer);
 
 export default router;

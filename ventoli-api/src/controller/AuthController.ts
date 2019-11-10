@@ -35,7 +35,7 @@ export default class AuthController {
    *       401:
    *         description: Wrong username or password
    */
-  static login = async (req: Request, res: Response) => {
+  static async login(req: Request, res: Response) {
     const { playername, password } = req.body;
     if (!(playername && password)) {
       res.status(400).send();
@@ -56,5 +56,5 @@ export default class AuthController {
 
     const payload = JwtPayload.fromPlayer(player);
     res.send(payload.getSignedToken());
-  };
+  }
 }
