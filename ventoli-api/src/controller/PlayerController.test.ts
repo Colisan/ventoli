@@ -7,17 +7,18 @@ import * as typeorm from 'typeorm';
 import * as classValidator from 'class-validator';
 import PlayerController from './PlayerController';
 import Player from '../entity/Player';
-import { ValidationError } from 'class-validator';
 
 chai.use(sinonChai);
 
 describe('PlayerController class', () => {
   it('can be instanciated without parameter', () => {
     const repo = { isFakeRepo: true };
-    sinon.stub(typeorm, 'getRepository' as any).returns(repo);
+    const getRepoSub = sinon.stub(typeorm, 'getRepository' as any).returns(repo);
     const playerController = new PlayerController();
 
     expect(playerController.playerRepository).to.equal(repo);
+
+    getRepoSub.restore();
   });
 
   it('can be instanciated with repository injection', () => {
@@ -75,5 +76,56 @@ describe('PlayerController newPlayer method', () => {
     expect(res.send).to.have.been.calledWith(sinon.match.truthy);
 
     validateStub.restore();
+  });
+
+  it('hashes the password before calling save', async () => {
+    const validateStub = sinon.stub(classValidator, 'validate');
+    validateStub.returns(Promise.resolve([]));
+    playerController.playerRepository.save = sinon.stub().returns(new Player());
+
+    const clearPassword = 'HashMe';
+
+    const req = mockReq({ body: { playername: 'InnocentNoob', password: clearPassword } });
+    const res = mockRes();
+    await playerController.newPlayer(req, res);
+
+    expect(playerController.playerRepository.save).to.have.been.calledWith(
+      sinon.match(player => {
+        return player.password != clearPassword;
+      })
+    );
+
+    validateStub.restore();
+    playerController.playerRepository.save = undefined;
+  });
+
+  it('returns http 409 if player already exists', async () => {
+    const validateStub = sinon.stub(classValidator, 'validate');
+    validateStub.returns(Promise.resolve([]));
+    playerController.playerRepository.save = sinon.stub().throws('Nopity nope');
+
+    const req = mockReq({ body: { playername: 'TwoStubOneGirl', password: 'Mudamuda' } });
+    const res = mockRes();
+    await playerController.newPlayer(req, res);
+
+    expect(res.status).to.have.been.calledWith(409);
+
+    validateStub.restore();
+    playerController.playerRepository.save = undefined;
+  });
+
+  it('returns http 201 if it all goes well', async () => {
+    const validateStub = sinon.stub(classValidator, 'validate');
+    validateStub.returns(Promise.resolve([]));
+    playerController.playerRepository.save = sinon.stub().returns(new Player());
+
+    const req = mockReq({ body: { playername: 'FreshStub', password: '4llG00d' } });
+    const res = mockRes();
+    await playerController.newPlayer(req, res);
+
+    expect(res.status).to.have.been.calledWith(201);
+
+    validateStub.restore();
+    playerController.playerRepository.save = undefined;
   });
 });

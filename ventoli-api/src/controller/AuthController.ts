@@ -1,10 +1,16 @@
 import { Request, Response } from 'express';
-import { getRepository } from 'typeorm';
+import { getRepository, Repository } from 'typeorm';
 
 import Player from '../entity/Player';
 import JwtPayload from '../model/JwtPayload';
 
 export default class AuthController {
+  playerRepository: Repository<Player>;
+
+  constructor(playerRepoInjection = getRepository(Player)) {
+    this.playerRepository = playerRepoInjection;
+  }
+
   /**
    * @swagger
    *
@@ -35,18 +41,19 @@ export default class AuthController {
    *       401:
    *         description: Wrong username or password
    */
-  static async login(req: Request, res: Response) {
+  async login(req: Request, res: Response) {
     const { playername, password } = req.body;
     if (!(playername && password)) {
       res.status(400).send();
+      return;
     }
 
-    const playerRepository = getRepository(Player);
     let player: Player;
     try {
-      player = await playerRepository.findOneOrFail({ where: { playername } });
+      player = await this.playerRepository.findOneOrFail({ where: { playername } });
     } catch (error) {
       res.status(401).send();
+      return;
     }
 
     if (!player.isClearPasswordValid(password)) {

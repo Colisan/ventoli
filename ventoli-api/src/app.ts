@@ -4,7 +4,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import helmet from 'helmet';
 import cors from 'cors';
-import router from './route';
+import ApiRouter from './route/apiRouter';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 
@@ -30,7 +30,9 @@ createConnection()
     app.use(helmet());
     app.use(bodyParser.json());
 
-    app.use('/api', router);
+    const apiRouter = new ApiRouter();
+    apiRouter.setupRoutes();
+    app.use('/api', apiRouter.router);
 
     app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
