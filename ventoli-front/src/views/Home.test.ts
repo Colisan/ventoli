@@ -19,4 +19,8 @@ describe('Home view', () => {
   it('renders a link to the login view', () => {
     testWrapperForRouterPath(wrapper, 'Login');
   });
+
+  it('renders a link to the signin view', () => {
+    testWrapperForRouterPath(wrapper, 'Signin');
+  });
 });

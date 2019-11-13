@@ -1,7 +1,8 @@
 <template>
   <div>
-    <router-link to="/login">Log in</router-link>
     Hello
+    <router-link to="/signin">Sign in</router-link>
+    <router-link to="/login">Log in</router-link>
   </div>
 </template>
 

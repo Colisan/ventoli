@@ -3,13 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "lint": "tsc --noEmit && eslint ./src/**/*.{js,ts,tsx} --quiet --fix",
     "start": "set debug=* && ts-node-dev --respawn --transpileOnly ./src/app.ts",
     "test": "mocha -r ts-node/register ./src/**/*.test.ts",
     "test:watch": "npm run test -- --watch-extensions ts --watch",
     "test:coverage": "nyc npm run test",
-    "build": "tsc && node ./dist/app.js",
-    "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run"
+    "build": "tsc && node ./dist/app.js"
   },
   "dependencies": {
     "@types/bcryptjs": "^2.4.2",
