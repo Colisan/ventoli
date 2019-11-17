@@ -6,12 +6,16 @@ stages:
 
 cache:
   paths:
+    - ventoli-model/node_modules/
     - ventoli-front/node_modules/
     - ventoli-api/node_modules/
 
 install_dependencies:
   stage: build
   script:
+    - cd ventoli-model
+    - npm install
+    - cd ..
     - cd ventoli-front
     - npm install
     - cd ..
@@ -19,12 +23,16 @@ install_dependencies:
     - npm install
   artifacts:
     paths:
+      - ventoli-model/node_modules/
       - ventoli-front/node_modules/
       - ventoli-api/node_modules/
 
-testing_testing:
+run_tests:
   stage: test
   script:
+    - cd ventoli-model
+    - npm run test
+    - cd ..
     - cd ventoli-front
     - npm run test
     - cd ..

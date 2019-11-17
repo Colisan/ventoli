@@ -1,7 +1,7 @@
 <template>
-  <form @submit="loginWithCredentials">
-    <input :id="ID_LOGIN" v-model="loginModel" />
-    <input :id="ID_PASSWORD" type="password" v-model="passwordModel" />
+  <form @submit="submit">
+    <input v-model="login" />
+    <input type="password" v-model="password" />
     <input type="submit" value="Enter the castle!" />
   </form>
 </template>
@@ -13,15 +13,17 @@ import helperStores from '@/helpers/helperStores';
 
 @Component
 export default class LoginForm extends Vue {
-  public ID_LOGIN: string = 'login_input_login';
+  private login = '';
 
-  public ID_PASSWORD: string = 'login_input_password';
+  private password = '';
 
   @Action loginWithCredentials: any;
 
-  beforeCreate() {
-    helperStores.defaultModel(this, 'login');
-    helperStores.defaultModel(this, 'password');
+  submit() {
+    this.loginWithCredentials({
+      login: this.login,
+      password: this.password,
+    });
   }
 }
 </script>

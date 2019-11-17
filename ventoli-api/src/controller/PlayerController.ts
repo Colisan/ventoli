@@ -1,16 +1,9 @@
 import { Request, Response } from 'express';
-import { getRepository, Repository } from 'typeorm';
-import { validate } from 'class-validator';
+import { getRepository } from 'typeorm';
 
-import Player from '../entity/Player';
+import PlayerORM from '../entity/PlayerORM';
 
 export default class PlayerController {
-  playerRepository: Repository<Player>;
-
-  constructor(playerRepoInjection = getRepository(Player)) {
-    this.playerRepository = playerRepoInjection;
-  }
-
   /**
    * @swagger
    *
@@ -30,11 +23,13 @@ export default class PlayerController {
    *       404:
    *         description: Player not found
    */
-  async findOneByName(req: Request, res: Response) {
+  public static async findOneByName(req: Request, res: Response) {
     const { playername } = req.params;
 
+    const playerRepository = getRepository(PlayerORM);
+
     try {
-      const player = await this.playerRepository.findOneOrFail({
+      const player = await playerRepository.findOneOrFail({
         select: ['id', 'name'],
         where: { name: playername },
       });
@@ -73,13 +68,13 @@ export default class PlayerController {
    *       409:
    *         description: Username not avaliable
    */
-  async newPlayer(req: Request, res: Response) {
+  public static async newPlayer(req: Request, res: Response) {
     const { playername, password } = req.body;
-    const player = new Player();
+    const player = new PlayerORM();
     player.name = playername;
     player.password = password;
 
-    const errors = await validate(player);
+    const errors = await player.getValidationErrors();
     if (errors.length > 0) {
       res.status(400).send(errors);
       return;
@@ -87,8 +82,10 @@ export default class PlayerController {
 
     player.hashPassword();
 
+    const playerRepository = getRepository(PlayerORM);
+
     try {
-      await this.playerRepository.save(player);
+      await playerRepository.save(player);
     } catch (e) {
       res.status(409).send('Playername already in use');
       return;

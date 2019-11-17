@@ -18,38 +18,14 @@ describe('LoginForm component', () => {
     expect(wrapper.html()).not.to.be.undefined;
   });
 
-  it('renders a login input', () => {
-    const inputWrapper = wrapper.find(`#${wrapper.vm.$data.ID_LOGIN}`);
+  it('renders a text input', () => {
+    const inputWrapper = wrapper.find('input:not([type])');
     expect(inputWrapper.exists()).to.be.true;
   });
 
   it('renders a password input', () => {
-    const inputWrapper = wrapper.find(`#${wrapper.vm.$data.ID_PASSWORD}`);
+    const inputWrapper = wrapper.find('input[type=password]');
     expect(inputWrapper.exists()).to.be.true;
-  });
-
-  it('synchronizes its login input with the store login', () => {
-    let newValue = 'tintin le lapin';
-    store.commit('setLogin', newValue);
-    const inputWrapper = wrapper.find(`#${wrapper.vm.$data.ID_LOGIN}`);
-    const inputElement = inputWrapper.element as HTMLInputElement;
-    expect(inputElement.value).to.equal(newValue);
-
-    newValue = 'tata le petit chat';
-    inputWrapper.setValue(newValue);
-    expect(wrapper.vm.$store.state.store.login).to.equal(newValue);
-  });
-
-  it('synchronizes its password input with the store password', () => {
-    let newValue = 'secret';
-    store.commit('setPassword', newValue);
-    const inputWrapper = wrapper.find(`#${wrapper.vm.$data.ID_PASSWORD}`);
-    const inputElement = inputWrapper.element as HTMLInputElement;
-    expect(inputElement.value).to.equal(newValue);
-
-    newValue = 'méga secret';
-    inputWrapper.setValue(newValue);
-    expect(wrapper.vm.$store.state.store.password).to.equal(newValue);
   });
 
   it('renders a submit button', () => {

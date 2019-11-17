@@ -17,4 +17,19 @@ describe('SigninForm component', () => {
   it('renders something', () => {
     expect(wrapper.html()).not.to.be.undefined;
   });
+
+  it('renders a text input', () => {
+    const inputWrapper = wrapper.find('input:not([type])');
+    expect(inputWrapper.exists()).to.be.true;
+  });
+
+  it('renders a password input', () => {
+    const inputWrapper = wrapper.find('input[type=password]');
+    expect(inputWrapper.exists()).to.be.true;
+  });
+
+  it('renders a submit button', () => {
+    const inputWrapper = wrapper.find('input[type=submit]');
+    expect(inputWrapper.exists()).to.be.true;
+  });
 });

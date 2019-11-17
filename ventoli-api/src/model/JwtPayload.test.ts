@@ -3,7 +3,7 @@ import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import JwtPayload from './JwtPayload';
-import Player from '../entity/Player';
+import PlayerORM from '../entity/PlayerORM';
 
 chai.use(sinonChai);
 
@@ -37,7 +37,7 @@ describe('JwtPayload class', () => {
   });
 
   it('can be instanciated from Player Entity', () => {
-    const player = new Player();
+    const player = new PlayerORM();
     player.id = 777;
     player.name = 'Jack Pott';
     const payload = JwtPayload.fromPlayer(player);

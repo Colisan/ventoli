@@ -1,19 +1,17 @@
 import { Entity, PrimaryGeneratedColumn, Column, Unique, CreateDateColumn, UpdateDateColumn } from 'typeorm';
-import { Length } from 'class-validator';
-import * as bcrypt from 'bcryptjs';
+
+import Player from '@ventoli/ventoli-model/src/Player';
 
 @Entity()
 @Unique(['name'])
-export default class Player {
+export default class PlayerORM extends Player {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  @Length(4, 50)
   name: string;
 
   @Column()
-  @Length(8, 200)
   password: string;
 
   @Column()
@@ -23,12 +21,4 @@ export default class Player {
   @Column()
   @UpdateDateColumn()
   updatedAt: Date;
-
-  hashPassword() {
-    this.password = bcrypt.hashSync(this.password, 8);
-  }
-
-  isClearPasswordValid(clearPassword: string) {
-    return bcrypt.compareSync(clearPassword, this.password);
-  }
 }

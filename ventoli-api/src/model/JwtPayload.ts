@@ -1,5 +1,5 @@
 import * as jwt from 'jsonwebtoken';
-import Player from '../entity/Player';
+import PlayerORM from '../entity/PlayerORM';
 import * as config from '../../config.js';
 
 interface PayloadData {
@@ -23,7 +23,7 @@ export default class JwtPayload {
     return jwt.sign(this.datas, config.jwt_secret, { expiresIn: '1h' });
   }
 
-  static fromPlayer(player: Player) {
+  static fromPlayer(player: PlayerORM) {
     const res = new JwtPayload();
     res.datas.playerid = player.id;
     res.datas.playername = player.name;
