@@ -1,28 +1,28 @@
-import { Length, validate } from "class-validator";
+import { Length, validate, ValidationError } from "class-validator";
 import * as bcrypt from "bcryptjs";
 
 export default class Player {
-  id!: number;
+  public id!: number;
 
   @Length(4, 50)
-  name!: string;
+  public name!: string;
 
   @Length(8, 200)
-  password!: string;
+  public password!: string;
 
-  createdAt!: Date;
+  public createdAt!: Date;
 
-  updatedAt!: Date;
+  public updatedAt!: Date;
 
-  hashPassword() {
+  public hashPassword(): void {
     this.password = bcrypt.hashSync(this.password, 8);
   }
 
-  isClearPasswordValid(clearPassword: string) {
+  public isClearPasswordValid(clearPassword: string): boolean {
     return bcrypt.compareSync(clearPassword, this.password);
   }
 
-  async getValidationErrors() {
+  public async getValidationErrors(): Promise<ValidationError[]> {
     return await validate(this);
   }
 }

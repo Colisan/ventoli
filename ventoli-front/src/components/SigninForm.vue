@@ -10,7 +10,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { Getter, Action, Mutation } from 'vuex-class';
-import Player from '@ventoli/ventoli-model/src/Player';
+import Player from '@ventoli/ventoli-model/dist/src/Player';
 import helperStores from '@/helpers/helperStores';
 
 @Component

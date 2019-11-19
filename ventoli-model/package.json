@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "lint": "tsc --noEmit && eslint ./src/**/*.{js,ts,tsx} --quiet --fix",
     "test": "mocha -r ts-node/register ./src/**/*.test.ts",
     "test:watch": "npm run test -- --watch-extensions ts --watch",
-    "test:coverage": "nyc npm run test"
+    "test:coverage": "nyc npm run test",
+    "build": "tsc --declaration && node ./dist/index.js"
   },
   "dependencies": {
     "@types/bcryptjs": "^2.4.2",
