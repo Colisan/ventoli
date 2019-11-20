@@ -15,11 +15,11 @@ func _ready():
 	sunEnergyFct.add_point(Vector2(0.5, 1))
 	sunEnergyFct.add_point(Vector2(0.9, 0))
 	sunEnergyFct.add_point(Vector2(1, 0))
-	moonEnergyFct.add_point(Vector2(0, 1));
+	moonEnergyFct.add_point(Vector2(0, 0.4));
 	moonEnergyFct.add_point(Vector2(0.4, 0))
 	moonEnergyFct.add_point(Vector2(0.5, 0))
 	moonEnergyFct.add_point(Vector2(0.6, 0))
-	moonEnergyFct.add_point(Vector2(1, 1))
+	moonEnergyFct.add_point(Vector2(1, 0.4))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

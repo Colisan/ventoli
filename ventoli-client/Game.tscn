@@ -4,6 +4,8 @@
 [ext_resource path="res://LightSpace.gd" type="Script" id=2]
 
 [sub_resource type="Environment" id=1]
+background_mode = 1
+background_color = Color( 0.431373, 0.654902, 1, 1 )
 background_energy = 0.0
 ambient_light_color = Color( 1, 1, 1, 1 )
 ambient_light_energy = 0.3
@@ -26,7 +28,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="World" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
 
 [node name="LightSpace" type="Spatial" parent="."]
@@ -39,6 +41,7 @@ __meta__ = {
 [node name="SunLight" type="DirectionalLight" parent="LightSpace"]
 transform = Transform( -4.37114e-008, 0, -1, 0, 1, 0, 1, 0, -4.37114e-008, -5, 0, 0 )
 light_energy = 0.7
+shadow_enabled = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -47,6 +50,7 @@ __meta__ = {
 transform = Transform( 0, 4.47035e-008, 1, 0, -1, 1.49012e-008, 1, 0, -1.49012e-008, 5, 5.96046e-008, -5.96046e-008 )
 light_color = Color( 1, 0.956863, 0.564706, 1 )
 light_energy = 0.3
+shadow_enabled = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -54,4 +58,6 @@ __meta__ = {
 [node name="Debug" type="RichTextLabel" parent="."]
 margin_right = 403.0
 margin_bottom = 270.0
+mouse_filter = 2
 text = "Test"
+scroll_active = false
