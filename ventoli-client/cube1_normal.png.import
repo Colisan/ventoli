@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/redOverlay.png-1f6a91960cd13c3122f8680588db5aba.stex"
+path="res://.import/cube1_normal.png-bf4517037dbfc80cab3ae3b79db304fc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://redOverlay.png"
-dest_files=[ "res://.import/redOverlay.png-1f6a91960cd13c3122f8680588db5aba.stex" ]
+source_file="res://cube1_normal.png"
+dest_files=[ "res://.import/cube1_normal.png-bf4517037dbfc80cab3ae3b79db304fc.stex" ]
 
 [params]
 
@@ -18,7 +18,7 @@ compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
-compress/normal_map=0
+compress/normal_map=1
 flags/repeat=0
 flags/filter=false
 flags/mipmaps=false

@@ -19,3 +19,8 @@ func _on_Area_mouse_entered():
 func _on_Area_mouse_exited():
 	$Overlay.visible = false
 	pass # Replace with function body.
+
+func _on_Area_input_event(camera, event, click_position, click_normal, shape_idx):
+	if event is InputEventMouseButton && event.pressed:
+		$OverUnderlay.visible = !$OverUnderlay.visible
+		print_debug(event)
