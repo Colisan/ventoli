@@ -41,7 +41,8 @@ func _ready():
 			add_child(bloc)
 			bloc.translation.x = i - 5
 			bloc.translation.z = j - 5
-			bloc.translation.y = floor((i * j) / 16) * 0.5
+			bloc.translation.y = (floor((i * j) / 16) * 0.5) + rand_range(-0.1, 0.1)
+			bloc.rotation_degrees.y += (randi() % 4) * 90
 			
 
 func _input(event):
