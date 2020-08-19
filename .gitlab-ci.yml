@@ -6,6 +6,7 @@ stages:
 
 cache:
   paths:
+    - node_modules/
     - ventoli-model/node_modules/
     - ventoli-front/node_modules/
     - ventoli-api/node_modules/
