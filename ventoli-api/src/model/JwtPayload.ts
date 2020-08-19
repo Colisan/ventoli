@@ -20,7 +20,7 @@ export default class JwtPayload {
   }
 
   public getSignedToken(): string {
-    return jwt.sign(this.datas, config.jwt_secret, { expiresIn: '1h' });
+    return jwt.sign(this.datas, config.jwtSecret, { expiresIn: '1h' });
   }
 
   static fromPlayer(player: PlayerORM) {
@@ -31,6 +31,6 @@ export default class JwtPayload {
   }
 
   static fromSignedToken(token: string) {
-    return new JwtPayload(jwt.verify(token, config.jwt_secret) as PayloadData);
+    return new JwtPayload(jwt.verify(token, config.jwtSecret) as PayloadData);
   }
 }

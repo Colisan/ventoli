@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "workspaces": [
+		"ventoli-api",
+		"ventoli-front",
+		"ventoli-model",
+		"ventoli-server"
+	]
+}
