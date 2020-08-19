@@ -13,16 +13,6 @@ cache:
 install_dependencies:
   stage: build
   script:
-    - cd ventoli-model
-    - yarn link
-    - yarn install
-    - cd ..
-    - cd ventoli-front
-    - yarn link "@ventoli/ventoli-model"
-    - yarn install
-    - cd ..
-    - cd ventoli-api
-    - yarn link "@ventoli/ventoli-model"
     - yarn install
   artifacts:
     paths:
