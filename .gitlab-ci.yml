@@ -14,13 +14,16 @@ install_dependencies:
   stage: build
   script:
     - cd ventoli-model
-    - npm install
+    - yarn link
+    - yarn install
     - cd ..
     - cd ventoli-front
-    - npm install
+    - yarn link "@ventoli/ventoli-model"
+    - yarn install
     - cd ..
     - cd ventoli-api
-    - npm install
+    - yarn link "@ventoli/ventoli-model"
+    - yarn install
   artifacts:
     paths:
       - ventoli-model/node_modules/
@@ -31,10 +34,10 @@ run_tests:
   stage: test
   script:
     - cd ventoli-model
-    - npm run test
+    - yarn run test
     - cd ..
     - cd ventoli-front
-    - npm run test
+    - yarn run test
     - cd ..
     - cd ventoli-api
-    - npm run test
+    - yarn run test
