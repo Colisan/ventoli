@@ -1,6 +1,7 @@
 {
   "name": "@ventoli/ventoli-front",
   "version": "0.1.0",
+  "author": "Coli",
   "private": true,
   "scripts": {
     "serve_dev": "vue-cli-service serve",
@@ -12,7 +13,7 @@
   "dependencies": {
     "@types/sinon": "^7.5.0",
     "@types/sinon-chai": "^3.2.3",
-    "@ventoli/ventoli-model": "0.1.0",
+    "@ventoli/ventoli-model": "^0.1.0",
     "axios": "^0.19.0",
     "core-js": "^3.3.2",
     "vue": "^2.6.10",

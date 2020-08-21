@@ -1,0 +1,21 @@
+{
+  "cache": false,
+  "check-coverage": false,
+  "extension": [
+    ".ts"
+  ],
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": [
+    "coverage/**",
+    "node_modules/**",
+    "**/*.test.ts"
+  ],
+  "sourceMap": true,
+  "reporter": [
+    "lcovonly"
+  ],
+  "all": true,
+  "instrument": true
+}

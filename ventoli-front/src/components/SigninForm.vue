@@ -10,8 +10,8 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { Getter, Action, Mutation } from 'vuex-class';
-import Player from '@ventoli/ventoli-model/dist/src/Player';
-import helperStores from '@/helpers/helperStores';
+import { Player } from '@ventoli/ventoli-model';
+import helperStores from '../helpers/helperStores';
 
 @Component
 export default class SigninForm extends Vue {

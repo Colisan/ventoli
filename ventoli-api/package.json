@@ -1,6 +1,8 @@
 {
    "name": "ventoli-api",
-   "version": "0.0.1",
+   "version": "0.1.0",
+	 "author": "Coli",
+	 "private": true,
    "description": "Awesome project developed with TypeORM.",
    "scripts": {
       "start": "ts-node src/index.ts --files",

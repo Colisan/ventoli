@@ -1,7 +1,10 @@
 {
   "name": "@ventoli/ventoli-model",
   "version": "0.1.0",
-  "private": true,
+  "author": "Coli",
+	"private": true,
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
   "scripts": {
     "lint": "tsc --noEmit && eslint ./src/**/*.{js,ts,tsx} --quiet --fix",
     "test": "mocha -r ts-node/register ./src/**/*.test.ts",

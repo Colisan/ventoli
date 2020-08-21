@@ -1,0 +1,14 @@
+{
+  "name": "@ventoli/ventoli-model",
+  "version": "0.1.0",
+  "author": "Coli",
+  "private": true,
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "devDependencies": {
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
+}
