@@ -5,21 +5,23 @@ stages:
   - test
 
 cache:
+  key: one-key-to-rule-them-all
   paths:
     - node_modules/
     - ventoli-model/node_modules/
     - ventoli-front/node_modules/
     - ventoli-api/node_modules/
+    - .yarn
 
 install_dependencies:
   stage: build
   script:
-    - yarn install
+    - yarn install --cache-folder .yarn
+    - cd ventoli-model
+    - yarn run build
   artifacts:
     paths:
-      - ventoli-model/node_modules/
-      - ventoli-front/node_modules/
-      - ventoli-api/node_modules/
+      - ventoli-model/dist/
 
 run_tests:
   stage: test
