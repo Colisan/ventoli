@@ -6,21 +6,21 @@ import { routes } from '@/router';
 import { testWrapperForRouterPath } from '@/helpers/helperTests';
 
 describe('Home view', () => {
-  const wrapper = shallowMount(Home, {});
+	const wrapper = shallowMount(Home, {});
 
-  it('renders something', () => {
-    expect(wrapper.html()).not.to.be.undefined;
-  });
+	it('renders something', () => {
+		expect(wrapper.html()).not.to.be.undefined;
+	});
 
-  it('is polite', () => {
-    expect(wrapper.html()).to.include('Hello');
-  });
+	it('is polite', () => {
+		expect(wrapper.html()).to.include('Hello');
+	});
 
-  it('renders a link to the login view', () => {
-    testWrapperForRouterPath(wrapper, 'Login');
-  });
+	it('renders a link to the login view', () => {
+		testWrapperForRouterPath(wrapper, 'Login');
+	});
 
-  it('renders a link to the signin view', () => {
-    testWrapperForRouterPath(wrapper, 'Signin');
-  });
+	it('renders a link to the signin view', () => {
+		testWrapperForRouterPath(wrapper, 'Signin');
+	});
 });

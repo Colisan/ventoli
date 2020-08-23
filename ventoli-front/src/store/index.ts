@@ -5,7 +5,7 @@ import store from '@/store/storeFront';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  modules: {
-    store,
-  },
+	modules: {
+		store,
+	},
 });

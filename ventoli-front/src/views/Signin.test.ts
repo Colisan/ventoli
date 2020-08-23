@@ -7,9 +7,9 @@ import { routes } from '@/router';
 import { testWrapperForRouterPath } from '@/helpers/helperTests';
 
 describe('Signin view', () => {
-  const wrapper = shallowMount(Signin, {});
+	const wrapper = shallowMount(Signin, {});
 
-  it('renders something', () => {
-    expect(wrapper.html()).not.to.be.undefined;
-  });
+	it('renders something', () => {
+		expect(wrapper.html()).not.to.be.undefined;
+	});
 });

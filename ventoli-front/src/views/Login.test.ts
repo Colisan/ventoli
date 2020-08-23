@@ -7,17 +7,17 @@ import { routes } from '@/router';
 import { testWrapperForRouterPath } from '@/helpers/helperTests';
 
 describe('Login view', () => {
-  const wrapper = shallowMount(Login, {});
+	const wrapper = shallowMount(Login, {});
 
-  it('renders something', () => {
-    expect(wrapper.html()).not.to.be.undefined;
-  });
+	it('renders something', () => {
+		expect(wrapper.html()).not.to.be.undefined;
+	});
 
-  it('has a LoginForm component as child', () => {
-    expect(wrapper.find(LoginForm).exists()).to.equal(true);
-  });
+	it('has a LoginForm component as child', () => {
+		expect(wrapper.find(LoginForm).exists()).to.equal(true);
+	});
 
-  it('renders a link to the home view', () => {
-    testWrapperForRouterPath(wrapper, 'Home');
-  });
+	it('renders a link to the home view', () => {
+		testWrapperForRouterPath(wrapper, 'Home');
+	});
 });

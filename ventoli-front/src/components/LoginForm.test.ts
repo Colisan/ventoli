@@ -12,32 +12,32 @@ chai.use(sinonChai);
 Vue.use(Vuex);
 
 describe('LoginForm component', () => {
-  const wrapper = shallowMount(LoginForm, { store });
+	const wrapper = shallowMount(LoginForm, { store });
 
-  it('renders something', () => {
-    expect(wrapper.html()).not.to.be.undefined;
-  });
+	it('renders something', () => {
+		expect(wrapper.html()).not.to.be.undefined;
+	});
 
-  it('renders a text input', () => {
-    const inputWrapper = wrapper.find('input:not([type])');
-    expect(inputWrapper.exists()).to.be.true;
-  });
+	it('renders a text input', () => {
+		const inputWrapper = wrapper.find('input:not([type])');
+		expect(inputWrapper.exists()).to.be.true;
+	});
 
-  it('renders a password input', () => {
-    const inputWrapper = wrapper.find('input[type=password]');
-    expect(inputWrapper.exists()).to.be.true;
-  });
+	it('renders a password input', () => {
+		const inputWrapper = wrapper.find('input[type=password]');
+		expect(inputWrapper.exists()).to.be.true;
+	});
 
-  it('renders a submit button', () => {
-    const inputWrapper = wrapper.find('input[type=submit]');
-    expect(inputWrapper.exists()).to.be.true;
-  });
+	it('renders a submit button', () => {
+		const inputWrapper = wrapper.find('input[type=submit]');
+		expect(inputWrapper.exists()).to.be.true;
+	});
 
-  it("calls store's loginWithCredentials action when form submitted", () => {
-    const inputWrapper = wrapper.find('form');
-    const actionStub = sinon.stub(wrapper.vm.$store, 'dispatch');
-    inputWrapper.trigger('submit');
-    expect(actionStub).to.have.been.calledWith('loginWithCredentials');
-    sinon.restore();
-  });
+	it("calls store's loginWithCredentials action when form submitted", () => {
+		const inputWrapper = wrapper.find('form');
+		const actionStub = sinon.stub(wrapper.vm.$store, 'dispatch');
+		inputWrapper.trigger('submit');
+		expect(actionStub).to.have.been.calledWith('loginWithCredentials');
+		sinon.restore();
+	});
 });

@@ -4,5 +4,6 @@ module.exports = {
   singleQuote: true,
   printWidth: 80,
   useTabs: true,
-  tabWidth: 2
+	tabWidth: 2,
+	vueIndentScriptAndStyle: true,
 };

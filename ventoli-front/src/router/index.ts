@@ -7,25 +7,25 @@ import Signin from '@/views/Signin.vue';
 Vue.use(VueRouter);
 
 export const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home,
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: Login,
-  },
-  {
-    path: '/signin',
-    name: 'Signin',
-    component: Signin,
-  },
+	{
+		path: '/',
+		name: 'Home',
+		component: Home,
+	},
+	{
+		path: '/login',
+		name: 'Login',
+		component: Login,
+	},
+	{
+		path: '/signin',
+		name: 'Signin',
+		component: Signin,
+	},
 ];
 
 const router = new VueRouter({
-  routes,
+	routes,
 });
 
 export default router;
