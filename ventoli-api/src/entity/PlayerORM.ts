@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, Unique, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
-import Player from '@ventoli/ventoli-model/src/Player';
+import { Player } from '../../../ventoli-model/dist';
 
 @Entity()
 @Unique(['name'])
