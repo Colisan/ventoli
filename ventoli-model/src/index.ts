@@ -1,5 +1,1 @@
-import Player from "./entity/Player";
-
-export default {
-  Player
-};
+export { default as Player } from "./entity/Player";
