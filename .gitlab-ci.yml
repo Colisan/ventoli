@@ -16,9 +16,9 @@ cache:
 install_dependencies:
   stage: build
   script:
+    - yarn global add lerna
     - yarn install --cache-folder .yarn
-    - cd ventoli-model
-    - yarn run build
+    - lerna run build
   artifacts:
     paths:
       - ventoli-model/dist/
@@ -26,11 +26,4 @@ install_dependencies:
 run_tests:
   stage: test
   script:
-    - cd ventoli-model
-    - yarn run test
-    - cd ..
-    - cd ventoli-front
-    - yarn run test
-    - cd ..
-    - cd ventoli-api
-    - yarn run test
+    - lerna run test

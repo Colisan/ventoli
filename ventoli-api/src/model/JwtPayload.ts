@@ -1,6 +1,5 @@
 import * as jwt from 'jsonwebtoken';
 import PlayerORM from '../entity/PlayerORM';
-import * as config from '../../config.js';
 
 interface PayloadData {
   playerid: number;
@@ -20,7 +19,7 @@ export default class JwtPayload {
   }
 
   public getSignedToken(): string {
-    return jwt.sign(this.datas, config.jwtSecret, { expiresIn: '1h' });
+    return jwt.sign(this.datas, process.env.JWT_SECRET, { expiresIn: '1h' });
   }
 
   static fromPlayer(player: PlayerORM) {
@@ -31,6 +30,6 @@ export default class JwtPayload {
   }
 
   static fromSignedToken(token: string) {
-    return new JwtPayload(jwt.verify(token, config.jwtSecret) as PayloadData);
+    return new JwtPayload(jwt.verify(token, process.env.JWT_SECRET) as PayloadData);
   }
 }
