@@ -25,4 +25,4 @@ install_dependencies:
 run_tests:
   stage: test
   script:
-    - yarn lerna run build
+    - yarn lerna run test
