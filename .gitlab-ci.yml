@@ -16,8 +16,9 @@ cache:
 install_dependencies:
   stage: build
   script:
+    - yarn config set cache-folder .yarn
     - yarn global add lerna
-    - yarn install --cache-folder .yarn
+    - yarn install
     - lerna run build
   artifacts:
     paths:
