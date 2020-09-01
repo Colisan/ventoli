@@ -48,12 +48,12 @@ export default class AuthController {
     try {
       player = await playerRepository.findOneOrFail({ where: { name: playername } });
     } catch (error) {
-      res.status(401).send();
+      res.status(401).send("Unknown playername");
       return;
 		}
 
     if (!player.isClearPasswordValid(password)) {
-      res.status(401).send();
+      res.status(401).send("Invalid password");
       return;
     }
 

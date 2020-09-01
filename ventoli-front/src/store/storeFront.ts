@@ -20,9 +20,9 @@ export const actions = {
 			})
 			.catch((err: any) => {
 				if (err.response) {
-					throw new Error('Wrong username or password.');
+					throw new Error(err.response.data);
 				}
-				throw err.toString();
+				throw new Error(err.toString());
 			});
 	},
 	async createAccount(store: any, informations: any): Promise<any> {
@@ -36,12 +36,7 @@ export const actions = {
 			})
 			.catch((err: any) => {
 				if (err.response) {
-					if (err.status === 400) {
-						throw new Error("Credentials don't respect constraints.");
-					}
-					if (err.status === 409) {
-						throw new Error('Username not avaliable.');
-					}
+					throw new Error(err.response.data);
 				}
 				throw new Error(err.toString());
 			});
