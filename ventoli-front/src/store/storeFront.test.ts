@@ -12,12 +12,25 @@ describe('loginWithCredentials action', () => {
 		expect(actions.loginWithCredentials).not.to.be.undefined;
 	});
 
+	it('rejects on http error', async () => {
+		const postStub = sinon.stub(axios, 'post');
+		const postData = 'errorMsg';
+		postStub.returns(
+			new Promise((resolve, _) => {
+				resolve({ status: 500, data: postData });
+			})
+		);
+
+		expect(async () => actions.loginWithCredentials({}, {})).to.throw;
+		postStub.restore();
+	});
+
 	it('calls axios with login and password and set authToken with the result', async () => {
 		const postStub = sinon.stub(axios, 'post');
 		const postData = 'fetchedToken';
 		postStub.returns(
 			new Promise((resolve, _) => {
-				resolve({ data: postData });
+				resolve({ status: 200, data: postData });
 			})
 		);
 		const store = {
@@ -35,7 +48,7 @@ describe('loginWithCredentials action', () => {
 			password: credentials.password,
 		});
 		expect(store.commit).to.have.been.calledOnceWith('setAuthToken', postData);
-		sinon.restore();
+		postStub.restore();
 	});
 });
 
@@ -44,12 +57,25 @@ describe('createAccount action', () => {
 		expect(actions.createAccount).not.to.be.undefined;
 	});
 
+	it('rejects on http error', async () => {
+		const postStub = sinon.stub(axios, 'post');
+		const postData = 'errorMsg';
+		postStub.returns(
+			new Promise((resolve, _) => {
+				resolve({ status: 500, data: postData });
+			})
+		);
+
+		expect(async () => actions.createAccount({}, {})).to.throw;
+		postStub.restore();
+	});
+
 	it('calls axios with login and password and set authToken with the result', async () => {
 		const postStub = sinon.stub(axios, 'post');
 		const postData = 'fetchedToken';
 		postStub.returns(
 			new Promise((resolve, _) => {
-				resolve({ data: postData });
+				resolve({ status: 201, data: postData });
 			})
 		);
 		const store = {

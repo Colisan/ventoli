@@ -23,6 +23,8 @@
 
 		@Action createAccount: any;
 
+		@Action loginWithCredentials: any;
+
 		async computeFormValidationError(): Promise<string | undefined> {
 			const player = new Player();
 			player.name = this.login;
@@ -30,23 +32,35 @@
 			const errors = await player.getValidationErrors();
 
 			if (errors.length > 0) return errors[0].toString();
+
 			if (this.password !== this.passwordAgain)
 				return "Password confirmation don't match";
 			return undefined;
 		}
 
-		submit() {
-			const validationError = this.computeFormValidationError();
+		async submit() {
+			const validationError = await this.computeFormValidationError();
 
 			if (validationError !== undefined) {
 				// eslint-disable-next-line
-      alert(validationError);
+				alert(validationError);
 				console.error(validationError);
 				return;
 			}
 			this.createAccount({
 				login: this.login,
 				password: this.password,
+			}).then(() => {
+				this.loginWithCredentials({
+					login: this.login,
+					password: this.password,
+				})
+					.then(() => {
+						this.$router.push({ name: 'Home' });
+					})
+					.catch((err: any) => {
+						alert(err);
+					});
 			});
 		}
 	}

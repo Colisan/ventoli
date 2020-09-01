@@ -36,6 +36,7 @@ describe('LoginForm component', () => {
 	it("calls store's loginWithCredentials action when form submitted", () => {
 		const inputWrapper = wrapper.find('form');
 		const actionStub = sinon.stub(wrapper.vm.$store, 'dispatch');
+		actionStub.resolves('ok');
 		inputWrapper.trigger('submit');
 		expect(actionStub).to.have.been.calledWith('loginWithCredentials');
 		sinon.restore();

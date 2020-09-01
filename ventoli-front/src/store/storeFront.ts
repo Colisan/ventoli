@@ -8,32 +8,43 @@ export const getInitialState = () => ({
 const initialState = getInitialState();
 
 export const actions = {
-	async loginWithCredentials(
-		store: any,
-		credentials: any
-	): Promise<AxiosResponse<any>> {
-		const res = await axios.post(
-			`${process.env.VUE_APP_VENTOLI_API_URL}/auth/login`,
-			{
+	async loginWithCredentials(store: any, credentials: any): Promise<any> {
+		return axios
+			.post(`${process.env.VUE_APP_VENTOLI_API_URL}/auth/login`, {
 				playername: credentials.login,
 				password: credentials.password,
-			}
-		);
-		store.commit('setAuthToken', res.data);
-		return res;
+			})
+			.then((res: AxiosResponse<any>) => {
+				store.commit('setAuthToken', res.data);
+				return res.data;
+			})
+			.catch((err: any) => {
+				if (err.response) {
+					throw new Error('Wrong username or password.');
+				}
+				throw err.toString();
+			});
 	},
-	async createAccount(
-		store: any,
-		informations: any
-	): Promise<AxiosResponse<any>> {
-		const res = await axios.post(
-			`${process.env.VUE_APP_VENTOLI_API_URL}/player`,
-			{
+	async createAccount(store: any, informations: any): Promise<any> {
+		return axios
+			.post(`${process.env.VUE_APP_VENTOLI_API_URL}/player`, {
 				playername: informations.login,
 				password: informations.password,
-			}
-		);
-		return res;
+			})
+			.then((res: AxiosResponse<any>) => {
+				return res.data;
+			})
+			.catch((err: any) => {
+				if (err.response) {
+					if (err.status === 400) {
+						throw new Error("Credentials don't respect constraints.");
+					}
+					if (err.status === 409) {
+						throw new Error('Username not avaliable.');
+					}
+				}
+				throw new Error(err.toString());
+			});
 	},
 };
 

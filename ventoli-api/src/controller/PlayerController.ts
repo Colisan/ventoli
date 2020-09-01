@@ -74,7 +74,7 @@ export default class PlayerController {
     player.name = playername;
     player.password = password;
 
-    const errors = await player.getValidationErrors();
+		const errors = await player.getValidationErrors();
     if (errors.length > 0) {
       res.status(400).send(errors);
       return;

@@ -46,11 +46,11 @@ export default class AuthController {
 
     let player: PlayerORM;
     try {
-      player = await playerRepository.findOneOrFail({ where: { playername } });
+      player = await playerRepository.findOneOrFail({ where: { name: playername } });
     } catch (error) {
       res.status(401).send();
       return;
-    }
+		}
 
     if (!player.isClearPasswordValid(password)) {
       res.status(401).send();

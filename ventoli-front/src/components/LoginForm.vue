@@ -23,7 +23,13 @@
 			this.loginWithCredentials({
 				login: this.login,
 				password: this.password,
-			});
+			})
+				.then((res: any) => {
+					this.$router.push({ name: 'Home' });
+				})
+				.catch((err: any) => {
+					alert(err);
+				});
 		}
 	}
 </script>

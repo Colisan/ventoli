@@ -8,8 +8,6 @@ Vue.config.productionTip = false;
 
 Vue.use(Vuex);
 
-console.log(process.env);
-
 new Vue({
 	router,
 	store,
