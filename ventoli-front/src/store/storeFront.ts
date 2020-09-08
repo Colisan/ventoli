@@ -1,11 +1,28 @@
-import { ActionTree, MutationTree, GetterTree } from 'vuex';
+import { ActionTree, MutationTree, GetterTree, Store } from 'vuex';
 import axios, { AxiosResponse } from 'axios';
 import helperStores from '@/helpers/helperStores';
 
-export const getInitialState = () => ({
-	authToken: '',
-});
-const initialState = getInitialState();
+let initialAuthToken: string;
+
+export const initialState = {
+	authToken: initialAuthToken = '',
+};
+
+export const GetStoreFrontPlugin = (storage: Storage) => (
+	store: Store<typeof initialState>
+) => {
+	store.commit('setAuthToken', storage.getItem('auth-token'));
+	store.subscribe((mutation, state) => {
+		if (mutation.type === 'setAuthToken') {
+			console.log(mutation);
+			if (mutation.payload) {
+				storage.setItem('auth-token', mutation.payload);
+			} else {
+				storage.removeItem('auth-token');
+			}
+		}
+	});
+};
 
 export const actions = {
 	async loginWithCredentials(store: any, credentials: any): Promise<any> {
@@ -41,13 +58,19 @@ export const actions = {
 				throw new Error(err.toString());
 			});
 	},
+	logout(store: any) {
+		store.commit('setAuthToken', initialAuthToken);
+	},
 };
 
 export const mutations = {
 	...helperStores.defaultMutations(initialState),
 };
 
-export const getters = {};
+export const getters = {
+	...helperStores.defaultGetters(initialState),
+	isLoggedIn: (store: any) => Boolean(store.authToken),
+};
 
 export default {
 	state: initialState,

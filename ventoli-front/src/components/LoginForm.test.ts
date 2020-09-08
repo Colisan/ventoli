@@ -6,26 +6,22 @@ import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import LoginForm from '@/components/LoginForm.vue';
-import store from '@/store/';
+import getStore from '@/store/';
 
 chai.use(sinonChai);
 Vue.use(Vuex);
 
 describe('LoginForm component', () => {
-	const wrapper = shallowMount(LoginForm, { store });
+	const localStorageStub = ({
+		getItem: sinon.stub(),
+		setItem: sinon.stub(),
+	} as unknown) as Storage;
+	const wrapper = shallowMount(LoginForm, {
+		store: getStore(localStorageStub),
+	});
 
 	it('renders something', () => {
 		expect(wrapper.html()).not.to.be.undefined;
-	});
-
-	it('renders a text input', () => {
-		const inputWrapper = wrapper.find('input:not([type])');
-		expect(inputWrapper.exists()).to.be.true;
-	});
-
-	it('renders a password input', () => {
-		const inputWrapper = wrapper.find('input[type=password]');
-		expect(inputWrapper.exists()).to.be.true;
 	});
 
 	it('renders a submit button', () => {
@@ -39,6 +35,6 @@ describe('LoginForm component', () => {
 		actionStub.resolves('ok');
 		inputWrapper.trigger('submit');
 		expect(actionStub).to.have.been.calledWith('loginWithCredentials');
-		sinon.restore();
+		actionStub.restore();
 	});
 });

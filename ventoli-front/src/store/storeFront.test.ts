@@ -3,13 +3,15 @@ import chai, { expect } from 'chai';
 import axios from 'axios';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
-import { actions } from './storeFront';
+import * as StoreFront from '@/store/storeFront';
 
 chai.use(sinonChai);
 
+const StoreFrontPluginStub = sinon.stub(StoreFront, 'GetStoreFrontPlugin');
+
 describe('loginWithCredentials action', () => {
 	it('exists', () => {
-		expect(actions.loginWithCredentials).not.to.be.undefined;
+		expect(StoreFront.actions.loginWithCredentials).not.to.be.undefined;
 	});
 
 	it('rejects on http error', async () => {
@@ -21,7 +23,8 @@ describe('loginWithCredentials action', () => {
 			})
 		);
 
-		expect(async () => actions.loginWithCredentials({}, {})).to.throw;
+		expect(async () => StoreFront.actions.loginWithCredentials({}, {})).to
+			.throw;
 		postStub.restore();
 	});
 
@@ -42,7 +45,7 @@ describe('loginWithCredentials action', () => {
 			password: 'p4ssw0rd',
 		};
 
-		await actions.loginWithCredentials(store, credentials);
+		await StoreFront.actions.loginWithCredentials(store, credentials);
 		expect(postStub).to.have.been.calledOnceWith(sinon.match.any, {
 			playername: credentials.login,
 			password: credentials.password,
@@ -54,7 +57,7 @@ describe('loginWithCredentials action', () => {
 
 describe('createAccount action', () => {
 	it('exists', () => {
-		expect(actions.createAccount).not.to.be.undefined;
+		expect(StoreFront.actions.createAccount).not.to.be.undefined;
 	});
 
 	it('rejects on http error', async () => {
@@ -66,7 +69,7 @@ describe('createAccount action', () => {
 			})
 		);
 
-		expect(async () => actions.createAccount({}, {})).to.throw;
+		expect(async () => StoreFront.actions.createAccount({}, {})).to.throw;
 		postStub.restore();
 	});
 
@@ -87,7 +90,7 @@ describe('createAccount action', () => {
 			password: 'p4ssw0rd',
 		};
 
-		await actions.createAccount(store, informations);
+		await StoreFront.actions.createAccount(store, informations);
 		expect(postStub).to.have.been.calledOnceWith(sinon.match.any, {
 			playername: informations.login,
 			password: informations.password,
@@ -96,3 +99,5 @@ describe('createAccount action', () => {
 		sinon.restore();
 	});
 });
+
+StoreFrontPluginStub.restore();

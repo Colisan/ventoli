@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Home from '@/views/Home.vue';
 import Login from '@/views/Login.vue';
 import Signin from '@/views/Signin.vue';
+import Settings from '@/views/Settings.vue';
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,11 @@ export const routes = [
 		path: '/signin',
 		name: 'Signin',
 		component: Signin,
+	},
+	{
+		path: '/settings',
+		name: 'Settings',
+		component: Settings,
 	},
 ];
 
