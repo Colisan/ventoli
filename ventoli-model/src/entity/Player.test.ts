@@ -16,18 +16,16 @@ describe('Player entity', () => {
 	it('can hash its password', () => {
 		const player = new Player();
 		const initialPassword = 'p4ssw0rd';
-		player.password = initialPassword;
-		player.hashPassword();
-		expect(player.password).to.have.length.greaterThan(0);
-		expect(player.password).not.to.equal(initialPassword);
+		player.validClearPassword = initialPassword;
+		expect(player.hashedPassword).to.have.length.greaterThan(0);
+		expect(player.hashedPassword).not.to.equal(initialPassword);
 	});
 
 	it('can validate a clear password', () => {
 		const player = new Player();
 		const initialPassword = 't0p.s3cr3t';
-		player.password = initialPassword;
-		player.hashPassword();
-		expect(player.isClearPasswordValid(initialPassword)).to.be.true;
-		expect(player.isClearPasswordValid('another password')).to.be.false;
+		player.validClearPassword = initialPassword;
+		expect(player.isClearPasswordEqual(initialPassword)).to.be.true;
+		expect(player.isClearPasswordEqual('another password')).to.be.false;
 	});
 });

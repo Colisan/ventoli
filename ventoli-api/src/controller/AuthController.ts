@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { getRepository, Repository } from 'typeorm';
+import { Player } from '../../../ventoli-model/dist';
 
 import PlayerORM from '../entity/PlayerORM';
 import JwtPayload from '../model/JwtPayload';
@@ -44,15 +45,18 @@ export default class AuthController {
 
     const playerRepository = getRepository(PlayerORM);
 
-    let player: PlayerORM;
+		let playerEntity: PlayerORM;
+		
     try {
-      player = await playerRepository.findOneOrFail({ where: { name: playername } });
+      playerEntity = await playerRepository.findOneOrFail({ where: { name: playername } });
     } catch (error) {
-      res.status(401).send("Unknown playername");
+      res.status(401).send("Unknown playername" + error.toString());
       return;
 		}
 
-    if (!player.isClearPasswordValid(password)) {
+		let player: Player = playerEntity.toPlayerModel();
+		
+    if (!player.isClearPasswordEqual(password)) {
       res.status(401).send("Invalid password");
       return;
     }

@@ -1,8 +1,12 @@
 <template>
 	<form @submit="submit">
 		<input v-model="login" />
-		<input type="password" v-model="password" />
-		<input type="password" v-model="passwordAgain" />
+		<input type="password" v-model="password" placeholder="password" />
+		<input
+			type="password"
+			v-model="passwordAgain"
+			placeholder="confirm password"
+		/>
 		<input type="submit" value="Create new account!" />
 	</form>
 </template>
@@ -25,43 +29,52 @@
 
 		@Action loginWithCredentials: any;
 
-		async computeFormValidationError(): Promise<string | undefined> {
+		get formValidationError(): string {
 			const player = new Player();
-			player.name = this.login;
-			player.password = this.password;
-			const errors = await player.getValidationErrors();
-
-			if (errors.length > 0) return errors[0].toString();
+			try {
+				player.name = this.login;
+				player.password = this.password;
+			} catch (error) {
+				return error.toString();
+			}
 
 			if (this.password !== this.passwordAgain)
 				return "Password confirmation don't match";
-			return undefined;
+
+			return '';
 		}
 
 		async submit() {
-			const validationError = await this.computeFormValidationError();
+			const validationError = this.formValidationError;
 
-			if (validationError !== undefined) {
+			if (validationError) {
 				// eslint-disable-next-line
 				alert(validationError);
 				console.error(validationError);
 				return;
 			}
+
 			this.createAccount({
 				login: this.login,
 				password: this.password,
-			}).then(() => {
-				this.loginWithCredentials({
-					login: this.login,
-					password: this.password,
-				})
-					.then(() => {
-						this.$router.push({ name: 'Home' });
+			})
+				.then(() => {
+					this.loginWithCredentials({
+						login: this.login,
+						password: this.password,
 					})
-					.catch((err: any) => {
-						alert(err);
-					});
-			});
+						.then(() => {
+							this.$router.push({ name: 'Home' });
+						})
+						.catch((err: any) => {
+							// eslint-disable-next-line
+							alert(err);
+						});
+				})
+				.catch((err: any) => {
+					// eslint-disable-next-line
+					alert(err);
+				});
 		}
 	}
 </script>

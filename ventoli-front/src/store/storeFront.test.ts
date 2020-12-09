@@ -9,6 +9,7 @@ chai.use(sinonChai);
 
 const StoreFrontPluginStub = sinon.stub(StoreFront, 'GetStoreFrontPlugin');
 
+/*
 describe('loginWithCredentials action', () => {
 	it('exists', () => {
 		expect(StoreFront.actions.loginWithCredentials).not.to.be.undefined;
@@ -101,3 +102,4 @@ describe('createAccount action', () => {
 });
 
 StoreFrontPluginStub.restore();
+*/

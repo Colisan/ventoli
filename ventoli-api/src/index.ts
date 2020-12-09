@@ -2,7 +2,7 @@ import "reflect-metadata";
 import {createConnection} from "typeorm";
 import express from "express";
 import * as bodyParser from "body-parser";
-import routes from "./routes";
+import routes from "./route";
 import helmet from 'helmet';
 import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
@@ -31,7 +31,7 @@ createConnection().then(async connection => {
     app.use(bodyParser.json());
 
     app.use('/api', routes);
-		app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+		app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDoc, { explorer: true }));
 		
     // start express server
     app.listen(3000);

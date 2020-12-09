@@ -1,4 +1,5 @@
 import * as jwt from 'jsonwebtoken';
+import { Player } from '../../../ventoli-model/dist';
 import PlayerORM from '../entity/PlayerORM';
 
 interface PayloadData {
@@ -22,7 +23,7 @@ export default class JwtPayload {
     return jwt.sign(this.datas, process.env.JWT_SECRET, { expiresIn: '1h' });
   }
 
-  static fromPlayer(player: PlayerORM) {
+  static fromPlayer(player: Player) {
     const res = new JwtPayload();
     res.datas.playerid = player.id;
     res.datas.playername = player.name;

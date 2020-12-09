@@ -1,13 +1,15 @@
 import Vue from 'vue';
-import Vuex from 'vuex';
+import Vuex, { Store, StoreOptions } from 'vuex';
 import storeFront, { GetStoreFrontPlugin } from '@/store/storeFront';
 
 Vue.use(Vuex);
 
-export default (storage: Storage) =>
-	new Vuex.Store({
+const getStore = (storage: Storage): Store<any> =>
+	new Vuex.Store<any>({
 		modules: {
 			storeFront,
 		},
 		plugins: [GetStoreFrontPlugin(storage)],
 	});
+
+export default getStore;

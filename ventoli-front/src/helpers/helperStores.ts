@@ -6,29 +6,31 @@ function ucfirst(input: string): string {
 
 export default {
 	// todo passer en annotations
-	defaultMutations(initialState: { [key: string]: any }) {
+	defaultMutations<StateType>(initialState: StateType) {
 		const res = <any>{};
 		Object.keys(initialState).forEach(prop => {
 			const mutationName = `set${ucfirst(prop)}`;
-			res[mutationName] = (state: { [key: string]: any }, newValue: any) => {
-				state[prop] = newValue;
+			res[mutationName] = (state: StateType, newValue: any) => {
+				(state as { [key: string]: any })[prop] = newValue;
 			};
 		});
-		res.resetStore = (state: { [key: string]: any }) => {
+		res.resetStore = (state: StateType) => {
 			Object.keys(initialState).forEach(prop => {
-				state[prop] = initialState[prop];
+				(state as { [key: string]: any })[prop] = (initialState as {
+					[key: string]: any;
+				})[prop];
 			});
 		};
 		return res;
 	},
-	defaultGetters(initialState: any) {
-		const res = <any>{};
+	defaultGetters<StateType>(initialState: StateType) {
+		const res = <{ [key: string]: any }>{};
 		Object.keys(initialState).forEach(prop => {
-			res[prop] = (state: { [key: string]: any }) => state[prop];
+			res[prop] = (state: StateType) => (state as { [key: string]: any })[prop];
 		});
 		return res;
 	},
-	defaultModel(
+	defaultModel<StateType>(
 		vueComponent: Vue,
 		stateOrGetterName: string,
 		mutationName = `set${ucfirst(stateOrGetterName)}`,
@@ -38,7 +40,7 @@ export default {
 			get(): any {
 				return (
 					vueComponent.$store &&
-					(vueComponent.$store.state.store[stateOrGetterName] ||
+					(vueComponent.$store.state[stateOrGetterName] ||
 						vueComponent.$store.getters[stateOrGetterName])
 				);
 			},

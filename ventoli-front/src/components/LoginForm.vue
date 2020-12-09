@@ -1,7 +1,7 @@
 <template>
 	<form @submit="submit">
-		<input v-model="login" />
-		<input type="password" v-model="password" />
+		<input v-model="login" placeholder="login" />
+		<input type="password" v-model="password" placeholder="password" />
 		<input type="submit" value="Enter the castle!" />
 	</form>
 </template>
@@ -28,6 +28,7 @@
 					this.$router.push({ name: 'Home' });
 				})
 				.catch((err: any) => {
+					// eslint-disable-next-line
 					alert(err);
 				});
 		}
