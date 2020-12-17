@@ -7,16 +7,18 @@ import {
 	ActionContext,
 	Plugin,
 } from 'vuex';
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import helperStores from '@/helpers/helperStores';
-import { Player } from '../../../ventoli-model/dist';
+import { Player, Game } from '../../../ventoli-model/dist';
 
 let initialAuthToken: string | undefined;
 let initialPlayer: Player | undefined;
+let game: Game | undefined;
 
 export const initialState = {
 	authToken: initialAuthToken = undefined,
 	currentPlayer: initialPlayer = undefined,
+	currentGame: game = undefined,
 };
 
 export type State = typeof initialState;
@@ -71,11 +73,12 @@ export const actions: ActionTree<State, any> = {
 			.then((res: AxiosResponse<Player>) => {
 				store.commit('setCurrentPlayer', res.data);
 			})
-			.catch((err: any) => {
+			.catch((err: AxiosError) => {
 				if (err.response) {
-					throw new Error(err.response.data);
-				}
-				throw new Error(err.toString());
+					if (err.response.status === 401) {
+						store.dispatch('logout');
+					} else throw new Error(err.response.data);
+				} else throw new Error(err.toString());
 			});
 	},
 	async createAccount(

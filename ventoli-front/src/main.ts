@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import { Route } from 'vue-router';
 import Vuex from 'vuex';
 import App from './App.vue';
 import router from './router';
@@ -8,7 +9,7 @@ Vue.config.productionTip = false;
 
 Vue.use(Vuex);
 
-new Vue({
+const app = new Vue({
 	router,
 	store: getStore(localStorage),
 	render: h => h(App),

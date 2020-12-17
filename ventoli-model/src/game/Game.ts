@@ -1,9 +1,9 @@
-import { Fight, FightMap, Player, Turn } from "..";
+import { Fight, FightMap, Player, Turn, Zone } from "..";
 
 export default class Game {
 	public player: Player
 
-	public pastFightList: Fight[]
+	public zoneList: Zone[]
 
-	public currentFight: Fight
+	public seed: string
 }

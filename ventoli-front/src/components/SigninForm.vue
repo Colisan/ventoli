@@ -32,8 +32,8 @@
 		get formValidationError(): string {
 			const player = new Player();
 			try {
-				player.name = this.login;
-				player.password = this.password;
+				player.validName = this.login;
+				player.validClearPassword = this.password;
 			} catch (error) {
 				return error.toString();
 			}

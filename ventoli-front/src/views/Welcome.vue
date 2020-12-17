@@ -1,21 +1,19 @@
 <template>
 	<div>
-		<router-link to="/">Home</router-link>
-		<SigninForm />
+		Welcome
+		<template>
+			<router-link :to="{ name: 'Signin' }">Sign in</router-link>
+			<router-link :to="{ name: 'Login' }">Log in</router-link>
+		</template>
 	</div>
 </template>
 
 <script lang="ts">
 	import { Component, Prop, Vue } from 'vue-property-decorator';
 	import { Getter, Action, Mutation } from 'vuex-class';
-	import SigninForm from '@/components/SigninForm.vue';
 
-	@Component({
-		components: {
-			SigninForm,
-		},
-	})
-	export default class Sigin extends Vue {
+	@Component
+	export default class Welcome extends Vue {
 		@Getter isLoggedIn!: boolean;
 
 		beforeMount() {

@@ -1,11 +1,7 @@
 <template>
 	<div>
 		<MainHeader />
-		<div>
-			<router-link :to="{ name: 'PlayGame' }">{{
-				gameButtonLabel
-			}}</router-link>
-		</div>
+		Game here
 	</div>
 </template>
 
@@ -20,7 +16,7 @@
 			MainHeader,
 		},
 	})
-	export default class Home extends Vue {
+	export default class PlayGame extends Vue {
 		@Getter currentGame!: Game | undefined;
 
 		@Getter isLoggedIn!: boolean;
@@ -29,11 +25,6 @@
 			if (!this.isLoggedIn) {
 				this.$router.push({ name: 'Login' });
 			}
-		}
-
-		get gameButtonLabel(): string {
-			if (this.currentGame === undefined) return 'New game';
-			return 'Continue game';
 		}
 	}
 </script>

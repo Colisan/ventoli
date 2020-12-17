@@ -30,7 +30,7 @@
 		get formValidationError(): string {
 			const player = new Player();
 			try {
-				player.password = this.newPassword;
+				player.validClearPassword = this.newPassword;
 			} catch (error) {
 				return error.toString();
 			}

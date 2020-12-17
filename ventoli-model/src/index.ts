@@ -15,3 +15,6 @@ export { default as Movement } from './game/Movement';
 export { default as UnitStats } from './game/UnitStats';
 export { default as ActionStats } from './game/ActionResult';
 export { default as Effect } from './game/Effect'
+export { default as Zone } from './game/Zone';
+export { default as Place } from './game/Place';
+export { default as Game } from './game/Game'

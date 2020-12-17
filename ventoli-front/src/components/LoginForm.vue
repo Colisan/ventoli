@@ -25,7 +25,7 @@
 				password: this.password,
 			})
 				.then((res: any) => {
-					this.$router.push({ name: 'Home' });
+					this.$router.back();
 				})
 				.catch((err: any) => {
 					// eslint-disable-next-line
