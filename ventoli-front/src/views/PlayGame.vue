@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<MainHeader />
-		Game here
+		<MainGame />
 	</div>
 </template>
 
@@ -9,11 +9,13 @@
 	import { Component, Prop, Vue } from 'vue-property-decorator';
 	import { Getter, Action, Mutation } from 'vuex-class';
 	import MainHeader from '../components/MainHeader.vue';
+	import MainGame from '../components/MainGame.vue';
 	import { Game } from '../../../ventoli-model/dist';
 
 	@Component({
 		components: {
 			MainHeader,
+			MainGame,
 		},
 	})
 	export default class PlayGame extends Vue {

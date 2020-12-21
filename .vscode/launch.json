@@ -7,7 +7,7 @@
 		{
 			"name": "start",
 			"request": "launch",
-			"runtimeExecutable": "npm",
+			"runtimeExecutable": "lerna",
 			"runtimeArgs": [
 				"run",
 				"dev",

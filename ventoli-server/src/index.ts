@@ -1,10 +1,10 @@
 import WebSocket from 'ws'
  
-const webSocketServer = new WebSocket.Server({ port: 8080 })
+const webSocketServer = new WebSocket.Server({ port: 4000 })
  
 webSocketServer.on('connection', webSocket => {
 	webSocket.on('message', message => {
     console.log(`Received message: ${message}`)
   })
-  webSocket.send('Hello! Message From Server!!')
+  webSocket.send('Hello! Message From Server!')
 })

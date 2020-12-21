@@ -1,1 +1,3 @@
+mode_modules/*
 ../ventoli-model/*
+*.d.ts

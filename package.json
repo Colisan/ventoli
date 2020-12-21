@@ -1,4 +1,5 @@
 {
+	"name": "ventoli",
 		"private": true,
 		"workspaces": [
 				"ventoli-api",
@@ -6,8 +7,7 @@
 				"ventoli-model",
 				"ventoli-server"
 		],
-		"name": "ventoli",
 		"devDependencies": {
-				"lerna": "^3.22.1"
+			"lerna": "^3.22.1"
 		}
 }
