@@ -1,7 +1,7 @@
 {
   "name": "@ventoli/ventoli-front",
   "version": "0.1.0",
-  "author": "Coli",
+  "author": "Colisan",
   "private": true,
   "scripts": {
     "dev": "vue-cli-service serve",
@@ -47,7 +47,7 @@
     "sass-loader": "^8.0.0",
     "sinon": "^7.5.0",
     "sinon-chai": "^3.3.0",
-    "typescript": "~3.5.3",
+    "typescript": "^4.1.3",
     "vue-template-compiler": "^2.6.10",
     "webpack-node-externals": "^2.5.1"
   }

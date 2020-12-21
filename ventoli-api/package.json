@@ -1,7 +1,7 @@
 {
    "name": "ventoli-api",
    "version": "0.1.0",
-   "author": "Coli",
+   "author": "Colisan",
    "private": true,
    "description": "Awesome project developed with TypeORM.",
    "scripts": {
@@ -51,6 +51,6 @@
       "sinon-express-mock": "^2.2.1",
       "ts-mocha": "^7.0.0",
       "ts-node": "^8.10.2",
-      "typescript": "^3.7.2"
+			"typescript": "^4.1.3"
    }
 }
