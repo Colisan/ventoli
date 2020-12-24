@@ -1,17 +1,12 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
+import VueRouter, { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 import Welcome from '@/views/Welcome.vue';
 import Home from '@/views/Home.vue';
 import Login from '@/views/Login.vue';
-import Signin from '@/views/Signin.vue';
+import SignIn from '@/views/SignIn.vue';
 import Settings from '@/views/Settings.vue';
 import PlayGame from '@/views/PlayGame.vue';
 
-Vue.use(VueRouter);
-
-export const noLoginComponentList = [];
-
-export const routes = [
+export const routes: Array<RouteRecordRaw> = [
 	{
 		path: '/',
 		name: 'Welcome',
@@ -19,13 +14,13 @@ export const routes = [
 	},
 	{
 		path: '/login',
-		name: 'Login',
+		name: 'LogIn',
 		component: Login,
 	},
 	{
 		path: '/signin',
-		name: 'Signin',
-		component: Signin,
+		name: 'SignIn',
+		component: SignIn,
 	},
 	{
 		path: '/home',
@@ -44,8 +39,10 @@ export const routes = [
 	},
 ];
 
-const router = new VueRouter({
-	routes,
-});
+const router = createRouter({
+  history: createWebHashHistory(),
+  routes
+})
 
-export default router;
+export default router
+

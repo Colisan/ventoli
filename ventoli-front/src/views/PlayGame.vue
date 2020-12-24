@@ -6,27 +6,23 @@
 </template>
 
 <script lang="ts">
-	import { Component, Prop, Vue } from 'vue-property-decorator';
-	import { Getter, Action, Mutation } from 'vuex-class';
-	import MainHeader from '../components/MainHeader.vue';
-	import MainGame from '../components/MainGame.vue';
-	import { Game } from '../../../ventoli-model/dist';
+	import { computed, onBeforeMount, ref, defineComponent } from 'vue';
+	import { useStore } from 'vuex'
+	import { useRouter } from 'vue-router';
+	import MainHeader from '@/components/MainHeader.vue';
+	import MainGame from '@/components/MainGame.vue';
+	import useNeedLoggedIn from '../compositions/NeedLoggedIn';
 
-	@Component({
+	export default defineComponent({
+		name: "PlayGame",
 		components: {
 			MainHeader,
 			MainGame,
 		},
-	})
-	export default class PlayGame extends Vue {
-		@Getter currentGame!: Game | undefined;
-
-		@Getter isLoggedIn!: boolean;
-
-		beforeMount() {
-			if (!this.isLoggedIn) {
-				this.$router.push({ name: 'Login' });
-			}
-		}
-	}
+		setup() {
+			return {
+				... useNeedLoggedIn(),
+			};
+		},
+	});
 </script>

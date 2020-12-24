@@ -7,7 +7,7 @@
 		{
 			"name": "start",
 			"request": "launch",
-			"runtimeExecutable": "npm",
+			"runtimeExecutable": "yarn",
 			"runtimeArgs": [
 				"run",
 				"dev",

@@ -1,8 +1,34 @@
-//const ESLintPlugin = require('eslint-webpack-plugin');
+const path = require("path");
+const vueSrc = "./src";
 
 module.exports = {
   configureWebpack: {
-    plugins: [
-    ],
+    resolve: {
+      alias: {
+        "@": path.join(__dirname, vueSrc)
+      }
+    }
   },
-}
+	chainWebpack: config => {
+		config
+			.plugin('html')
+			.tap(args => {
+				args[0].title = "Castel Ventoli";
+				return args;
+			})
+	},
+  pwa: {
+    name: 'Castel Ventoli',
+    themeColor: '#9cdb43',
+    msTileColor: '#141013',
+    appleMobileWebAppCapable: 'yes',
+    appleMobileWebAppStatusBarStyle: 'black',
+		iconPaths: {
+			favicon32: 'ventoli.gif',
+			favicon16: 'ventoli.gif',
+			appleTouchIcon: 'ventoli.gif',
+			maskIcon: 'ventoli.gif',
+			msTileImage: 'ventoli.gif'
+		},
+  },
+};

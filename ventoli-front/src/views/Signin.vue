@@ -6,22 +6,19 @@
 </template>
 
 <script lang="ts">
-	import { Component, Prop, Vue } from 'vue-property-decorator';
-	import { Getter, Action, Mutation } from 'vuex-class';
+	import { defineComponent } from 'vue';
+	import useNeedLoggedOut from '../compositions/NeedLoggedOut'
 	import SigninForm from '@/components/SigninForm.vue';
 
-	@Component({
+	export default defineComponent({
+		name: "SignIn",
 		components: {
 			SigninForm,
 		},
-	})
-	export default class Sigin extends Vue {
-		@Getter isLoggedIn!: boolean;
-
-		beforeMount() {
-			if (this.isLoggedIn) {
-				this.$router.push({ name: 'Home' });
-			}
-		}
-	}
+		setup () {
+			return {
+				...useNeedLoggedOut(),
+			};
+		},
+	});
 </script>

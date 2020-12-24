@@ -1,36 +1,46 @@
 <template>
-	<form @submit="submit">
+	<form @submit="onSubmit">
 		<input v-model="login" placeholder="login" />
 		<input type="password" v-model="password" placeholder="password" />
-		<input type="submit" value="Enter the castle!" />
+		<input type="onSubmit" value="Enter the castle!" />
 	</form>
 </template>
 
 <script lang="ts">
-	import { Component, Prop, Vue } from 'vue-property-decorator';
-	import { Getter, Action, Mutation } from 'vuex-class';
-	import helperStores from '@/helpers/helperStores';
+	import { computed, defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
+	import { useStore } from 'vuex'
+	import { useRouter } from 'vue-router';
+	import { Game } from '../../../ventoli-model/dist';
 
-	@Component
-	export default class LoginForm extends Vue {
-		private login = '';
+	export default defineComponent({
+		name: "LoginForm",
+		setup () {
+			const store = useStore();
+			const router = useRouter();
 
-		private password = '';
-
-		@Action loginWithCredentials: any;
-
-		submit() {
-			this.loginWithCredentials({
-				login: this.login,
-				password: this.password,
+			const dataState = reactive({
+				login: '',
+				password: '',
 			})
-				.then((res: any) => {
-					this.$router.back();
+
+			const onSubmit = () => {
+				store.dispatch("loginWithCredentials", {
+					login: dataState.login,
+					password: dataState.password,
 				})
-				.catch((err: any) => {
-					// eslint-disable-next-line
-					alert(err);
-				});
-		}
-	}
+					.then((res: any) => {
+						router.back();
+					})
+					.catch((err: any) => {
+						// eslint-disable-next-line
+						alert(err);
+					});
+			}
+
+			return {
+				...toRefs(dataState),
+				onSubmit,
+			};
+		},
+	});
 </script>

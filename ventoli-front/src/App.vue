@@ -1,5 +1,5 @@
 <template>
-	<div id="app">
+	<div id="ventoli-app">
 		<router-view />
 	</div>
 </template>

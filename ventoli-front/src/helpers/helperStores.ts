@@ -30,6 +30,7 @@ export default {
 		});
 		return res;
 	},
+	/*
 	defaultModel<StateType>(
 		vueComponent: Vue,
 		stateOrGetterName: string,
@@ -49,5 +50,5 @@ export default {
 					vueComponent.$store.commit(mutationName, value);
 			},
 		});
-	},
+	},*/
 };

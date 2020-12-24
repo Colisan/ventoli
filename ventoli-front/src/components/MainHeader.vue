@@ -11,16 +11,23 @@
 </template>
 
 <script lang="ts">
-	import { Component, Prop, Vue } from 'vue-property-decorator';
-	import { Getter, Action, Mutation } from 'vuex-class';
+	import { computed, defineComponent, onBeforeMount, ref } from 'vue';
+	import { useStore } from 'vuex'
+	import { useRouter } from 'vue-router';
 
-	@Component
-	export default class MainHeader extends Vue {
-		@Action logout!: Function;
+	export default defineComponent({
+		name: "MainHeader",
+		setup () {
+			const store = useStore();
+			const router = useRouter();
 
-		onLogoutClick() {
-			this.logout();
-			this.$router.push({ name: 'Welcome' });
-		}
-	}
+			const onLogoutClick = () => {
+				store.dispatch("logout");
+				router.push({ name: 'Welcome' });
+			}
+			return {
+				onLogoutClick
+			};
+		},
+	});
 </script>

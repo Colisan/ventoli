@@ -10,41 +10,38 @@
 </template>
 
 <script lang="ts">
-	import { Component, Prop, Vue } from 'vue-property-decorator';
-	import { Getter, Action, Mutation } from 'vuex-class';
+	import { computed, defineComponent, onBeforeMount, ref } from 'vue';
+	import { useStore } from 'vuex'
+	import { useRouter } from 'vue-router';
+	import { Game } from '../../../ventoli-model/dist';
 
-	@Component
-	export default class MainGame extends Vue {
-		isLoading: boolean = true;
+	export default defineComponent({
+		name: "MainGame",
+		submit() {
+			const isLoading = ref(true);
 
-		webSocket!: WebSocket;
+			let webSocket: WebSocket;
+			try {
+				 webSocket = new WebSocket(
+					process.env.VUE_APP_VENTOLI_SERVER_URL as string
+				);
+			} catch (e) {
+				console.error("todo no socket");
+				return;
+			}
 
-		beforeMount() {
-			console.log(process.env.VUE_APP_VENTOLI_SERVER_URL);
-			this.connectToServer().then(() => {
-				this.isLoading = false;
-			});
-		}
+			webSocket.onopen = () => {
+				webSocket.send('something');
+				isLoading.value = true;
+			};
 
-		async connectToServer() {
-			return new Promise((resolve, reject) => {
-				try {
-					this.webSocket = new WebSocket(
-						process.env.VUE_APP_VENTOLI_SERVER_URL as string
-					);
-				} catch (e) {
-					reject(e);
-				}
+			webSocket.onmessage = data => {
+				console.log('recieved', data);
+			};
 
-				this.webSocket.onopen = () => {
-					this.webSocket.send('something');
-					resolve(1);
-				};
-
-				this.webSocket.onmessage = data => {
-					console.log('recieved', data);
-				};
-			});
-		}
-	}
+			return {
+				isLoading,
+			}
+		},
+	});
 </script>

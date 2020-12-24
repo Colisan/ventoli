@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable import/no-extraneous-dependencies */
+/*
 import { expect } from 'chai';
 import { Wrapper } from '@vue/test-utils';
 import { routes } from '@/router';
@@ -20,3 +19,4 @@ export function testWrapperForRouterPath(
 export default {
 	testWrapperForRouterPath,
 };
+*/

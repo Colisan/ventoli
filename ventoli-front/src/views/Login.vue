@@ -6,22 +6,21 @@
 </template>
 
 <script lang="ts">
-	import { Component, Prop, Vue } from 'vue-property-decorator';
-	import { Getter, Action, Mutation } from 'vuex-class';
+	import { computed, onBeforeMount, ref, defineComponent } from 'vue';
+	import { useStore } from 'vuex'
+	import { useRouter } from 'vue-router';
 	import LoginForm from '@/components/LoginForm.vue';
+	import useNeedLoggedIn from '../compositions/NeedLoggedIn';
 
-	@Component({
+	export default defineComponent({
+		name: "Login",
 		components: {
 			LoginForm,
 		},
-	})
-	export default class Login extends Vue {
-		@Getter isLoggedIn!: boolean;
-
-		beforeMount() {
-			if (this.isLoggedIn) {
-				this.$router.push({ name: 'Home' });
-			}
-		}
-	}
+		setup() {
+			return {
+				...useNeedLoggedIn(),
+			};
+		},
+	});
 </script>

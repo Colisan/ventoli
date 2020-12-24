@@ -2,38 +2,35 @@
 	<div>
 		<MainHeader />
 		<div>
-			<router-link :to="{ name: 'PlayGame' }">{{
-				gameButtonLabel
-			}}</router-link>
+			<router-link :to="{ name: 'PlayGame' }">
+				{{ gameButtonLabel }}
+			</router-link>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-	import { Component, Prop, Vue } from 'vue-property-decorator';
-	import { Getter, Action, Mutation } from 'vuex-class';
-	import MainHeader from '../components/MainHeader.vue';
+	import { computed, defineComponent, onBeforeMount, ref } from 'vue';
+	import { useStore } from 'vuex'
 	import { Game } from '../../../ventoli-model/dist';
+	import MainHeader from '@/components/MainHeader.vue';
+	import useNeedLoggedIn from '../compositions/NeedLoggedIn'
 
-	@Component({
+	export default defineComponent({
+		name: 'Home',
 		components: {
 			MainHeader,
 		},
-	})
-	export default class Home extends Vue {
-		@Getter currentGame!: Game | undefined;
+		setup() {
+			const store = useStore()
 
-		@Getter isLoggedIn!: boolean;
+			const currentGame = computed(() => store.getters.currentGame);
+			const gameButtonLabel = ref((currentGame === undefined) ? 'New game' : 'Continue game');
 
-		beforeMount() {
-			if (!this.isLoggedIn) {
-				this.$router.push({ name: 'Login' });
-			}
-		}
-
-		get gameButtonLabel(): string {
-			if (this.currentGame === undefined) return 'New game';
-			return 'Continue game';
-		}
-	}
+			return {
+				...useNeedLoggedIn(),
+				gameButtonLabel
+			};
+		},
+	});
 </script>

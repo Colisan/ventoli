@@ -1,15 +1,13 @@
-import Vue from 'vue';
-import Vuex, { Store, StoreOptions } from 'vuex';
-import storeFront, { GetStoreFrontPlugin } from '@/store/storeFront';
+import { createStore, Store, useStore } from 'vuex';
+import storeFront, { GetStoreFrontPlugin, State } from '@/store/storeFront';
 
-Vue.use(Vuex);
-
-const getStore = (storage: Storage): Store<any> =>
-	new Vuex.Store<any>({
+const getStore = (storage: Storage): Store<State> => 
+	createStore({
 		modules: {
 			storeFront,
 		},
 		plugins: [GetStoreFrontPlugin(storage)],
+		strict: true
 	});
 
 export default getStore;

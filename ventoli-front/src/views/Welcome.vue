@@ -2,24 +2,22 @@
 	<div>
 		Welcome
 		<template>
-			<router-link :to="{ name: 'Signin' }">Sign in</router-link>
-			<router-link :to="{ name: 'Login' }">Log in</router-link>
+			<router-link :to="{ name: 'SignIn' }">Sign in</router-link>
+			<router-link :to="{ name: 'LogIn' }">Log in</router-link>
 		</template>
 	</div>
 </template>
 
 <script lang="ts">
-	import { Component, Prop, Vue } from 'vue-property-decorator';
-	import { Getter, Action, Mutation } from 'vuex-class';
+	import { defineComponent } from 'vue';
+	import useNeedLoggedOut from '../compositions/NeedLoggedOut'
 
-	@Component
-	export default class Welcome extends Vue {
-		@Getter isLoggedIn!: boolean;
-
-		beforeMount() {
-			if (this.isLoggedIn) {
-				this.$router.push({ name: 'Home' });
-			}
-		}
-	}
+	export default defineComponent({
+		name: "Welcome",
+		setup () {
+			return {
+				...useNeedLoggedOut(),
+			};
+		},
+	});
 </script>

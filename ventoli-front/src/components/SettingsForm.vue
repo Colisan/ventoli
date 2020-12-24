@@ -1,5 +1,5 @@
 <template>
-	<form @submit="submit">
+	<form @submit="onSubmit">
 		<input type="password" v-model="oldPassword" placeholder="old password" />
 		<input type="password" v-model="newPassword" placeholder="new password" />
 		<input
@@ -12,58 +12,73 @@
 </template>
 
 <script lang="ts">
-	import { Component, Prop, Vue } from 'vue-property-decorator';
-	import { Getter, Action, Mutation } from 'vuex-class';
-	import helperStores from '@/helpers/helperStores';
+	import { computed, defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
+	import { useStore } from 'vuex'
+	import { useRouter } from 'vue-router';
 	import { Player } from '../../../ventoli-model/dist';
 
-	@Component
-	export default class SettingsForm extends Vue {
-		private oldPassword = '';
+	export default defineComponent({
+		name: "SettingsForm",
+		setup () {
+			const store = useStore();
+			const router = useRouter();
 
-		private newPassword = '';
-
-		private newPasswordAgain = '';
-
-		@Action editAccount: any;
-
-		get formValidationError(): string {
-			const player = new Player();
-			try {
-				player.validClearPassword = this.newPassword;
-			} catch (error) {
-				return error.toString();
-			}
-
-			// TODO
-			if (!this.oldPassword) return 'Old password is incorrect';
-
-			if (this.oldPassword === this.newPassword)
-				return 'Old and new passwords are the same';
-
-			if (this.newPassword !== this.newPasswordAgain)
-				return "Password confirmation don't match";
-
-			return '';
-		}
-
-		async submit() {
-			const validationError = this.formValidationError;
-
-			if (validationError) {
-				// eslint-disable-next-line
-				alert(validationError);
-				console.error(validationError);
-				return;
-			}
-			this.editAccount({
-				login: this.newPassword,
-				oldPassword: this.oldPassword,
-				newPassword: this.newPassword,
-			}).then(() => {
-				// eslint-disable-next-line
-				alert('ok');
+			const dataState = reactive({
+				oldPassword: '',
+				newPassword: '',
+				newPasswordAgain: '',
 			});
-		}
-	}
+
+			const editAccount = () => {
+				return store.dispatch("editAccount", {
+					login: dataState.newPassword,
+					oldPassword: dataState.oldPassword,
+					newPassword: dataState.newPassword,
+				}).then(() => {
+					// eslint-disable-next-line
+					alert('ok');
+				});
+			};
+
+			const formValidationError = () : string => {
+				const player = new Player();
+				try {
+					player.validClearPassword = dataState.newPassword;
+				} catch (error) {
+					return error.toString();
+				}
+
+				// TODO
+				if (!dataState.oldPassword) return 'Old password is incorrect';
+
+				if (dataState.oldPassword === dataState.newPassword)
+					return 'Old and new passwords are the same';
+
+				if (dataState.newPassword !== dataState.newPasswordAgain)
+					return "Password confirmation don't match";
+
+				return '';
+			};
+
+			const onSubmit = () => {
+				const validationError = formValidationError();
+
+				if (validationError) {
+					// eslint-disable-next-line
+					alert(validationError);
+					console.error(validationError);
+					return;
+				}
+				editAccount().then(() => {
+					// eslint-disable-next-line
+					alert('ok');
+				});
+			};
+			
+			return {
+				...toRefs(dataState),
+				onSubmit,
+			}
+		},
+	});
 </script>
