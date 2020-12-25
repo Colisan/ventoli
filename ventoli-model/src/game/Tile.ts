@@ -3,9 +3,9 @@ import { FightMap } from '..';
 import setPositionable from '../mixin/Positionable';
 
 class BaseTile {
-	public parentFightMap: FightMap
+	public parentFightMap: FightMap;
 
-	public depth: number
+	public depth: number;
 }
 
 export default class PositionableTile extends setPositionable(BaseTile) {}

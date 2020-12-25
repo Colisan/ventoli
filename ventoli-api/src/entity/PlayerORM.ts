@@ -1,27 +1,34 @@
-import { Entity, PrimaryGeneratedColumn, Column, Unique, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+	Entity,
+	PrimaryGeneratedColumn,
+	Column,
+	Unique,
+	CreateDateColumn,
+	UpdateDateColumn,
+} from 'typeorm';
 
 import { Player } from '../../../ventoli-model/dist';
 
 @Entity()
 @Unique(['name'])
 export default class PlayerORM {
-  @PrimaryGeneratedColumn()
-  public id: number;
+	@PrimaryGeneratedColumn()
+	public id: number;
 
-  @Column()
-  public name: string;
+	@Column()
+	public name: string;
 
-  @Column()
-  public password: string;
+	@Column()
+	public password: string;
 
-  @Column()
-  @CreateDateColumn()
-  public createdAt: Date;
+	@Column()
+	@CreateDateColumn()
+	public createdAt: Date;
 
-  @Column()
-  @UpdateDateColumn()
+	@Column()
+	@UpdateDateColumn()
 	public updatedAt: Date;
-	
+
 	public constructor(playerModel?: Player) {
 		if (playerModel) {
 			this.id = playerModel.id;

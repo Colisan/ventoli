@@ -7,15 +7,15 @@
 
 <script lang="ts">
 	import { defineComponent } from 'vue';
-	import useNeedLoggedOut from '../compositions/NeedLoggedOut'
+	import useNeedLoggedOut from '../compositions/NeedLoggedOut';
 	import SigninForm from '@/components/SigninForm.vue';
 
 	export default defineComponent({
-		name: "SignIn",
+		name: 'SignIn',
 		components: {
 			SigninForm,
 		},
-		setup () {
+		setup() {
 			return {
 				...useNeedLoggedOut(),
 			};

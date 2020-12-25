@@ -1,15 +1,15 @@
-import { FightMap, Place, Player, Turn } from "..";
+import { FightMap, Place, Player, Turn } from '..';
 
 export default class Fight {
-	public fightNumber: number
+	public fightNumber: number;
 
-	public parentPlace: Place
+	public parentPlace: Place;
 
-	public map: FightMap
+	public map: FightMap;
 
-	public playerList: Player[]
+	public playerList: Player[];
 
-	public pastTurnList: Turn[]
+	public pastTurnList: Turn[];
 
-	public currentTurn: Turn
+	public currentTurn: Turn;
 }

@@ -1,42 +1,42 @@
 {
-  "name": "vue3test33",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "test": "vue-cli-service test:unit ./src/**/*.test.ts",
-    "test:watch": "vue-cli-service test:unit ./src/**/*.test.ts --watch"
-  },
-  "dependencies": {
-    "axios": "^0.21.1",
-    "core-js": "^3.6.5",
-    "register-service-worker": "^1.7.1",
-    "vue": "^3.0.0",
-    "vue-class-component": "^8.0.0-0",
-    "vue-router": "^4.0.0-0",
-    "vuex": "^4.0.0-0"
-  },
-  "devDependencies": {
-    "@types/chai": "^4.2.11",
-    "@types/mocha": "^5.2.4",
-    "@types/sinon": "^9.0.9",
-    "@types/sinon-chai": "^3.2.5",
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-pwa": "~4.5.0",
-    "@vue/cli-plugin-router": "~4.5.0",
-    "@vue/cli-plugin-typescript": "~4.5.0",
-    "@vue/cli-plugin-unit-mocha": "~4.5.0",
-    "@vue/cli-plugin-vuex": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.0.0",
-    "@vue/test-utils": "^2.0.0-0",
-    "chai": "^4.1.2",
-    "sass": "^1.26.5",
-    "sass-loader": "^8.0.2",
-    "sinon": "^9.2.2",
-    "sinon-chai": "^3.5.0",
-    "typescript": "~3.9.3",
-    "vuex-class": "^0.3.2"
-  }
+	"name": "vue3test33",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "vue-cli-service serve",
+		"build": "vue-cli-service build",
+		"test": "vue-cli-service test:unit ./src/**/*.test.ts",
+		"test:watch": "vue-cli-service test:unit ./src/**/*.test.ts --watch"
+	},
+	"dependencies": {
+		"axios": "^0.21.1",
+		"core-js": "^3.6.5",
+		"register-service-worker": "^1.7.1",
+		"vue": "^3.0.0",
+		"vue-class-component": "^8.0.0-0",
+		"vue-router": "^4.0.0-0",
+		"vuex": "^4.0.0-0"
+	},
+	"devDependencies": {
+		"@types/chai": "^4.2.11",
+		"@types/mocha": "^5.2.4",
+		"@types/sinon": "^9.0.9",
+		"@types/sinon-chai": "^3.2.5",
+		"@vue/cli-plugin-babel": "~4.5.0",
+		"@vue/cli-plugin-pwa": "~4.5.0",
+		"@vue/cli-plugin-router": "~4.5.0",
+		"@vue/cli-plugin-typescript": "~4.5.0",
+		"@vue/cli-plugin-unit-mocha": "~4.5.0",
+		"@vue/cli-plugin-vuex": "~4.5.0",
+		"@vue/cli-service": "~4.5.0",
+		"@vue/compiler-sfc": "^3.0.0",
+		"@vue/test-utils": "^2.0.0-0",
+		"chai": "^4.1.2",
+		"sass": "^1.26.5",
+		"sass-loader": "^8.0.2",
+		"sinon": "^9.2.2",
+		"sinon-chai": "^3.5.0",
+		"typescript": "~3.9.3",
+		"vuex-class": "^0.3.2"
+	}
 }

@@ -7,27 +7,35 @@
 </template>
 
 <script lang="ts">
-	import { computed, defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
-	import { useStore } from 'vuex'
+	import {
+		computed,
+		defineComponent,
+		onBeforeMount,
+		reactive,
+		ref,
+		toRefs,
+	} from 'vue';
+	import { useStore } from 'vuex';
 	import { useRouter } from 'vue-router';
 	import { Game } from '../../../ventoli-model/dist';
 
 	export default defineComponent({
-		name: "LoginForm",
-		setup () {
+		name: 'LoginForm',
+		setup() {
 			const store = useStore();
 			const router = useRouter();
 
 			const dataState = reactive({
 				login: '',
 				password: '',
-			})
+			});
 
 			const onSubmit = () => {
-				store.dispatch("loginWithCredentials", {
-					login: dataState.login,
-					password: dataState.password,
-				})
+				store
+					.dispatch('loginWithCredentials', {
+						login: dataState.login,
+						password: dataState.password,
+					})
 					.then((res: any) => {
 						router.back();
 					})
@@ -35,7 +43,7 @@
 						// eslint-disable-next-line
 						alert(err);
 					});
-			}
+			};
 
 			return {
 				...toRefs(dataState),

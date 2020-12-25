@@ -1,9 +1,9 @@
-import { ActiveAbility, PassiveAbility, Tile, Unit, UnitStats } from "..";
+import { ActiveAbility, PassiveAbility, Tile, Unit, UnitStats } from '..';
 
 export default class Effect {
-	public targetUnit: Unit
+	public targetUnit: Unit;
 
-	public underlyingPassiveAbility?: PassiveAbility
+	public underlyingPassiveAbility?: PassiveAbility;
 
-	public turnsLeft?: number
+	public turnsLeft?: number;
 }

@@ -1,4 +1,4 @@
-import { Fight, FightMap, Place, Player, Turn } from "..";
+import { Fight, FightMap, Place, Player, Turn } from '..';
 
 export enum ZoneType {
 	TUTORIAL = 0,
@@ -11,13 +11,13 @@ export enum ZoneType {
 	PRISON = 7,
 	TUNNELS = 8,
 	CHAPEL = 9,
-	THRONE = 10
+	THRONE = 10,
 }
 
 export default class Zone {
-	public type: ZoneType
+	public type: ZoneType;
 
-	public placeList: Place[]
+	public placeList: Place[];
 
-	public additionalFightList: Fight[]
+	public additionalFightList: Fight[];
 }

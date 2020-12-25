@@ -1,34 +1,32 @@
-const path = require("path");
-const vueSrc = "./src";
+const path = require('path');
+const vueSrc = './src';
 
 module.exports = {
-  configureWebpack: {
-    resolve: {
-      alias: {
-        "@": path.join(__dirname, vueSrc)
-      }
-    }
-  },
-	chainWebpack: config => {
-		config
-			.plugin('html')
-			.tap(args => {
-				args[0].title = "Castel Ventoli";
-				return args;
-			})
+	configureWebpack: {
+		resolve: {
+			alias: {
+				'@': path.join(__dirname, vueSrc),
+			},
+		},
 	},
-  pwa: {
-    name: 'Castel Ventoli',
-    themeColor: '#9cdb43',
-    msTileColor: '#141013',
-    appleMobileWebAppCapable: 'yes',
-    appleMobileWebAppStatusBarStyle: 'black',
+	chainWebpack: (config) => {
+		config.plugin('html').tap((args) => {
+			args[0].title = 'Castel Ventoli';
+			return args;
+		});
+	},
+	pwa: {
+		name: 'Castel Ventoli',
+		themeColor: '#9cdb43',
+		msTileColor: '#141013',
+		appleMobileWebAppCapable: 'yes',
+		appleMobileWebAppStatusBarStyle: 'black',
 		iconPaths: {
 			favicon32: 'ventoli.gif',
 			favicon16: 'ventoli.gif',
 			appleTouchIcon: 'ventoli.gif',
 			maskIcon: 'ventoli.gif',
-			msTileImage: 'ventoli.gif'
+			msTileImage: 'ventoli.gif',
 		},
-  },
+	},
 };

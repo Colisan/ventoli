@@ -12,14 +12,21 @@
 </template>
 
 <script lang="ts">
-	import { computed, defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
-	import { useStore } from 'vuex'
+	import {
+		computed,
+		defineComponent,
+		onBeforeMount,
+		reactive,
+		ref,
+		toRefs,
+	} from 'vue';
+	import { useStore } from 'vuex';
 	import { useRouter } from 'vue-router';
 	import { Player } from '../../../ventoli-model/dist';
 
 	export default defineComponent({
-		name: "SettingsForm",
-		setup () {
+		name: 'SettingsForm',
+		setup() {
 			const store = useStore();
 			const router = useRouter();
 
@@ -30,17 +37,19 @@
 			});
 
 			const editAccount = () => {
-				return store.dispatch("editAccount", {
-					login: dataState.newPassword,
-					oldPassword: dataState.oldPassword,
-					newPassword: dataState.newPassword,
-				}).then(() => {
-					// eslint-disable-next-line
-					alert('ok');
-				});
+				return store
+					.dispatch('editAccount', {
+						login: dataState.newPassword,
+						oldPassword: dataState.oldPassword,
+						newPassword: dataState.newPassword,
+					})
+					.then(() => {
+						// eslint-disable-next-line
+						alert('ok');
+					});
 			};
 
-			const formValidationError = () : string => {
+			const formValidationError = (): string => {
 				const player = new Player();
 				try {
 					player.validClearPassword = dataState.newPassword;
@@ -74,11 +83,11 @@
 					alert('ok');
 				});
 			};
-			
+
 			return {
 				...toRefs(dataState),
 				onSubmit,
-			}
+			};
 		},
 	});
 </script>

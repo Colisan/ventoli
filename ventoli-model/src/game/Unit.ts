@@ -1,33 +1,37 @@
-import { Ability, ActiveAbility, Effect, PassiveAbility, Stuff, UnitStats } from "..";
+import {
+	Ability,
+	ActiveAbility,
+	Effect,
+	PassiveAbility,
+	Stuff,
+	UnitStats,
+} from '..';
 
 export default class Unit {
-	public name: string
-	
-	public stuffList: Stuff[]
+	public name: string;
 
-	public chosenActiveAbilityList: ActiveAbility[]
+	public stuffList: Stuff[];
 
-	public chosenPassiveAbilityList: PassiveAbility[]
+	public chosenActiveAbilityList: ActiveAbility[];
 
-	public coreStats: UnitStats
+	public chosenPassiveAbilityList: PassiveAbility[];
 
+	public coreStats: UnitStats;
 
-	public currentHP: number
+	public currentHP: number;
 
-	public alterationList: Effect[]
-	
-	
+	public alterationList: Effect[];
+
 	public get currentStrengh() {
-		let base = this.coreStats.strengh
-		return base
+		let base = this.coreStats.strengh;
+		return base;
 	}
 
 	public get bonusMagicalRange() {
-		return 0
+		return 0;
 	}
-	
+
 	public get bonusPhysicalRange() {
-		return 0
+		return 0;
 	}
-	
 }

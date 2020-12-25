@@ -1,4 +1,3 @@
-import { Tile, Unit } from "..";
+import { Tile, Unit } from '..';
 
-export default interface Ability {
-}
+export default interface Ability {}

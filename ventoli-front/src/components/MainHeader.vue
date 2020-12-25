@@ -12,21 +12,21 @@
 
 <script lang="ts">
 	import { computed, defineComponent, onBeforeMount, ref } from 'vue';
-	import { useStore } from 'vuex'
+	import { useStore } from 'vuex';
 	import { useRouter } from 'vue-router';
 
 	export default defineComponent({
-		name: "MainHeader",
-		setup () {
+		name: 'MainHeader',
+		setup() {
 			const store = useStore();
 			const router = useRouter();
 
 			const onLogoutClick = () => {
-				store.dispatch("logout");
+				store.dispatch('logout');
 				router.push({ name: 'Welcome' });
-			}
+			};
 			return {
-				onLogoutClick
+				onLogoutClick,
 			};
 		},
 	});

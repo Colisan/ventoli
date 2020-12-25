@@ -8,13 +8,13 @@ export { default as FightMap } from './game/FightMap';
 export { default as Tile } from './game/Tile';
 export { default as Stuff } from './game/Stuff';
 export { default as Ability } from './game/Ability';
-export { default as ActionResult } from './game/ActionResult'
+export { default as ActionResult } from './game/ActionResult';
 export { default as ActiveAbility } from './game/ActiveAbility';
 export { default as PassiveAbility } from './game/PassiveAbility';
 export { default as Movement } from './game/Movement';
 export { default as UnitStats } from './game/UnitStats';
 export { default as ActionStats } from './game/ActionResult';
-export { default as Effect } from './game/Effect'
+export { default as Effect } from './game/Effect';
 export { default as Zone } from './game/Zone';
 export { default as Place } from './game/Place';
-export { default as Game } from './game/Game'
+export { default as Game } from './game/Game';

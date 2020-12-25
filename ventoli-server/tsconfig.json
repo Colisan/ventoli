@@ -1,9 +1,6 @@
 {
-  "compilerOptions": {
-		"lib": [
-			 "es5",
-			 "es6"
-		],
+	"compilerOptions": {
+		"lib": ["es5", "es6"],
 		"target": "es5",
 		"module": "commonjs",
 		"moduleResolution": "node",
@@ -12,8 +9,8 @@
 		"experimentalDecorators": true,
 		"sourceMap": true,
 		"esModuleInterop": true,
-		"typeRoots" : ["./node_modules/@types", "../node_modules/@types"]
-  },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "dist"]
+		"typeRoots": ["./node_modules/@types", "../node_modules/@types"]
+	},
+	"include": ["src/**/*.ts"],
+	"exclude": ["node_modules", "dist"]
 }

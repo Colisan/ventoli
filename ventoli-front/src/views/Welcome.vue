@@ -10,11 +10,11 @@
 
 <script lang="ts">
 	import { defineComponent } from 'vue';
-	import useNeedLoggedOut from '../compositions/NeedLoggedOut'
+	import useNeedLoggedOut from '../compositions/NeedLoggedOut';
 
 	export default defineComponent({
-		name: "Welcome",
-		setup () {
+		name: 'Welcome',
+		setup() {
 			return {
 				...useNeedLoggedOut(),
 			};

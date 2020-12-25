@@ -20,10 +20,9 @@ export default class Player {
 	}
 
 	public set validName(newName: string) {
-		if (newName.length < 5)
-			throw "Name must be at least 5 characters long";
-		if (newName.match(/\W/gmui))
-			throw "Name must only contain letter or digit characters";
+		if (newName.length < 5) throw 'Name must be at least 5 characters long';
+		if (newName.match(/\W/gimu))
+			throw 'Name must only contain letter or digit characters';
 		this._name = newName;
 	}
 
@@ -33,13 +32,13 @@ export default class Player {
 
 	public set validClearPassword(newClearPassword: string) {
 		if (newClearPassword.length < 8)
-			throw "Password must be at least 8 characters long";
-		if (!newClearPassword.match(/[a-z][A-Z]/gmui))
-			throw "Password must contain a letter";
-		if (!newClearPassword.match(/\d/gmui))
-			throw "Password must contain a digit";
-		if (!newClearPassword.match(/\W/gmui))
-			throw "Password must contain a non-letter and non-digit character";
+			throw 'Password must be at least 8 characters long';
+		if (!newClearPassword.match(/[a-z][A-Z]/gimu))
+			throw 'Password must contain a letter';
+		if (!newClearPassword.match(/\d/gimu))
+			throw 'Password must contain a digit';
+		if (!newClearPassword.match(/\W/gimu))
+			throw 'Password must contain a non-letter and non-digit character';
 		this._hashedPassword = bcrypt.hashSync(newClearPassword, 8);
 	}
 

@@ -12,13 +12,20 @@
 </template>
 
 <script lang="ts">
-	import { computed, defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
-	import { useStore } from 'vuex'
+	import {
+		computed,
+		defineComponent,
+		onBeforeMount,
+		reactive,
+		ref,
+		toRefs,
+	} from 'vue';
+	import { useStore } from 'vuex';
 	import { useRouter } from 'vue-router';
-import { Player } from '../../../ventoli-model/dist';
+	import { Player } from '../../../ventoli-model/dist';
 
 	export default defineComponent({
-		name: "SigninForm",
+		name: 'SigninForm',
 		setup() {
 			const store = useStore();
 			const router = useRouter();
@@ -30,18 +37,18 @@ import { Player } from '../../../ventoli-model/dist';
 			});
 
 			const dispatchCreation = () => {
-				return store.dispatch("createAccount", {
+				return store.dispatch('createAccount', {
 					login: dataState.login,
 					password: dataState.password,
-				})
-			}
-			
+				});
+			};
+
 			const dispatchLogin = () => {
-				return store.dispatch("loginWithCredentials", {
+				return store.dispatch('loginWithCredentials', {
 					login: dataState.login,
 					password: dataState.password,
-				})
-			}
+				});
+			};
 
 			const formValidationError = (): string => {
 				const player = new Player();
@@ -56,7 +63,7 @@ import { Player } from '../../../ventoli-model/dist';
 					return "Password confirmation don't match";
 
 				return '';
-			}
+			};
 
 			const onSubmit = () => {
 				const validationError = formValidationError();
@@ -83,12 +90,12 @@ import { Player } from '../../../ventoli-model/dist';
 						// eslint-disable-next-line
 						alert(err);
 					});
-			}
+			};
 
 			return {
 				...toRefs(dataState),
 				onSubmit,
-			}
+			};
 		},
 	});
 </script>

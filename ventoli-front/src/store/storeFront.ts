@@ -16,9 +16,9 @@ let initialPlayer: Player | undefined;
 let game: Game | undefined;
 
 export const initialState = {
-	authToken: initialAuthToken = undefined,
-	currentPlayer: initialPlayer = undefined,
-	currentGame: game = undefined,
+	authToken: (initialAuthToken = undefined),
+	currentPlayer: (initialPlayer = undefined),
+	currentGame: (game = undefined),
 };
 
 export type State = typeof initialState;

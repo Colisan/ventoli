@@ -7,21 +7,21 @@
 
 <script lang="ts">
 	import { computed, onBeforeMount, ref, defineComponent } from 'vue';
-	import { useStore } from 'vuex'
+	import { useStore } from 'vuex';
 	import { useRouter } from 'vue-router';
 	import MainHeader from '@/components/MainHeader.vue';
 	import MainGame from '@/components/MainGame.vue';
 	import useNeedLoggedIn from '../compositions/NeedLoggedIn';
 
 	export default defineComponent({
-		name: "PlayGame",
+		name: 'PlayGame',
 		components: {
 			MainHeader,
 			MainGame,
 		},
 		setup() {
 			return {
-				... useNeedLoggedIn(),
+				...useNeedLoggedIn(),
 			};
 		},
 	});

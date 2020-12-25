@@ -1,4 +1,8 @@
-import VueRouter, { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
+import VueRouter, {
+	createRouter,
+	createWebHashHistory,
+	RouteRecordRaw,
+} from 'vue-router';
 import Welcome from '@/views/Welcome.vue';
 import Home from '@/views/Home.vue';
 import Login from '@/views/Login.vue';
@@ -40,9 +44,8 @@ export const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
-  routes
-})
+	history: createWebHashHistory(),
+	routes,
+});
 
-export default router
-
+export default router;

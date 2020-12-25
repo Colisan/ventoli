@@ -1,13 +1,14 @@
 {
 	"name": "ventoli",
-		"private": true,
-		"workspaces": [
-				"ventoli-api",
-				"ventoli-front",
-				"ventoli-model",
-				"ventoli-server"
-		],
-		"devDependencies": {
-			"lerna": "^3.22.1"
-		}
+	"private": true,
+	"workspaces": [
+		"ventoli-api",
+		"ventoli-front",
+		"ventoli-model",
+		"ventoli-server"
+	],
+	"devDependencies": {
+		"lerna": "^3.22.1",
+		"prettier": "^2.2.1"
+	}
 }
