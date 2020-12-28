@@ -14,7 +14,7 @@
 	import { useStore } from 'vuex';
 	import { Game } from '../../../ventoli-model/dist';
 	import MainHeader from '@/components/MainHeader.vue';
-	import useNeedLoggedIn from '../compositions/NeedLoggedIn';
+	import useNeedLoggedIn from '@/compositions/NeedLoggedIn';
 
 	export default defineComponent({
 		name: 'Home',

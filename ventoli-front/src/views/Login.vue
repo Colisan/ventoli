@@ -10,7 +10,7 @@
 	import { useStore } from 'vuex';
 	import { useRouter } from 'vue-router';
 	import LoginForm from '@/components/LoginForm.vue';
-	import useNeedLoggedIn from '../compositions/NeedLoggedIn';
+	import useNeedLoggedIn from '@/compositions/NeedLoggedIn';
 
 	export default defineComponent({
 		name: 'Login',

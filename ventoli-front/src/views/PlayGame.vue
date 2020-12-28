@@ -11,7 +11,7 @@
 	import { useRouter } from 'vue-router';
 	import MainHeader from '@/components/MainHeader.vue';
 	import MainGame from '@/components/MainGame.vue';
-	import useNeedLoggedIn from '../compositions/NeedLoggedIn';
+	import useNeedLoggedIn from '@/compositions/NeedLoggedIn';
 
 	export default defineComponent({
 		name: 'PlayGame',
