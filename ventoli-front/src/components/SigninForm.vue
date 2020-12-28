@@ -23,6 +23,7 @@
 	import { useStore } from 'vuex';
 	import { useRouter } from 'vue-router';
 	import { Player } from '../../../ventoli-model/dist';
+import { ActionType } from '@/store/storeFront/actions';
 
 	export default defineComponent({
 		name: 'SigninForm',
@@ -37,14 +38,14 @@
 			});
 
 			const dispatchCreation = () => {
-				return store.dispatch('createAccount', {
+				return store.dispatch(ActionType.CallCreateAccount, {
 					login: dataState.login,
 					password: dataState.password,
 				});
 			};
 
 			const dispatchLogin = () => {
-				return store.dispatch('loginWithCredentials', {
+				return store.dispatch(ActionType.CallLogin, {
 					login: dataState.login,
 					password: dataState.password,
 				});

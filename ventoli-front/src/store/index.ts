@@ -1,3 +1,4 @@
+/*
 import { createStore, Store, useStore } from 'vuex';
 import storeFront, { GetStoreFrontPlugin, State } from '@/store/storeFront';
 
@@ -11,3 +12,4 @@ const getStore = (storage: Storage): Store<State> =>
 	});
 
 export default getStore;
+*/

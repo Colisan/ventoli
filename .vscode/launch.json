@@ -8,7 +8,7 @@
 			"name": "start",
 			"request": "launch",
 			"runtimeExecutable": "lerna",
-			"runtimeArgs": ["run", "dev"],
+			"runtimeArgs": ["run", "dev", "--parallel"],
 			"skipFiles": ["<node_internals>/**"],
 			"type": "pwa-node"
 		}

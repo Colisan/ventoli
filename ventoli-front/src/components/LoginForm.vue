@@ -2,7 +2,7 @@
 	<form @submit="onSubmit">
 		<input v-model="login" placeholder="login" />
 		<input type="password" v-model="password" placeholder="password" />
-		<input type="onSubmit" value="Enter the castle!" />
+		<input type="submit" value="Enter the castle!" />
 	</form>
 </template>
 
@@ -18,6 +18,7 @@
 	import { useStore } from 'vuex';
 	import { useRouter } from 'vue-router';
 	import { Game } from '../../../ventoli-model/dist';
+import { ActionType } from '@/store/storeFront/actions';
 
 	export default defineComponent({
 		name: 'LoginForm',
@@ -32,7 +33,7 @@
 
 			const onSubmit = () => {
 				store
-					.dispatch('loginWithCredentials', {
+					.dispatch(ActionType.CallLogin, {
 						login: dataState.login,
 						password: dataState.password,
 					})

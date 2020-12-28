@@ -13,21 +13,21 @@ import { Player } from '../../../ventoli-model/dist';
 @Unique(['name'])
 export default class PlayerORM {
 	@PrimaryGeneratedColumn()
-	public id: number;
+	public id!: number;
 
 	@Column()
-	public name: string;
+	public name!: string;
 
 	@Column()
-	public password: string;
+	public password!: string;
 
 	@Column()
 	@CreateDateColumn()
-	public createdAt: Date;
+	public createdAt!: Date;
 
 	@Column()
 	@UpdateDateColumn()
-	public updatedAt: Date;
+	public updatedAt!: Date;
 
 	public constructor(playerModel?: Player) {
 		if (playerModel) {

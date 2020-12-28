@@ -23,6 +23,7 @@
 	import { useStore } from 'vuex';
 	import { useRouter } from 'vue-router';
 	import { Player } from '../../../ventoli-model/dist';
+import { ActionType } from '@/store/storeFront/actions';
 
 	export default defineComponent({
 		name: 'SettingsForm',
@@ -38,7 +39,7 @@
 
 			const editAccount = () => {
 				return store
-					.dispatch('editAccount', {
+					.dispatch(ActionType.CallEditSelfAccount, {
 						login: dataState.newPassword,
 						oldPassword: dataState.oldPassword,
 						newPassword: dataState.newPassword,

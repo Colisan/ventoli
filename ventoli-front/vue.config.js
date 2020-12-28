@@ -15,6 +15,9 @@ module.exports = {
 			return args;
 		});
 	},
+	devServer: {
+    public: 'ventoli.local:8080',
+	},
 	pwa: {
 		name: 'Castel Ventoli',
 		themeColor: '#9cdb43',

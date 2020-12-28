@@ -1,10 +1,8 @@
 <template>
 	<div>
 		Welcome
-		<template>
-			<router-link :to="{ name: 'SignIn' }">Sign in</router-link>
-			<router-link :to="{ name: 'LogIn' }">Log in</router-link>
-		</template>
+		<router-link :to="{ name: 'SignIn' }">Sign in</router-link>
+		<router-link :to="{ name: 'LogIn' }">Log in</router-link>
 	</div>
 </template>
 

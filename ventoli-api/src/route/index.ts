@@ -1,9 +1,16 @@
-import { Router } from 'express';
+import { RequestHandler, Router } from 'express';
 import AuthController from '../controller/AuthController';
 import PlayerController from '../controller/PlayerController';
 import { validateJwt } from '../middleware/validateJwt';
+import { avaliableRoutes, RouteType } from './routes';
 
 const router = Router();
+
+function plugRoute(route: RouteType, controller: RequestHandler) {
+	let routeInfos = avaliableRoutes[route];
+	if (routeInfos.needAuth) router[routeInfos.method](routeInfos.url, [validateJwt], controller);
+	else router[routeInfos.method](routeInfos.url, controller);
+}
 
 /**
  * @swagger
@@ -12,7 +19,7 @@ const router = Router();
  *   post:
  *     $ref: '#/definitions/AuthController_login'
  */
-router.post('/auth/login', AuthController.login);
+plugRoute(RouteType.PostLogin, AuthController.login);
 
 /**
  * @swagger
@@ -21,7 +28,7 @@ router.post('/auth/login', AuthController.login);
  *   put:
  *     $ref: '#/definitions/PlayerController_editPlayer'
  */
-router.put('/player', [validateJwt], PlayerController.editPlayer);
+plugRoute(RouteType.PutSelfPlayer, PlayerController.editPlayer);
 
 /**
  * @swagger
@@ -30,7 +37,7 @@ router.put('/player', [validateJwt], PlayerController.editPlayer);
  *   get:
  *     $ref: '#/definitions/PlayerController_findSelfByName'
  */
-router.get('/player', [validateJwt], PlayerController.findSelf);
+plugRoute(RouteType.GetSelfPlayer, PlayerController.findSelf);
 
 /**
  * @swagger
@@ -39,7 +46,7 @@ router.get('/player', [validateJwt], PlayerController.findSelf);
  *   post:
  *     $ref: '#/definitions/PlayerController_newPlayer'
  */
-router.post('/player', PlayerController.newPlayer);
+plugRoute(RouteType.PostLogin, PlayerController.newPlayer);
 
 /**
  * @swagger
@@ -48,6 +55,6 @@ router.post('/player', PlayerController.newPlayer);
  *   get:
  *     $ref: '#/definitions/PlayerController_findOneByName'
  */
-router.get('/player/:playername', PlayerController.findOneByName);
+plugRoute(RouteType.GetOtherPlayer, PlayerController.findOneByName);
 
 export default router;

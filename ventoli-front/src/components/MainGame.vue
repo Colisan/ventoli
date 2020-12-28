@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-	import { computed, defineComponent, onBeforeMount, ref } from 'vue';
+	import { computed, defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
 	import { useStore } from 'vuex';
 	import { useRouter } from 'vue-router';
 	import { Game } from '../../../ventoli-model/dist';
@@ -14,7 +14,9 @@
 	export default defineComponent({
 		name: 'MainGame',
 		submit() {
-			const isLoading = ref(true);
+			const stataData = reactive({
+				isLoading: true,
+			})
 
 			let webSocket: WebSocket;
 			try {
@@ -28,7 +30,7 @@
 
 			webSocket.onopen = () => {
 				webSocket.send('something');
-				isLoading.value = true;
+				stataData.isLoading = true;
 			};
 
 			webSocket.onmessage = (data) => {
@@ -36,7 +38,7 @@
 			};
 
 			return {
-				isLoading,
+				...toRefs(stataData),
 			};
 		},
 	});

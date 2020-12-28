@@ -9,7 +9,7 @@ export default function useNeedLoggedOut() {
 	const isLoggedIn = computed(() => store.getters.isLoggedIn);
 
 	onBeforeMount(() => {
-		if (isLoggedIn) {
+		if (isLoggedIn.value) {
 			router.push({ name: 'Home' });
 		}
 	});

@@ -24,9 +24,9 @@
 		setup() {
 			const store = useStore();
 
-			const currentGame = computed(() => store.getters.currentGame);
+			const currentGame = computed(() => store.state.currentGame);
 			const gameButtonLabel = ref(
-				currentGame === undefined ? 'New game' : 'Continue game'
+				currentGame.value === undefined ? 'New game' : 'Continue game'
 			);
 
 			return {

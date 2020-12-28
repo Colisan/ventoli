@@ -3,8 +3,8 @@ import { Player } from '../../../ventoli-model/dist';
 import PlayerORM from '../entity/PlayerORM';
 
 interface PayloadData {
-	playerid: number;
-	playername: string;
+	playerid: number | undefined;
+	playername: string | undefined;
 }
 
 export default class JwtPayload {
@@ -20,7 +20,9 @@ export default class JwtPayload {
 	}
 
 	public getSignedToken(): string {
-		return jwt.sign(this.datas, process.env.JWT_SECRET, { expiresIn: '1h' });
+		let secret = process.env.JWT_SECRET;
+		if (secret) return jwt.sign(this.datas, secret, { expiresIn: '1h' });
+		else throw 'No JWT_SECRET found in ENV';
 	}
 
 	static fromPlayer(player: Player) {
@@ -30,9 +32,9 @@ export default class JwtPayload {
 		return res;
 	}
 
-	static fromSignedToken(token: string) {
-		return new JwtPayload(
-			jwt.verify(token, process.env.JWT_SECRET) as PayloadData
-		);
+	static fromSignedToken(token: string): JwtPayload {
+		let secret = process.env.JWT_SECRET;
+		if (secret) return new JwtPayload(jwt.verify(token, secret) as PayloadData);
+		else throw 'No JWT_SECRET found in ENV';
 	}
 }

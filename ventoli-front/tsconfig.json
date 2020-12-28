@@ -25,6 +25,6 @@
 		"src/**/*.vue",
 		"tests/**/*.ts",
 		"tests/**/*.tsx"
-	],
+, "src/store/storeFront.ts.old"	],
 	"exclude": ["node_modules"]
 }
