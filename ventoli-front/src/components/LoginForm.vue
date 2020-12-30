@@ -19,6 +19,7 @@
 	import { useRouter } from 'vue-router';
 	import { Game } from '../../../ventoli-model/dist';
 import { ActionType } from '@/store/storeFront/actions';
+import { MutationType } from '@/store/storeFront/mutations';
 
 	export default defineComponent({
 		name: 'LoginForm',

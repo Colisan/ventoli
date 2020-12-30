@@ -10,6 +10,22 @@ export default class AuthController {
 	 * @swagger
 	 *
 	 * definitions:
+	 *   AuthController_validateAuth:
+	 *     description: Check jwt token validity
+	 *     produces:
+	 *       - application/json
+	 *     responses:
+	 *       200:
+	 *         description: Token is exquisite
+	 */
+	public static async validateAuth(req: Request, res: Response) {
+		res.status(200).send();
+	}
+
+	/**
+	 * @swagger
+	 *
+	 * definitions:
 	 *   AuthController_login:
 	 *     description: Login to the application
 	 *     produces:

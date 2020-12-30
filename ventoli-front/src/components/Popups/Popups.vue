@@ -10,7 +10,7 @@
 	import { computed, defineComponent, onBeforeMount, ref } from 'vue';
 	import { useStore } from 'vuex';
 	import { useRouter } from 'vue-router';
-	import SinglePopup from './SinglePopup.vue';
+	import SinglePopup from '@/components/popups/SinglePopup.vue';
 	import { Popup } from '@/model/Popup';
 
 	export default defineComponent({

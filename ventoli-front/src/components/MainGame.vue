@@ -14,7 +14,7 @@
 	export default defineComponent({
 		name: 'MainGame',
 		submit() {
-			const stataData = reactive({
+			const dataState = reactive({
 				isLoading: true,
 			})
 
@@ -30,7 +30,7 @@
 
 			webSocket.onopen = () => {
 				webSocket.send('something');
-				stataData.isLoading = true;
+				dataState.isLoading = true;
 			};
 
 			webSocket.onmessage = (data) => {
@@ -38,7 +38,7 @@
 			};
 
 			return {
-				...toRefs(stataData),
+				...toRefs(dataState),
 			};
 		},
 	});

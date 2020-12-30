@@ -1,12 +1,13 @@
 import { ActionContext, ActionTree } from 'vuex';
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Mutations, MutationType } from './mutations';
-import { initialState, State } from './state';
+import { getInitialState, State } from './state';
 import { Player } from '../../../../ventoli-model/dist';
 import { avaliableRoutes, RouteType } from '../../../../ventoli-api/src/route/routes';
 import { Popup } from '@/model/Popup';
 
 export enum ActionType {
+	TestThenSetToken = 'TEST_THEN_SET_TOKEN',
 	CallLogin = 'CALL_LOGIN',
 	CallGetSelfAccount = 'CALL_GET_SELF_ACCOUNT',
 	CallCreateAccount = 'CALL_CREATE_SELF_ACCOUNT',
@@ -40,6 +41,7 @@ export type infoPopupSettings = {
 };
 
 export type Actions = {
+	[ActionType.TestThenSetToken](context: TypedActionContext, token: string): void;
 	[ActionType.CallLogin](context: TypedActionContext, credentials: credentials): void;
 	[ActionType.CallGetSelfAccount](context: TypedActionContext): void;
 	[ActionType.CallCreateAccount](context: TypedActionContext, credentials: credentials): void;
@@ -49,12 +51,13 @@ export type Actions = {
 };
 
 async function callApi(
-	context: TypedActionContext,
 	route: RouteType,
+	token?: string,
 	getParams: { [key: string]: { toString: Function } } = {},
 	postParams: Object = {}
 ): Promise<any> {
 	const routeInfos = avaliableRoutes[route];
+
 	let url = `${process.env.VUE_APP_VENTOLI_API_URL}${routeInfos.url}`;
 	for (let name in getParams) {
 		url.replace(`:${name}`, getParams[name].toString());
@@ -70,7 +73,7 @@ async function callApi(
 	let config: AxiosRequestConfig = {};
 	if (routeInfos.needAuth) {
 		config.headers = {
-			Authorization: `Bearer ${context.state.authToken}`,
+			Authorization: `Bearer ${token}`,
 		};
 	}
 
@@ -86,10 +89,15 @@ async function callApi(
 }
 
 export const actions: ActionTree<State, State> & Actions = {
+	async [ActionType.TestThenSetToken](context, token) {
+		return callApi(RouteType.ValidAuth, token).then((res: AxiosResponse<any>) => {
+			context.commit(MutationType.SetAuthToken, token);
+		});
+	},
 	async [ActionType.CallLogin](context, credentials) {
 		return callApi(
-			context,
 			RouteType.PostLogin,
+			context.state.authToken,
 			{},
 			{
 				playername: credentials.login,
@@ -101,12 +109,14 @@ export const actions: ActionTree<State, State> & Actions = {
 		});
 	},
 	async [ActionType.CallGetSelfAccount](context) {
-		return callApi(context, RouteType.GetSelfPlayer).then((res: AxiosResponse<Player>) => {
-			context.commit(MutationType.SetCurrentPlayer, res.data as Player);
-		});
+		return callApi(RouteType.GetSelfPlayer, context.state.authToken).then(
+			(res: AxiosResponse<Player>) => {
+				context.commit(MutationType.SetCurrentPlayer, res.data);
+			}
+		);
 	},
 	async [ActionType.CallCreateAccount](context, credentials) {
-		return callApi(context, RouteType.PostNewPlayer, {
+		return callApi(RouteType.PostNewPlayer, context.state.authToken, {
 			playername: credentials.login,
 			password: credentials.password,
 		}).catch((err: any) => {
@@ -118,7 +128,7 @@ export const actions: ActionTree<State, State> & Actions = {
 	},
 	async [ActionType.CallEditSelfAccount](context, informations) {
 		if (context.state.currentPlayer)
-			return callApi(context, RouteType.PutSelfPlayer, {
+			return callApi(RouteType.PutSelfPlayer, context.state.authToken, {
 				id: context.state.currentPlayer.id,
 				oldPassword: informations.oldPassword,
 				newPassword: informations.newPassword,
@@ -136,6 +146,7 @@ export const actions: ActionTree<State, State> & Actions = {
 		else return Promise.reject('Not logged in');
 	},
 	[ActionType.Logout](context) {
+		let initialState = getInitialState();
 		context.commit(MutationType.SetAuthToken, initialState.authToken);
 		context.commit(MutationType.SetCurrentGame, initialState.currentGame);
 		context.commit(MutationType.SetCurrentPlayer, initialState.currentPlayer);

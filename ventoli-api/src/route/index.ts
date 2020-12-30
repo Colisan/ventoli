@@ -15,6 +15,15 @@ function plugRoute(route: RouteType, controller: RequestHandler) {
 /**
  * @swagger
  *
+ * /api/auth/:
+ *   get:
+ *     $ref: '#/definitions/AuthController_validateAuth'
+ */
+plugRoute(RouteType.ValidAuth, AuthController.validateAuth);
+
+/**
+ * @swagger
+ *
  * /api/auth/login/:
  *   post:
  *     $ref: '#/definitions/AuthController_login'

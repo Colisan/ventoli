@@ -10,6 +10,7 @@ export default function useNeedLoggedOut() {
 
 	onBeforeMount(() => {
 		if (isLoggedIn.value) {
+			console.log('Not logged out, redirecting to home');
 			router.push({ name: 'Home' });
 		}
 	});

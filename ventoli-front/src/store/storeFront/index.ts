@@ -5,7 +5,7 @@ import {
 	DispatchOptions,
 	createLogger,
 } from 'vuex';
-import { State, initialState } from './state';
+import { State, getInitialState } from './state';
 import { Mutations, mutations } from './mutations';
 import { Actions, actions } from './actions';
 import { Getters, getters } from './getters';
@@ -13,7 +13,7 @@ import { Getters, getters } from './getters';
 // todo : passer en module
 const store = createStore<State>({
 	plugins: process.env.NODE_ENV === 'development' ? [createLogger()] : [],
-	state: initialState,
+	state: getInitialState(),
 	mutations,
 	actions,
 	getters,

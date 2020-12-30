@@ -3,8 +3,8 @@ import { Player } from '../../../ventoli-model/dist';
 import PlayerORM from '../entity/PlayerORM';
 
 interface PayloadData {
-	playerid: number | undefined;
-	playername: string | undefined;
+	playerid?: number;
+	playername?: string;
 }
 
 export default class JwtPayload {

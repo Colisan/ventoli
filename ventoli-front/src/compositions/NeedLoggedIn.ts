@@ -10,6 +10,7 @@ export default function useNeedLoggedIn() {
 
 	onBeforeMount(() => {
 		if (!isLoggedIn.value) {
+			console.log('Not logged in, redirecting to login');
 			router.push({ name: 'LogIn' });
 		}
 	});
