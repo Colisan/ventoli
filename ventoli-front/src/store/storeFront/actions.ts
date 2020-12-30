@@ -4,6 +4,7 @@ import { Mutations, MutationType } from './mutations';
 import { initialState, State } from './state';
 import { Player } from '../../../../ventoli-model/dist';
 import { avaliableRoutes, RouteType } from '../../../../ventoli-api/src/route/routes';
+import { Popup } from '@/model/Popup';
 
 export enum ActionType {
 	CallLogin = 'CALL_LOGIN',
@@ -11,6 +12,7 @@ export enum ActionType {
 	CallCreateAccount = 'CALL_CREATE_SELF_ACCOUNT',
 	CallEditSelfAccount = 'CALL_EDIT_SELF_ACCOUNT',
 	Logout = 'LOGOUT',
+	ShowInfoPopup = 'SHOW_INFO_POPUP',
 }
 
 type TypedActionContext = Omit<ActionContext<State, State>, 'commit'> & {
@@ -31,12 +33,19 @@ export type accountInfos = {
 	newPassword: string;
 };
 
+export type infoPopupSettings = {
+	title?: string;
+	content: string;
+	okLabel?: string;
+};
+
 export type Actions = {
 	[ActionType.CallLogin](context: TypedActionContext, credentials: credentials): void;
 	[ActionType.CallGetSelfAccount](context: TypedActionContext): void;
 	[ActionType.CallCreateAccount](context: TypedActionContext, credentials: credentials): void;
 	[ActionType.CallEditSelfAccount](context: TypedActionContext, informations: accountInfos): void;
 	[ActionType.Logout](context: TypedActionContext): void;
+	[ActionType.ShowInfoPopup](context: TypedActionContext, infos: infoPopupSettings): void;
 };
 
 async function callApi(
@@ -77,7 +86,7 @@ async function callApi(
 }
 
 export const actions: ActionTree<State, State> & Actions = {
-	async [ActionType.CallLogin](context: TypedActionContext, credentials: credentials) {
+	async [ActionType.CallLogin](context, credentials) {
 		return callApi(
 			context,
 			RouteType.PostLogin,
@@ -91,12 +100,12 @@ export const actions: ActionTree<State, State> & Actions = {
 			context.dispatch(ActionType.CallGetSelfAccount);
 		});
 	},
-	async [ActionType.CallGetSelfAccount](context: TypedActionContext) {
+	async [ActionType.CallGetSelfAccount](context) {
 		return callApi(context, RouteType.GetSelfPlayer).then((res: AxiosResponse<Player>) => {
 			context.commit(MutationType.SetCurrentPlayer, res.data as Player);
 		});
 	},
-	async [ActionType.CallCreateAccount](context: TypedActionContext, credentials: credentials) {
+	async [ActionType.CallCreateAccount](context, credentials) {
 		return callApi(context, RouteType.PostNewPlayer, {
 			playername: credentials.login,
 			password: credentials.password,
@@ -107,7 +116,7 @@ export const actions: ActionTree<State, State> & Actions = {
 			throw new Error(err.toString());
 		});
 	},
-	async [ActionType.CallEditSelfAccount](context: TypedActionContext, informations: accountInfos) {
+	async [ActionType.CallEditSelfAccount](context, informations) {
 		if (context.state.currentPlayer)
 			return callApi(context, RouteType.PutSelfPlayer, {
 				id: context.state.currentPlayer.id,
@@ -126,9 +135,25 @@ export const actions: ActionTree<State, State> & Actions = {
 				});
 		else return Promise.reject('Not logged in');
 	},
-	[ActionType.Logout](context: TypedActionContext) {
+	[ActionType.Logout](context) {
 		context.commit(MutationType.SetAuthToken, initialState.authToken);
 		context.commit(MutationType.SetCurrentGame, initialState.currentGame);
 		context.commit(MutationType.SetCurrentPlayer, initialState.currentPlayer);
+	},
+	[ActionType.ShowInfoPopup](context, infos) {
+		const popup = new Popup(infos.content);
+		popup.title = infos.title;
+
+		let popupIndex: number;
+		popup.buttonList = [
+			{
+				label: infos.okLabel ?? 'Ok',
+				action: () => {
+					context.commit(MutationType.RemovePopup, popupIndex);
+				},
+			},
+		];
+		context.commit(MutationType.AddPopup, popup);
+		popupIndex = context.state.lastPopupIndex.valueOf();
 	},
 };

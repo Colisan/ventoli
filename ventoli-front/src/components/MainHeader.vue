@@ -14,7 +14,9 @@
 	import { computed, defineComponent, onBeforeMount, ref } from 'vue';
 	import { useStore } from 'vuex';
 	import { useRouter } from 'vue-router';
-import { ActionType } from '@/store/storeFront/actions';
+	import { ActionType } from '@/store/storeFront/actions';
+	import { Popup } from '@/model/Popup';
+	import { MutationType } from '@/store/storeFront/mutations';
 
 	export default defineComponent({
 		name: 'MainHeader',
@@ -26,6 +28,7 @@ import { ActionType } from '@/store/storeFront/actions';
 				store.dispatch(ActionType.Logout);
 				router.push({ name: 'Welcome' });
 			};
+
 			return {
 				onLogoutClick,
 			};

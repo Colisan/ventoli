@@ -1,17 +1,20 @@
 <template>
 	<div id="ventoli-app">
 		<router-view />
+		<popups />
 	</div>
 </template>
 
 <script lang="ts">
 	import { defineComponent } from 'vue';
 	import { useStore } from 'vuex';
-import { MutationType } from './store/storeFront/mutations';
-import { ActionType } from './store/storeFront/actions';
+	import { MutationType } from '@/store/storeFront/mutations';
+	import { ActionType } from '@/store/storeFront/actions';
+	import Popups from '@/components/Popups/Popups.vue';
 
 	export default defineComponent({
 		name: 'Ventoli',
+		components: { Popups },
 		setup() {
 			const store = useStore();
 
