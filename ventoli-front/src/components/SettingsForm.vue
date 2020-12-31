@@ -1,21 +1,18 @@
 <template>
 	<form @submit="onSubmit">
-		<input-field v-model="oldPassword" :type="InputType.Password" label="Current password"/>
-		<input-field v-model="newPassword" :type="InputType.Password" label="New password"/>
-		<input-field v-model="newPasswordAgain" :type="InputType.Password" label="Confirm new password"/>
+		<input-field v-model="oldPassword" :type="InputType.Password" label="Current password" />
+		<input-field v-model="newPassword" :type="InputType.Password" label="New password" />
+		<input-field
+			v-model="newPasswordAgain"
+			:type="InputType.Password"
+			label="Confirm new password"
+		/>
 		<input type="submit" value="Save" />
 	</form>
 </template>
 
 <script lang="ts">
-	import {
-		computed,
-		defineComponent,
-		onBeforeMount,
-		reactive,
-		ref,
-		toRefs,
-	} from 'vue';
+	import { computed, defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
 	import { useStore } from 'vuex';
 	import { useRouter } from 'vue-router';
 	import { Player } from '../../../ventoli-model/dist';

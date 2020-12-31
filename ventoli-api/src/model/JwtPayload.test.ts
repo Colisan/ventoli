@@ -58,7 +58,6 @@ describe('JwtPayload class', () => {
 	});
 
 	it('throw an error when instanciating from an invalid token', () => {
-		expect(() => JwtPayload.fromSignedToken("that's not a jwt token...")).to
-			.throw;
+		expect(() => JwtPayload.fromSignedToken("that's not a jwt token...")).to.throw;
 	});
 });

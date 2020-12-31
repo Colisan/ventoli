@@ -25,9 +25,7 @@
 			const store = useStore();
 
 			const currentGame = computed(() => store.state.currentGame);
-			const gameButtonLabel = ref(
-				currentGame.value === undefined ? 'New game' : 'Continue game'
-			);
+			const gameButtonLabel = ref(currentGame.value === undefined ? 'New game' : 'Continue game');
 
 			return {
 				...useNeedLoggedIn(),

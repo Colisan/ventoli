@@ -16,7 +16,7 @@ module.exports = {
 		});
 	},
 	devServer: {
-    public: 'ventoli.local:8080',
+		public: 'ventoli.local:8080',
 	},
 	pwa: {
 		name: 'Castel Ventoli',

@@ -1,21 +1,14 @@
 <template>
 	<form @submit="onSubmit">
-		<input-field v-model="login" label="Login"/>
-		<input-field v-model="password" :type="InputType.Password" label="Password"/>
-		<input-field v-model="passwordAgain" :type="InputType.Password" label="Confirm password"/>
+		<input-field v-model="login" label="Login" />
+		<input-field v-model="password" :type="InputType.Password" label="Password" />
+		<input-field v-model="passwordAgain" :type="InputType.Password" label="Confirm password" />
 		<input type="submit" value="Create new account!" />
 	</form>
 </template>
 
 <script lang="ts">
-	import {
-		computed,
-		defineComponent,
-		onBeforeMount,
-		reactive,
-		ref,
-		toRefs,
-	} from 'vue';
+	import { computed, defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
 	import { useStore } from 'vuex';
 	import { useRouter } from 'vue-router';
 	import { Player } from '../../../ventoli-model/dist';

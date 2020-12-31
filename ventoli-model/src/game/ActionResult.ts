@@ -1,11 +1,4 @@
-import {
-	Ability,
-	ActiveAbility,
-	Effect,
-	PassiveAbility,
-	Stuff,
-	Unit,
-} from '..';
+import { Ability, ActiveAbility, Effect, PassiveAbility, Stuff, Unit } from '..';
 import { Length, Max, Min } from 'class-validator';
 
 export default class ActionResult {

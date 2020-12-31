@@ -1,7 +1,7 @@
 <template>
 	<fieldset>
 		<label :for="id">{{ label }}</label>
-		<input v-model="value" :type="type" :placeholder="placeholder" :id="id">
+		<input v-model="value" :type="type" :placeholder="placeholder" :id="id" />
 	</fieldset>
 </template>
 
@@ -23,35 +23,35 @@
 	import { ActionType } from '@/store/storeFront/actions';
 
 	export enum InputType {
-		Text = "TYPE_TEXT",
-		Password = "TYPE_PASSWORD",
-		Check = "TYPE_CHECKBOX",
+		Text = 'TYPE_TEXT',
+		Password = 'TYPE_PASSWORD',
+		Check = 'TYPE_CHECKBOX',
 	}
 
 	export const inputTypeValues = {
-		[InputType.Text]: "text",
-		[InputType.Password]: "password",
-		[InputType.Check]: "checkbox",
-	}
+		[InputType.Text]: 'text',
+		[InputType.Password]: 'password',
+		[InputType.Check]: 'checkbox',
+	};
 
 	export default defineComponent({
 		name: 'Input Field',
 		props: {
-			'modelValue': {
+			modelValue: {
 				required: true,
 			},
-			'label': {
+			label: {
 				type: String,
 				required: true,
 			},
-			'type': {
+			type: {
 				type: String,
 				validator: (val: string) => Object.keys(inputTypeValues).includes(val),
 				default: InputType.Text,
 			},
-			'placeholder': {
+			placeholder: {
 				type: String,
-				default : "",
+				default: '',
 			},
 		},
 		setup(props, context) {
@@ -65,11 +65,11 @@
 
 			watch(toRef(props, 'modelValue'), (modelValue) => {
 				dataState.value = modelValue;
-			})
+			});
 
 			watch(toRef(dataState, 'value'), (inputValue) => {
 				context.emit('update:modelValue', inputValue);
-			})
+			});
 
 			return {
 				...toRefs(dataState),

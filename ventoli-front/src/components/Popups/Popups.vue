@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div v-for="popup in popupList">
-			<single-popup :data="popup"/>
+			<single-popup :data="popup" />
 		</div>
 	</div>
 </template>
@@ -14,7 +14,7 @@
 	import { Popup } from '@/model/Popup';
 
 	export default defineComponent({
-	components: { SinglePopup },
+		components: { SinglePopup },
 		name: 'Popups Handler',
 		setup() {
 			const store = useStore();
@@ -23,7 +23,7 @@
 			const popupList = computed(() => store.state.popupList as Array<Popup>);
 
 			return {
-				popupList
+				popupList,
 			};
 		},
 	});

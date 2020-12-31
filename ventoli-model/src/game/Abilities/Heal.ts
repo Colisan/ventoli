@@ -5,10 +5,7 @@ export default class Brasier extends ActiveAbility {
 	isHealing = true;
 
 	public isValidTarget(target: Tile) {
-		return (
-			target.distanceTo(this.sourceUnit) <=
-			3 + this.sourceUnit.bonusMagicalRange
-		);
+		return target.distanceTo(this.sourceUnit) <= 3 + this.sourceUnit.bonusMagicalRange;
 	}
 
 	public isInAoe(tile: Tile, withTarget: Tile) {

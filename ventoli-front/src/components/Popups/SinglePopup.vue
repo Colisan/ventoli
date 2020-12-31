@@ -23,17 +23,16 @@
 	export default defineComponent({
 		name: 'Popup',
 		props: {
-			"data": {
+			data: {
 				type: Popup,
-				required: true
+				required: true,
 			},
 		},
 		setup() {
 			const store = useStore();
 			const router = useRouter();
 
-			return {
-			};
+			return {};
 		},
 	});
 </script>

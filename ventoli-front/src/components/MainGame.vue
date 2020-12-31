@@ -16,13 +16,11 @@
 		submit() {
 			const dataState = reactive({
 				isLoading: true,
-			})
+			});
 
 			let webSocket: WebSocket;
 			try {
-				webSocket = new WebSocket(
-					process.env.VUE_APP_VENTOLI_SERVER_URL as string
-				);
+				webSocket = new WebSocket(process.env.VUE_APP_VENTOLI_SERVER_URL as string);
 			} catch (e) {
 				console.error('todo no socket');
 				return;

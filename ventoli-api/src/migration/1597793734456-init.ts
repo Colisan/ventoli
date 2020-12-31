@@ -10,9 +10,7 @@ export class init1597793734456 implements MigrationInterface {
 	}
 
 	public async down(queryRunner: QueryRunner): Promise<void> {
-		await queryRunner.query(
-			'DROP INDEX `IDX_83a5afc99651cf8322113625d4` ON `player_orm`'
-		);
+		await queryRunner.query('DROP INDEX `IDX_83a5afc99651cf8322113625d4` ON `player_orm`');
 		await queryRunner.query('DROP TABLE `player_orm`');
 	}
 }

@@ -68,9 +68,7 @@ describe('AuthController login method', () => {
 		} as any);
 
 		const fakeToken = 'signedT0ken';
-		const tokenStub = sinon
-			.stub(JwtPayload.prototype, 'getSignedToken')
-			.returns(fakeToken);
+		const tokenStub = sinon.stub(JwtPayload.prototype, 'getSignedToken').returns(fakeToken);
 
 		const req = mockReq({
 			body: { playername: foundPlayer.name, password: clearPassword },

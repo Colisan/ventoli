@@ -31,11 +31,7 @@ createConnection()
 		app.use(bodyParser.json());
 
 		app.use('/api', routes);
-		app.use(
-			'/',
-			swaggerUi.serve,
-			swaggerUi.setup(swaggerDoc, { explorer: true })
-		);
+		app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDoc, { explorer: true }));
 
 		// start express server
 		app.listen(3000);

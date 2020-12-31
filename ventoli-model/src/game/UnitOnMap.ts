@@ -5,6 +5,4 @@ class BaseUnitOnMap extends UnitInGame {
 	public currentTile: Tile;
 }
 
-export default class PositionableUnitOnMap extends setPositionable(
-	BaseUnitOnMap
-) {}
+export default class PositionableUnitOnMap extends setPositionable(BaseUnitOnMap) {}

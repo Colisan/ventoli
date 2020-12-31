@@ -27,28 +27,29 @@
 
 			const dataState = reactive({
 				isLoading: true,
-			})
-			
+			});
+
 			const lastToken = localStorage.getItem('auth-token');
 
 			if (lastToken) {
-				store.dispatch(ActionType.TestThenSetToken, lastToken).then(() => {
-					store.dispatch(ActionType.CallGetSelfAccount).then(() => {
-						router.back();
+				store
+					.dispatch(ActionType.TestThenSetToken, lastToken)
+					.then(() => {
+						store.dispatch(ActionType.CallGetSelfAccount).then(() => {
+							router.back();
+						});
 					})
-				}).catch(()=>{
-					dataState.isLoading = false;
-				})
+					.catch(() => {
+						dataState.isLoading = false;
+					});
 			} else {
 				dataState.isLoading = false;
 			}
 
 			store.subscribe((mutation, state) => {
 				if (mutation.type === MutationType.SetAuthToken) {
-					if (mutation.payload)
-						localStorage.setItem('auth-token', mutation.payload);
-					else
-						localStorage.removeItem('auth-token');
+					if (mutation.payload) localStorage.setItem('auth-token', mutation.payload);
+					else localStorage.removeItem('auth-token');
 				}
 			});
 

@@ -16,7 +16,7 @@
 		name: 'Ventoli',
 		components: { Popups },
 		setup() {
-			return {}
+			return {};
 		},
 	});
 </script>

@@ -1,11 +1,4 @@
-import {
-	Ability,
-	ActiveAbility,
-	Effect,
-	PassiveAbility,
-	Stuff,
-	UnitStats,
-} from '..';
+import { Ability, ActiveAbility, Effect, PassiveAbility, Stuff, UnitStats } from '..';
 
 export default class Unit {
 	public name: string;
