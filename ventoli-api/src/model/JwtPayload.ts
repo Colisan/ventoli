@@ -8,20 +8,22 @@ interface PayloadData {
 }
 
 export default class JwtPayload {
-	datas: PayloadData;
+	public datas: PayloadData;
+	public noExpiration: boolean;
 
-	constructor(datas?: any) {
+	constructor(datas?: any, noExpiration: boolean = false) {
 		if (datas) this.datas = datas as PayloadData;
 		else
 			this.datas = {
 				playerid: undefined,
 				playername: undefined,
 			};
+		this.noExpiration = noExpiration;
 	}
 
 	public getSignedToken(): string {
 		let secret = process.env.JWT_SECRET;
-		if (secret) return jwt.sign(this.datas, secret, { expiresIn: '1h' });
+		if (secret) return jwt.sign(this.datas, secret, this.noExpiration ? {} : { expiresIn: '1h' });
 		else throw 'No JWT_SECRET found in ENV';
 	}
 

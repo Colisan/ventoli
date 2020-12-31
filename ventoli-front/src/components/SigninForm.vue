@@ -1,12 +1,8 @@
 <template>
 	<form @submit="onSubmit">
-		<input v-model="login" />
-		<input type="password" v-model="password" placeholder="password" />
-		<input
-			type="password"
-			v-model="passwordAgain"
-			placeholder="confirm password"
-		/>
+		<input-field v-model="login" label="Login"/>
+		<input-field v-model="password" :type="InputType.Password" label="Password"/>
+		<input-field v-model="passwordAgain" :type="InputType.Password" label="Confirm password"/>
 		<input type="submit" value="Create new account!" />
 	</form>
 </template>
@@ -23,10 +19,12 @@
 	import { useStore } from 'vuex';
 	import { useRouter } from 'vue-router';
 	import { Player } from '../../../ventoli-model/dist';
-import { ActionType } from '@/store/storeFront/actions';
+	import { ActionType } from '@/store/storeFront/actions';
+	import InputField, { InputType } from './InputField.vue';
 
 	export default defineComponent({
 		name: 'SigninForm',
+		components: { InputField },
 		setup() {
 			const store = useStore();
 			const router = useRouter();
@@ -96,6 +94,7 @@ import { ActionType } from '@/store/storeFront/actions';
 			return {
 				...toRefs(dataState),
 				onSubmit,
+				InputType,
 			};
 		},
 	});

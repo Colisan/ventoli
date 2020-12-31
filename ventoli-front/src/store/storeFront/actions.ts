@@ -24,30 +24,40 @@ type TypedActionContext = Omit<ActionContext<State, State>, 'commit'> & {
 	): ReturnType<Mutations[K]>;
 };
 
-export type credentials = {
-	login: string;
-	password: string;
-};
-
-export type accountInfos = {
-	oldPassword: string;
-	newPassword: string;
-};
-
-export type infoPopupSettings = {
-	title?: string;
-	content: string;
-	okLabel?: string;
-};
-
 export type Actions = {
 	[ActionType.TestThenSetToken](context: TypedActionContext, token: string): void;
-	[ActionType.CallLogin](context: TypedActionContext, credentials: credentials): void;
+	[ActionType.CallLogin](
+		context: TypedActionContext,
+		credentials: {
+			login: string;
+			password: string;
+			willRemember: boolean;
+		}
+	): void;
 	[ActionType.CallGetSelfAccount](context: TypedActionContext): void;
-	[ActionType.CallCreateAccount](context: TypedActionContext, credentials: credentials): void;
-	[ActionType.CallEditSelfAccount](context: TypedActionContext, informations: accountInfos): void;
+	[ActionType.CallCreateAccount](
+		context: TypedActionContext,
+		credentials: {
+			login: string;
+			password: string;
+		}
+	): void;
+	[ActionType.CallEditSelfAccount](
+		context: TypedActionContext,
+		informations: {
+			oldPassword: string;
+			newPassword: string;
+		}
+	): void;
 	[ActionType.Logout](context: TypedActionContext): void;
-	[ActionType.ShowInfoPopup](context: TypedActionContext, infos: infoPopupSettings): void;
+	[ActionType.ShowInfoPopup](
+		context: TypedActionContext,
+		infos: {
+			title?: string;
+			content: string;
+			okLabel?: string;
+		}
+	): void;
 };
 
 async function callApi(
@@ -102,6 +112,7 @@ export const actions: ActionTree<State, State> & Actions = {
 			{
 				playername: credentials.login,
 				password: credentials.password,
+				willRemember: credentials.willRemember,
 			}
 		).then((res: AxiosResponse<any>) => {
 			context.commit(MutationType.SetAuthToken, res.data);

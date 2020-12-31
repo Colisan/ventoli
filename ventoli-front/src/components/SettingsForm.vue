@@ -1,12 +1,8 @@
 <template>
 	<form @submit="onSubmit">
-		<input type="password" v-model="oldPassword" placeholder="old password" />
-		<input type="password" v-model="newPassword" placeholder="new password" />
-		<input
-			type="password"
-			v-model="newPasswordAgain"
-			placeholder="confirm new password"
-		/>
+		<input-field v-model="oldPassword" :type="InputType.Password" label="Current password"/>
+		<input-field v-model="newPassword" :type="InputType.Password" label="New password"/>
+		<input-field v-model="newPasswordAgain" :type="InputType.Password" label="Confirm new password"/>
 		<input type="submit" value="Save" />
 	</form>
 </template>
@@ -23,10 +19,12 @@
 	import { useStore } from 'vuex';
 	import { useRouter } from 'vue-router';
 	import { Player } from '../../../ventoli-model/dist';
-import { ActionType } from '@/store/storeFront/actions';
+	import { ActionType } from '@/store/storeFront/actions';
+	import InputField, { InputType } from './InputField.vue';
 
 	export default defineComponent({
 		name: 'SettingsForm',
+		components: { InputField },
 		setup() {
 			const store = useStore();
 			const router = useRouter();
@@ -88,6 +86,7 @@ import { ActionType } from '@/store/storeFront/actions';
 			return {
 				...toRefs(dataState),
 				onSubmit,
+				InputType,
 			};
 		},
 	});

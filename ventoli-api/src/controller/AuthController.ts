@@ -53,7 +53,7 @@ export default class AuthController {
 	 *         description: Wrong username or password
 	 */
 	public static async login(req: Request, res: Response) {
-		const { playername, password } = req.body;
+		const { playername, password, willRemember } = req.body;
 		if (!(playername && password)) {
 			res.status(400).send();
 			return;
@@ -80,6 +80,7 @@ export default class AuthController {
 		}
 
 		const payload = JwtPayload.fromPlayer(player);
+		payload.noExpiration = willRemember;
 		res.send(payload.getSignedToken());
 	}
 }
