@@ -13,7 +13,7 @@
 
 	export default defineComponent({
 		name: 'MainGame',
-		submit() {
+		setup() {
 			const dataState = reactive({
 				isLoading: true,
 			});
@@ -21,19 +21,19 @@
 			let webSocket: WebSocket;
 			try {
 				webSocket = new WebSocket(process.env.VUE_APP_VENTOLI_SERVER_URL as string);
+
+				webSocket.onopen = () => {
+					webSocket.send('something');
+					dataState.isLoading = true;
+				};
+
+				webSocket.onmessage = (data) => {
+					console.log('recieved', data);
+					dataState.isLoading = false;
+				};
 			} catch (e) {
 				console.error('todo no socket');
-				return;
 			}
-
-			webSocket.onopen = () => {
-				webSocket.send('something');
-				dataState.isLoading = true;
-			};
-
-			webSocket.onmessage = (data) => {
-				console.log('recieved', data);
-			};
 
 			return {
 				...toRefs(dataState),

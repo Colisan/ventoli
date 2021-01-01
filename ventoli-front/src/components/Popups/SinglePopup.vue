@@ -7,7 +7,7 @@
 			{{ data.content }}
 		</div>
 		<div>
-			<button v-for="button in data.buttonList" v-on:click="button.action">
+			<button v-for="button in data.buttonList" :key="button.label" v-on:click="button.action">
 				{{ button.label }}
 			</button>
 		</div>

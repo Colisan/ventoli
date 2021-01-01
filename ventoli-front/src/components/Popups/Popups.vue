@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div v-for="popup in popupList">
+		<div v-for="popup in popupList" :key="popup.content">
 			<single-popup :data="popup" />
 		</div>
 	</div>
