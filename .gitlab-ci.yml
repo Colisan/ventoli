@@ -11,13 +11,14 @@ cache:
     - ventoli-model/node_modules/
     - ventoli-front/node_modules/
     - ventoli-api/node_modules/
+    - ventoli-server/node_modules/
     - .yarn
 
 install_dependencies:
-  stage: build
+  stage: build model
   script:
     - yarn install --cache-folder .yarn
-    - yarn lerna run build
+    - yarn lerna run --scope @ventoli/ventoli-model build
   artifacts:
     paths:
       - ventoli-model/dist/
