@@ -1,6 +1,7 @@
 image: node:latest
 
 stages:
+  - install
   - build
   - test
 
@@ -14,10 +15,14 @@ cache:
     - ventoli-server/node_modules/
     - .yarn
 
-install_dependencies:
-  stage: build model
+run_install:
+  stage: install
   script:
     - yarn install --cache-folder .yarn
+
+run_build:
+  stage: build
+  script:
     - yarn lerna run --scope @ventoli/ventoli-model build
   artifacts:
     paths:
