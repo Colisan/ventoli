@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
-import { Player } from '../../../ventoli-model/dist';
+import { Player } from '@ventoli/ventoli-model';
 
 import PlayerORM from '../entity/PlayerORM';
 
@@ -116,7 +116,7 @@ export default class PlayerController {
 		}
 
 		const playerRepository = getRepository(PlayerORM);
-		const playerEntity = new PlayerORM(player);
+		const playerEntity = PlayerORM.fromPlayerModel(player);
 
 		try {
 			await playerRepository.save(playerEntity);

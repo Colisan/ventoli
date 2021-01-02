@@ -9,7 +9,7 @@
 	import { computed, defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
 	import { useStore } from 'vuex';
 	import { useRouter } from 'vue-router';
-	import { Game } from '../../../ventoli-model/dist';
+	import { Game } from '@ventoli/ventoli-model';
 
 	export default defineComponent({
 		name: 'MainGame',

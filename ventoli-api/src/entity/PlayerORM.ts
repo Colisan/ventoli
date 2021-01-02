@@ -7,7 +7,7 @@ import {
 	UpdateDateColumn,
 } from 'typeorm';
 
-import { Player } from '../../../ventoli-model/dist';
+import { Player } from '@ventoli/ventoli-model';
 
 @Entity()
 @Unique(['name'])
@@ -29,14 +29,28 @@ export default class PlayerORM {
 	@UpdateDateColumn()
 	public updatedAt!: Date;
 
-	public constructor(playerModel?: Player) {
-		if (playerModel) {
-			this.id = playerModel.id;
-			this.name = playerModel.name;
-			this.password = playerModel.hashedPassword;
-			this.createdAt = playerModel.createdAt;
-			this.updatedAt = playerModel.updatedAt;
-		}
+	public constructor(
+		id: PlayerORM['id'],
+		name: PlayerORM['name'],
+		hashedPassword: PlayerORM['password'],
+		createdAt: PlayerORM['createdAt'],
+		updatedAt: PlayerORM['updatedAt']
+	) {
+		this.id = id;
+		this.name = name;
+		this.password = hashedPassword;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+	}
+
+	public static fromPlayerModel(playerModel?: Player) {
+		return new PlayerORM(
+			playerModel.id,
+			playerModel.name,
+			playerModel.hashedPassword,
+			playerModel.createdAt,
+			playerModel.updatedAt
+		);
 	}
 
 	public toPlayerModel(): Player {

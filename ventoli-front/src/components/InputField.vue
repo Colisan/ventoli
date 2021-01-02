@@ -19,7 +19,7 @@
 	} from 'vue';
 	import { useStore } from 'vuex';
 	import { useRouter } from 'vue-router';
-	import { Player } from '../../../ventoli-model/dist';
+	import { Player } from '@ventoli/ventoli-model';
 	import { ActionType } from '@/store/storeFront/actions';
 
 	export enum InputType {

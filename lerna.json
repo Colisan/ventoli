@@ -1,10 +1,5 @@
 {
-  "npmClient": "yarn",
-  "packages": [
-    "ventoli-api",
-    "ventoli-front",
-    "ventoli-model",
-    "ventoli-server"
-  ],
-  "version": "0.1.0"
+	"npmClient": "yarn",
+	"packages": ["ventoli-api", "ventoli-front", "ventoli-model", "ventoli-server"],
+	"version": "0.1.0"
 }

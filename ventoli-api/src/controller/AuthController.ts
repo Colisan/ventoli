@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getRepository, Repository } from 'typeorm';
-import { Player } from '../../../ventoli-model/dist';
+import { Player } from '@ventoli/ventoli-model';
 
 import PlayerORM from '../entity/PlayerORM';
 import JwtPayload from '../model/JwtPayload';

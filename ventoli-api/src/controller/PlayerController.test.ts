@@ -7,126 +7,117 @@ import * as typeorm from 'typeorm';
 import * as classValidator from 'class-validator';
 import PlayerController from './PlayerController';
 import PlayerORM from '../entity/PlayerORM';
+import { Player } from '@ventoli/ventoli-model';
 
 chai.use(sinonChai);
 
-describe('PlayerController findOneByName method', () => {
-	// const playerController = new PlayerController(sinon.stub() as any);
+describe('PlayerController', () => {
+	let sandbox;
 
-	it('returns the player infos if found in database', async () => {
-		const foundPlayer = new PlayerORM();
-		foundPlayer.id = 111;
-		foundPlayer.name = 'AnotherNoob';
-
-		const getRepoStub = sinon.stub(typeorm, 'getRepository').returns({
-			findOneOrFail: sinon.stub().returns(Promise.resolve(foundPlayer)),
-		} as any);
-
-		const req = mockReq({ params: 'AnotherNoob' });
-		const res = mockRes();
-		await PlayerController.findOneByName(req, res);
-
-		expect(res.send).to.have.been.calledWith(foundPlayer);
-
-		getRepoStub.restore();
+	beforeEach(() => {
+		sandbox = sinon.createSandbox();
 	});
 
-	it('sends http 404 if no player found in database', async () => {
-		const getRepoStub = sinon.stub(typeorm, 'getRepository').returns({
-			findOneOrFail: sinon.stub().throws('Nop nop'),
-		} as any);
-
-		const req = mockReq({ params: 'Nonoob' });
-		const res = mockRes();
-		await PlayerController.findOneByName(req, res);
-
-		expect(res.status).to.have.been.calledWith(404);
-
-		getRepoStub.restore();
+	afterEach(() => {
+		sandbox.restore();
 	});
-});
 
-describe('PlayerController newPlayer method', () => {
-	it('returns http 400 and a reason if entity validation fails', async () => {
-		const validateStub = sinon.stub(PlayerORM.prototype, 'getValidationErrors');
-		validateStub.returns(Promise.resolve(['Nope lol' as any]));
+	describe('findOneByName method', () => {
+		// const playerController = new PlayerController(sinon.stub() as any);
 
-		const req = mockReq({
-			body: { playername: 'OneStubMan', password: 'Mudamuda' },
+		it('returns the player infos if found in database', async () => {
+			const foundPlayer = new PlayerORM(0, '', '', new Date(), new Date());
+			foundPlayer.id = 111;
+			foundPlayer.name = 'AnotherNoob';
+
+			sandbox.stub(typeorm, 'getRepository').returns({
+				findOneOrFail: sandbox.stub().returns(Promise.resolve(foundPlayer)),
+			} as any);
+
+			const req = mockReq({ params: 'AnotherNoob' });
+			const res = mockRes();
+			await PlayerController.findOneByName(req, res);
+
+			expect(res.send).to.have.been.calledWith(foundPlayer);
 		});
-		const res = mockRes();
-		await PlayerController.newPlayer(req, res);
 
-		expect(res.status).to.have.been.calledWith(400);
-		expect(res.send).to.have.been.calledWith(sinon.match.truthy);
+		it('sends http 404 if no player found in database', async () => {
+			sandbox.stub(typeorm, 'getRepository').returns({
+				findOneOrFail: sandbox.stub().throws('Nop nop'),
+			} as any);
 
-		validateStub.restore();
+			const req = mockReq({ params: 'Nonoob' });
+			const res = mockRes();
+			await PlayerController.findOneByName(req, res);
+
+			expect(res.status).to.have.been.calledWith(404);
+		});
 	});
 
-	it('hashes the password before calling save', async () => {
-		const validateStub = sinon.stub(PlayerORM.prototype, 'getValidationErrors');
-		validateStub.returns(Promise.resolve([]));
+	describe('newPlayer method', () => {
+		it('returns http 400 and a reason if entity validation fails', async () => {
+			sandbox.stub(Player.prototype, 'validClearPassword').throws('Not lol');
 
-		const saveStub = sinon.stub().returns(new PlayerORM());
-		const getRepoStub = sinon.stub(typeorm, 'getRepository').returns({
-			save: saveStub,
-		} as any);
+			const req = mockReq({
+				body: { playername: 'OneStubMan', password: 'Mudamuda' },
+			});
+			const res = mockRes();
+			await PlayerController.newPlayer(req, res);
 
-		const clearPassword = 'HashMe';
-
-		const req = mockReq({
-			body: { playername: 'InnocentNoob', password: clearPassword },
+			expect(res.status).to.have.been.calledWith(400);
+			expect(res.send).to.have.been.calledWith(sinon.match.truthy);
 		});
-		const res = mockRes();
-		await PlayerController.newPlayer(req, res);
 
-		expect(saveStub).to.have.been.calledWith(
-			sinon.match((player) => {
-				return player.password != clearPassword;
-			})
-		);
+		it('hashes the password before calling save', async () => {
+			const saveStub = sinon.stub().resolves();
+			const getRepoStub = sinon.stub(typeorm, 'getRepository').returns({
+				save: saveStub,
+			} as any);
 
-		validateStub.restore();
-		getRepoStub.restore();
-	});
+			const clearPassword = 'HashMe66...';
 
-	it('returns http 409 if player already exists', async () => {
-		const validateStub = sinon.stub(PlayerORM.prototype, 'getValidationErrors');
-		validateStub.returns(Promise.resolve([]));
+			const req = mockReq({
+				body: { playername: 'InnocentNoob', password: clearPassword },
+			});
+			const res = mockRes();
+			await PlayerController.newPlayer(req, res);
 
-		const getRepoStub = sinon.stub(typeorm, 'getRepository').returns({
-			save: sinon.stub().throws('Nopity nope'),
-		} as any);
+			expect(getRepoStub).to.have.been.called;
+			expect(saveStub).to.have.been.calledWith(
+				sinon.match((playerEntity) => {
+					return playerEntity.password != clearPassword;
+				})
+			);
 
-		const req = mockReq({
-			body: { playername: 'TwoStubOneGirl', password: 'Mudamuda' },
+			getRepoStub.restore();
 		});
-		const res = mockRes();
-		await PlayerController.newPlayer(req, res);
 
-		expect(res.status).to.have.been.calledWith(409);
+		it('returns http 409 if player already exists', async () => {
+			sandbox.stub(typeorm, 'getRepository').returns({
+				save: sandbox.stub().throws('Nopity nope'),
+			} as any);
 
-		validateStub.restore();
-		getRepoStub.restore();
-	});
+			const req = mockReq({
+				body: { playername: 'TwoStubOneGirl', password: 'Mudamuda33.' },
+			});
+			const res = mockRes();
+			await PlayerController.newPlayer(req, res);
 
-	it('returns http 201 if it all goes well', async () => {
-		const validateStub = sinon.stub(PlayerORM.prototype, 'getValidationErrors');
-		validateStub.returns(Promise.resolve([]));
-
-		const getRepoStub = sinon.stub(typeorm, 'getRepository').returns({
-			save: sinon.stub().returns(new PlayerORM()),
-		} as any);
-
-		const req = mockReq({
-			body: { playername: 'FreshStub', password: '4llG00d' },
+			expect(res.status).to.have.been.calledWith(409);
 		});
-		const res = mockRes();
-		await PlayerController.newPlayer(req, res);
 
-		expect(res.status).to.have.been.calledWith(201);
+		it('returns http 201 if it all goes well', async () => {
+			sandbox.stub(typeorm, 'getRepository').returns({
+				save: sandbox.stub().returns(new PlayerORM(0, '', '', new Date(), new Date())),
+			} as any);
 
-		validateStub.restore();
-		getRepoStub.restore();
+			const req = mockReq({
+				body: { playername: 'FreshStub', password: '4llG00d..' },
+			});
+			const res = mockRes();
+			await PlayerController.newPlayer(req, res);
+
+			expect(res.status).to.have.been.calledWith(201);
+		});
 	});
 });

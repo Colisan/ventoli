@@ -1,9 +1,9 @@
 {
-	"name": "ventoli-api",
+	"name": "@ventoli/ventoli-api",
 	"version": "0.1.0",
 	"author": "Colisan",
+	"description": "",
 	"private": true,
-	"description": "Awesome project developed with TypeORM.",
 	"scripts": {
 		"dev": "yarn run start",
 		"start": "ts-node -r dotenv/config src/index.ts --files",

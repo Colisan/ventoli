@@ -4,6 +4,7 @@ import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import JwtPayload from './JwtPayload';
 import PlayerORM from '../entity/PlayerORM';
+import { Player } from '@ventoli/ventoli-model';
 
 chai.use(sinonChai);
 
@@ -37,7 +38,7 @@ describe('JwtPayload class', () => {
 	});
 
 	it('can be instanciated from Player Entity', () => {
-		const player = new PlayerORM();
+		const player = new Player();
 		player.id = 777;
 		player.name = 'Jack Pott';
 		const payload = JwtPayload.fromPlayer(player);

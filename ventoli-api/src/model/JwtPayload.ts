@@ -1,5 +1,5 @@
 import * as jwt from 'jsonwebtoken';
-import { Player } from '../../../ventoli-model/dist';
+import { Player } from '@ventoli/ventoli-model';
 import PlayerORM from '../entity/PlayerORM';
 
 interface PayloadData {
@@ -27,14 +27,14 @@ export default class JwtPayload {
 		else throw 'No JWT_SECRET found in ENV';
 	}
 
-	static fromPlayer(player: Player) {
+	public static fromPlayer(player: Player) {
 		const res = new JwtPayload();
 		res.datas.playerid = player.id;
 		res.datas.playername = player.name;
 		return res;
 	}
 
-	static fromSignedToken(token: string): JwtPayload {
+	public static fromSignedToken(token: string): JwtPayload {
 		let secret = process.env.JWT_SECRET;
 		if (secret) return new JwtPayload(jwt.verify(token, secret) as PayloadData);
 		else throw 'No JWT_SECRET found in ENV';

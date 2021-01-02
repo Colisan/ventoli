@@ -12,7 +12,7 @@
 <script lang="ts">
 	import { computed, defineComponent, onBeforeMount, ref } from 'vue';
 	import { useStore } from 'vuex';
-	import { Game } from '../../../ventoli-model/dist';
+	import { Game } from '@ventoli/ventoli-model';
 	import MainHeader from '@/components/MainHeader.vue';
 	import useNeedLoggedIn from '@/compositions/NeedLoggedIn';
 

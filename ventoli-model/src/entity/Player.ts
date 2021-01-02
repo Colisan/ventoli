@@ -21,7 +21,10 @@ export default class Player {
 
 	public set validName(newName: string) {
 		if (newName.length < 5) throw 'Name must be at least 5 characters long';
-		if (newName.match(/\W/gimu)) throw 'Name must only contain letter or digit characters';
+		if (!newName.match(/[A-Za-zÀ-ÖØ-öø-ÿ]/gimu)) throw 'Password must contain a letter';
+		if (newName.match(/[^A-Za-zÀ-ÖØ-öø-ÿ-]/gimu)) throw 'Name must only contain letters or dashes';
+		if (newName.match(/-$/gimu)) throw 'Name should not end with a dash';
+		if (newName.match(/^-/gimu)) throw 'Name should not start with a dash';
 		this._name = newName;
 	}
 
@@ -31,9 +34,10 @@ export default class Player {
 
 	public set validClearPassword(newClearPassword: string) {
 		if (newClearPassword.length < 8) throw 'Password must be at least 8 characters long';
-		if (!newClearPassword.match(/[a-z][A-Z]/gimu)) throw 'Password must contain a letter';
-		if (!newClearPassword.match(/\d/gimu)) throw 'Password must contain a digit';
-		if (!newClearPassword.match(/\W/gimu))
+		if (!newClearPassword.match(/[A-Za-zÀ-ÖØ-öø-ÿ]/gimu)) throw 'Password must contain a letter';
+		if (!newClearPassword.match(/[A-ZÀ-ÖØ]/gimu)) throw 'Password must contain a uppercase letter';
+		if (!newClearPassword.match(/[0-9]/gimu)) throw 'Password must contain a digit';
+		if (!newClearPassword.match(/[^A-Za-zÀ-ÖØ-öø-ÿ0-9]/gimu))
 			throw 'Password must contain a non-letter and non-digit character';
 		this._hashedPassword = bcrypt.hashSync(newClearPassword, 8);
 	}

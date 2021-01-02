@@ -15,7 +15,7 @@ describe('Player entity', () => {
 
 	it('can hash its password', () => {
 		const player = new Player();
-		const initialPassword = 'p4ssw0rd';
+		const initialPassword = 'P4ssw0rd..';
 		player.validClearPassword = initialPassword;
 		expect(player.hashedPassword).to.have.length.greaterThan(0);
 		expect(player.hashedPassword).not.to.equal(initialPassword);
@@ -23,7 +23,7 @@ describe('Player entity', () => {
 
 	it('can validate a clear password', () => {
 		const player = new Player();
-		const initialPassword = 't0p.s3cr3t';
+		const initialPassword = 'T0p.s3cr3t..';
 		player.validClearPassword = initialPassword;
 		expect(player.isClearPasswordEqual(initialPassword)).to.be.true;
 		expect(player.isClearPasswordEqual('another password')).to.be.false;

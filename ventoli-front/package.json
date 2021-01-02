@@ -1,6 +1,8 @@
 {
-	"name": "vue3test33",
+	"name": "@ventoli/ventoli-front",
 	"version": "0.1.0",
+	"author": "Colisan",
+	"description": "",
 	"private": true,
 	"scripts": {
 		"dev": "vue-cli-service serve",
@@ -9,6 +11,8 @@
 		"test:watch": "vue-cli-service test:unit ./src/**/*.test.ts --watch"
 	},
 	"dependencies": {
+		"@ventoli/ventoli-model": "*",
+		"@ventoli/ventoli-api": "*",
 		"axios": "^0.21.1",
 		"core-js": "^3.6.5",
 		"register-service-worker": "^1.7.1",

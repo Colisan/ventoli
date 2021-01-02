@@ -2,8 +2,8 @@ import { ActionContext, ActionTree } from 'vuex';
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Mutations, MutationType } from './mutations';
 import { getInitialState, State } from './state';
-import { Player } from '../../../../ventoli-model/dist';
-import { avaliableRoutes, RouteType } from '../../../../ventoli-api/src/route/routes';
+import { Player } from '@ventoli/ventoli-model';
+import { avaliableRoutes, RouteType } from '@ventoli/ventoli-api/src/route/routes';
 import { Popup } from '@/model/Popup';
 
 export enum ActionType {

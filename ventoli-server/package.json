@@ -1,10 +1,9 @@
 {
-	"name": "ventoli-server",
+	"name": "@ventoli/ventoli-server",
 	"version": "0.1.0",
 	"author": "Colisan",
 	"description": "",
 	"private": true,
-	"main": "./src/index.ts",
 	"scripts": {
 		"dev": "concurrently -k -p \"[{name}]\" -n \"Typesript, Node\" \"tsc -w\" \"nodemon dist/index.js\"",
 		"build": "tsc",

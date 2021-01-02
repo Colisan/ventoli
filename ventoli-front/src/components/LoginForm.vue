@@ -11,7 +11,7 @@
 	import { computed, defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
 	import { useStore } from 'vuex';
 	import { useRouter } from 'vue-router';
-	import { Game } from '../../../ventoli-model/dist';
+	import { Game } from '@ventoli/ventoli-model';
 	import { ActionType } from '@/store/storeFront/actions';
 	import { MutationType } from '@/store/storeFront/mutations';
 	import InputField, { InputType } from './InputField.vue';

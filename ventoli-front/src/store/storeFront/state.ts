@@ -1,5 +1,5 @@
 import { Popup } from '@/model/Popup';
-import { Game, Player } from '../../../../ventoli-model/dist';
+import { Game, Player } from '@ventoli/ventoli-model';
 
 export type State = {
 	authToken?: string;
