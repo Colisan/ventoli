@@ -5,7 +5,7 @@ stages:
   - build
   - test
 
-cache:
+cache: &global_cache
   key: one-key-to-rule-them-all
   paths:
     - node_modules/
@@ -19,6 +19,9 @@ run_install:
   stage: install
   script:
     - yarn install --cache-folder .yarn
+  cache:
+    <<: *global_cache
+    policy: pull-push
 
 run_build:
   stage: build
@@ -27,8 +30,14 @@ run_build:
   artifacts:
     paths:
       - ventoli-model/dist/
+  cache:
+    <<: *global_cache
+    policy: pull
 
 run_tests:
   stage: test
   script:
     - yarn lerna run test
+  cache:
+    <<: *global_cache
+    policy: pull
