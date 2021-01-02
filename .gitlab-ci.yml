@@ -21,10 +21,11 @@ run_install:
     - yarn install --cache-folder .yarn
   cache:
     <<: *global_cache
-    policy: pull-push
+    policy: push
   only:
     changes:
-      - ./**/package.json
+      - '**/package.json'
+      - '**/yarn.lock'
 
 run_build:
   stage: build
