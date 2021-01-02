@@ -22,6 +22,9 @@ run_install:
   cache:
     <<: *global_cache
     policy: pull-push
+  only:
+    changes:
+      - ./**/package.json
 
 run_build:
   stage: build
