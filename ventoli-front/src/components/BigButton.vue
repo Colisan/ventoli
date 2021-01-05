@@ -1,10 +1,19 @@
 <template>
-	<a :class="{'bigButton': true,
-		'bigButton--isPressed': isPressed,
-		'bigButton--isReleased': isReleased
-	}" @mousedown.left="onMouseDown" @mouseup.left="onMouseUp">
+	<a
+		:class="{'bigButton': true,
+			'bigButton--isPressed': isPressed,
+			'bigButton--isReleased': isReleased,
+			'bigButton--isHover': isHover,
+		}"
+		@mousedown.left="onMouseDown"
+		@mouseup.left="onMouseUp"
+		@mouseover="onMouseOver"
+		@mouseout="onMouseOut"
+	>
 		<div class="bigButton__contentWrapper">
-			<div class="bigButton__content">{{ text }}</div>
+			<div class="bigButton__content">
+				<img v-if="icon" :src="require('@/assets/icons/' + icon)" class="bigButton__icon" />
+				{{ text }}</div>
 			<div class="bigButton__shine" />
 		</div>
 		<div class="bigButton__releaseOutline" />
@@ -23,6 +32,9 @@
 			text: {
 				type: String,
 				required: true,
+			},
+			icon: {
+				type: String,
 			}
 		},
 		setup(props, context) {
@@ -31,32 +43,45 @@
 			const dataState = reactive({
 				isPressed: false,
 				isReleased: false,
+				isHover: false,
 			});
 
 			const onMouseDown = () => {
 				dataState.isPressed = true;
-			}
+			};
 			
 			const onMouseUp = (evt: MouseEvent) => {
-				console.log(evt);
 				dataState.isPressed = false;
 				dataState.isReleased = true;
 				window.setTimeout(() => {
 					dataState.isReleased = false;
 					context.emit("bigButtonPressed");
 				}, 500);
+			};
+
+			const onMouseOver = (evt: MouseEvent) => {
+				dataState.isHover = true;
 			}
 
+			const onMouseOut = (evt: MouseEvent) => {
+				window.setTimeout(() => {
+					dataState.isHover = false;
+				}, 200);
+			}
+			
+			
 			return {
 				...toRefs(dataState),
 				onMouseDown,
 				onMouseUp,
+				onMouseOver,
+				onMouseOut,
 			};
 		},
 	});
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 	$buttonColor: #1a7a3e;
 	$buttonHeight: 2.8rem;
 	$halfButtonHeight: $buttonHeight / 2;
@@ -73,17 +98,25 @@
 		vertical-align: middle;
 		position: relative;
 		height: $buttonHeight;
-		font-size: 1.5rem;
+		font-size: 2rem;
 		color: white;
-		text-transform: uppercase;
 		cursor: pointer;
-		filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.4));
+		transition: filter 300ms;
+		filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.1));
+
+		* {
+			pointer-events: none;
+		}
 
 		> .bigButton__contentWrapper {
 			height: 100%;
 		}
 
-		&:hover &__shine {
+		&:hover:not(&--isPressed) {
+			filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.4));
+		}
+
+		&--isHover &__shine {
 			display: unset;
 			animation: shineGlide 200ms 0ms linear;
 		}
@@ -95,7 +128,7 @@
 
 		&.bigButton--isPressed::after {
 			top: 50%;
-			bottom: 0;
+			bottom: -1px; //TODO: fix =(
 			clip-path: polygon(
 				/* Top */
 				$halfButtonHeight 100%,
@@ -160,7 +193,7 @@
 			left: 0;
 			right: 0;
 			bottom: 50%;
-			background-color: white;
+			background-color: #ff0;
 			mix-blend-mode: overlay;
 			opacity: 0.3;
 			clip-path: polygon(
@@ -188,7 +221,7 @@
 			left: -2rem;
 			will-change: left;
 			width: $shineWidth + $shineSkew;
-			background-color: white;
+			background-color: #0FF;
 			mix-blend-mode: overlay;
 			clip-path: polygon(
 				calc(100% - #{$shineWidth}) 0%,
@@ -244,6 +277,14 @@
 					background-color: transparent;
 				}
 			}
+		}
+
+		&__icon {
+			width: 2rem;
+			height: 2rem;
+			image-rendering: pixelated;
+			padding-right: 1rem;
+			vertical-align: middle;
 		}
 	}
 

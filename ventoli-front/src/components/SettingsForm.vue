@@ -1,5 +1,5 @@
 <template>
-	<form @submit="onSubmit">
+	<form @submit.prevent="onSubmit">
 		<input-field v-model="oldPassword" :type="InputType.Password" label="Current password" />
 		<input-field v-model="newPassword" :type="InputType.Password" label="New password" />
 		<input-field

@@ -20,3 +20,20 @@
 		},
 	});
 </script>
+
+<style lang="scss">
+	@font-face {
+		font-family: "Oclivion Laettes";
+		src: url("assets/OclivionLaettes.ttf") format("truetype");
+	}
+
+	:root {
+		font-family: "Oclivion Laettes";
+		font-size: 15px;
+
+		> * {
+			font-size: 2rem;
+		}
+	}
+
+</style>

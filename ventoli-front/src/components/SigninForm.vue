@@ -1,5 +1,5 @@
 <template>
-	<form @submit="onSubmit">
+	<form @submit.prevent="onSubmit">
 		<input-field v-model="login" label="Login" />
 		<input-field v-model="password" :type="InputType.Password" label="Password" />
 		<input-field v-model="passwordAgain" :type="InputType.Password" label="Confirm password" />
