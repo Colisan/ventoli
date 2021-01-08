@@ -1,6 +1,6 @@
 <template>
 	<div class="start">
-		<big-button :text="gameButtonLabel" @bigButtonPressed="onPlay" icon='key.png' />
+		<big-button :text="gameButtonLabel" @bigButtonPressed="onPlay" icon='play.png' />
 	</div>
 </template>
 
