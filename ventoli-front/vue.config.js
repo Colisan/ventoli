@@ -18,6 +18,13 @@ module.exports = {
 	devServer: {
 		public: 'ventoli.local:8080',
 	},
+	css: {
+			loaderOptions: {
+					sass: {
+						prependData: `@import "@/_variables.scss";`,
+					},
+			},
+	},
 	pwa: {
 		name: 'Castel Ventoli',
 		themeColor: '#9cdb43',

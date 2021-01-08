@@ -11,8 +11,9 @@
 		"test:watch": "vue-cli-service test:unit ./src/**/*.test.ts --watch"
 	},
 	"dependencies": {
-		"@ventoli/ventoli-model": "*",
+		"@babylonjs/core": "^4.2.0",
 		"@ventoli/ventoli-api": "*",
+		"@ventoli/ventoli-model": "*",
 		"axios": "^0.21.1",
 		"core-js": "^3.6.5",
 		"register-service-worker": "^1.7.1",

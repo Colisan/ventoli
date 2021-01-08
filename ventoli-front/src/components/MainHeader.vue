@@ -1,7 +1,7 @@
 <template>
 	<header class="mainHeader__wrapper">
 		<div class="mainHeader__gameMenu">
-			<router-link :to="{ name: 'Home' }">Home</router-link>
+			<router-link :to="{ name: 'Start' }">Home</router-link>
 		</div>
 		<div class="mainHeader__userMenu">
 			<router-link :to="{ name: 'Settings' }">Settings</router-link>
@@ -26,7 +26,7 @@
 
 			const onLogoutClick = () => {
 				store.dispatch(ActionType.Logout);
-				router.push({ name: 'Welcome' });
+				router.push({ name: 'Home' });
 			};
 
 			return {
@@ -35,3 +35,31 @@
 		},
 	});
 </script>
+
+<style scoped lang="scss">
+	$headerHeight: 3rem;
+
+	.mainHeader {
+		&__wrapper {
+			position: fixed;
+			top:0;
+			left: 0;
+			right: 0;
+			height: $headerHeight;
+			display: flex;
+			justify-content: space-between;
+			background-color: rgba(0, 0, 0, 0.6);
+		}
+
+		&__userMenu, &__gameMenu {
+			> * {
+				display: inline-flex;
+				align-items: center;
+				height: 100%;
+				vertical-align: middle;
+				padding: 0 1rem;
+			}
+		}
+	}
+
+</style>

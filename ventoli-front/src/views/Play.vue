@@ -1,6 +1,5 @@
 <template>
-	<div>
-		<MainHeader />
+	<div class="play">
 		<MainGame />
 	</div>
 </template>
@@ -14,7 +13,7 @@
 	import useNeedLoggedIn from '@/compositions/NeedLoggedIn';
 
 	export default defineComponent({
-		name: 'PlayGame',
+		name: 'Play',
 		components: {
 			MainHeader,
 			MainGame,

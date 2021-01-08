@@ -1,7 +1,7 @@
 <template>
-	<div class="home__wrapper">
-		<router-view class="home__content"/>
-		<home-background class="home__background"/>
+	<div class="game__wrapper">
+		<main-header class="game__header"/>
+		<router-view class="game__content"/>
 	</div>
 </template>
 
@@ -10,21 +10,25 @@
 	import { useStore } from 'vuex';
 	import { Game } from '@ventoli/ventoli-model';
 	import useNeedLoggedIn from '@/compositions/NeedLoggedIn';
+	import MainHeader from '@/components/MainHeader.vue';
 	import { useRouter } from 'vue-router';
-	import HomeBackground from '@/components/HomeBackground.vue';
 
 	export default defineComponent({
-		name: 'Home',
-		components: { HomeBackground },
+		name: 'Game',
+		components: { MainHeader },
 		setup() {
 		},
 	});
 </script>
 
-<style scoper lang="scss">
+<style scoped lang="scss">
 
-.home {
-	&__wrapper, &__content, &__background {
+.game {
+	&__wrapper {
+		background-color: $darkBackgroundColor;
+	}
+
+	&__wrapper, &__content{
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -32,11 +36,8 @@
 		bottom: 0;
 	}
 
-	&__background {
-		width: 100%;
-		height: 100%;
-		background-color: $darkBackgroundColor;
-		z-index: -1;
+	&__header {
+		z-index: 2;
 	}
 }
 
