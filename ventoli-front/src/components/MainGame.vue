@@ -27,7 +27,7 @@
 					dataState.isLoading = true;
 				};
 
-				webSocket.onmessage = (data) => {
+				webSocket.onmessage = data => {
 					console.log('recieved', data);
 					dataState.isLoading = false;
 				};

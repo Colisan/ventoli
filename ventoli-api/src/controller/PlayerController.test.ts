@@ -84,7 +84,7 @@ describe('PlayerController', () => {
 
 			expect(getRepoStub).to.have.been.called;
 			expect(saveStub).to.have.been.calledWith(
-				sinon.match((playerEntity) => {
+				sinon.match(playerEntity => {
 					return playerEntity.password != clearPassword;
 				})
 			);

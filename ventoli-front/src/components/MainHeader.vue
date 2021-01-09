@@ -42,7 +42,7 @@
 	.mainHeader {
 		&__wrapper {
 			position: fixed;
-			top:0;
+			top: 0;
 			left: 0;
 			right: 0;
 			height: $headerHeight;
@@ -51,7 +51,8 @@
 			background-color: rgba(0, 0, 0, 0.6);
 		}
 
-		&__userMenu, &__gameMenu {
+		&__userMenu,
+		&__gameMenu {
 			> * {
 				display: inline-flex;
 				align-items: center;
@@ -61,5 +62,4 @@
 			}
 		}
 	}
-
 </style>

@@ -6,14 +6,14 @@ export default {
 	// todo passer en annotations
 	defaultMutations<StateType>(initialState: StateType) {
 		const res = <any>{};
-		Object.keys(initialState).forEach((prop) => {
+		Object.keys(initialState).forEach(prop => {
 			const mutationName = `set${ucfirst(prop)}`;
 			res[mutationName] = (state: StateType, newValue: any) => {
 				(state as { [key: string]: any })[prop] = newValue;
 			};
 		});
 		res.resetStore = (state: StateType) => {
-			Object.keys(initialState).forEach((prop) => {
+			Object.keys(initialState).forEach(prop => {
 				(state as { [key: string]: any })[prop] = (initialState as {
 					[key: string]: any;
 				})[prop];
@@ -23,7 +23,7 @@ export default {
 	},
 	defaultGetters<StateType>(initialState: StateType) {
 		const res = <{ [key: string]: any }>{};
-		Object.keys(initialState).forEach((prop) => {
+		Object.keys(initialState).forEach(prop => {
 			res[prop] = (state: StateType) => (state as { [key: string]: any })[prop];
 		});
 		return res;

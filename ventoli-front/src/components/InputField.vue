@@ -63,11 +63,11 @@
 				id: 'input_' + props.label.replaceAll(/(\W)/g, '_').toLowerCase(),
 			});
 
-			watch(toRef(props, 'modelValue'), (modelValue) => {
+			watch(toRef(props, 'modelValue'), modelValue => {
 				dataState.value = modelValue;
 			});
 
-			watch(toRef(dataState, 'value'), (inputValue) => {
+			watch(toRef(dataState, 'value'), inputValue => {
 				context.emit('update:modelValue', inputValue);
 			});
 

@@ -1,8 +1,8 @@
 <template>
 	<div class="welcome">
 		<div class="welcome__title">&nbsp;Castel&nbsp; &nbsp;Ventoli&nbsp;</div>
-		<big-button text="Create account" @bigButtonPressed="onSignIn" icon='add.png' />
-		<big-button text="Log in" @bigButtonPressed="onLogIn" icon='key.png' />
+		<big-button text="Create account" @bigButtonPressed="onSignIn" icon="add.png" />
+		<big-button text="Log in" @bigButtonPressed="onLogIn" icon="key.png" />
 	</div>
 </template>
 
@@ -17,15 +17,15 @@
 		components: { BigButton },
 		setup() {
 			const router = useRouter();
-			
+
 			const onSignIn = () => {
-				router.push({ name: 'SignIn' })
-			}
+				router.push({ name: 'SignIn' });
+			};
 
 			const onLogIn = () => {
-				router.push({ name: 'LogIn' })
-			}
-			
+				router.push({ name: 'LogIn' });
+			};
+
 			return {
 				...useNeedLoggedOut(),
 				onSignIn,
@@ -36,22 +36,20 @@
 </script>
 
 <style scoped lang="scss">
+	.welcome {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
 
-.welcome {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-
-	&__title {
-		font-size: 8rem;
-		margin-bottom: 5rem;
-		color: white;
+		&__title {
+			font-size: 8rem;
+			margin-bottom: 5rem;
+			color: white;
+		}
 	}
-}
 
-.bigButton:not(:last-child) {
-	margin-bottom: 3rem;
-}
-
+	.bigButton:not(:last-child) {
+		margin-bottom: 3rem;
+	}
 </style>

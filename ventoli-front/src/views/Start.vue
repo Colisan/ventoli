@@ -1,6 +1,6 @@
 <template>
 	<div class="start">
-		<big-button :text="gameButtonLabel" @bigButtonPressed="onPlay" icon='play.png' />
+		<big-button :text="gameButtonLabel" @bigButtonPressed="onPlay" icon="play.png" />
 	</div>
 </template>
 
@@ -25,8 +25,8 @@
 			const gameButtonLabel = ref(currentGame.value === undefined ? 'New game' : 'Continue game');
 
 			const onPlay = () => {
-				router.push({ name: 'PlayGame' })
-			}
+				router.push({ name: 'PlayGame' });
+			};
 
 			return {
 				...useNeedLoggedIn(),
@@ -38,12 +38,10 @@
 </script>
 
 <style scoper lang="scss">
-
-.start {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
-
+	.start {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
 </style>

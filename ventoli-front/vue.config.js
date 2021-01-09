@@ -9,8 +9,8 @@ module.exports = {
 			},
 		},
 	},
-	chainWebpack: (config) => {
-		config.plugin('html').tap((args) => {
+	chainWebpack: config => {
+		config.plugin('html').tap(args => {
 			args[0].title = 'Castel Ventoli';
 			return args;
 		});
@@ -19,11 +19,11 @@ module.exports = {
 		public: 'ventoli.local:8080',
 	},
 	css: {
-			loaderOptions: {
-					sass: {
-						prependData: `@import "@/_variables.scss";`,
-					},
+		loaderOptions: {
+			sass: {
+				prependData: `@import "@/_variables.scss";`,
 			},
+		},
 	},
 	pwa: {
 		name: 'Castel Ventoli',

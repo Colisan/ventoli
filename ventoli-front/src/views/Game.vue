@@ -1,7 +1,7 @@
 <template>
 	<div class="game__wrapper">
-		<main-header class="game__header"/>
-		<router-view class="game__content"/>
+		<main-header class="game__header" />
+		<router-view class="game__content" />
 	</div>
 </template>
 
@@ -16,29 +16,27 @@
 	export default defineComponent({
 		name: 'Game',
 		components: { MainHeader },
-		setup() {
-		},
+		setup() {},
 	});
 </script>
 
 <style scoped lang="scss">
+	.game {
+		&__wrapper {
+			background-color: $darkBackgroundColor;
+		}
 
-.game {
-	&__wrapper {
-		background-color: $darkBackgroundColor;
+		&__wrapper,
+		&__content {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+		}
+
+		&__header {
+			z-index: 2;
+		}
 	}
-
-	&__wrapper, &__content{
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-	}
-
-	&__header {
-		z-index: 2;
-	}
-}
-
 </style>

@@ -1,24 +1,23 @@
 <template>
 	<a
 		:class="{
-			bigButton: true,
-			'bigButton--isPressed': isPressed,
-			'bigButton--isReleased': isReleased,
-			'bigButton--isHover': isHover,
+			iconButton: true,
+			'iconButton--isPressed': isPressed,
+			'iconButton--isReleased': isReleased,
+			'iconButton--isHover': isHover,
 		}"
 		@mousedown.left="onMouseDown"
 		@mouseup.left="onMouseUp"
 		@mouseover="onMouseOver"
 		@mouseout="onMouseOut"
 	>
-		<div class="bigButton__contentWrapper">
-			<div class="bigButton__content">
-				<img v-if="icon" :src="require('@/assets/icons/' + icon)" class="bigButton__icon" />
-				{{ text }}
+		<div class="iconButton__contentWrapper">
+			<div class="iconButton__content">
+				<img v-if="icon" :src="require('@/assets/icons/' + icon)" class="iconButton__icon" />
 			</div>
-			<div class="bigButton__shine" />
+			<div class="iconButton__shine" />
 		</div>
-		<div class="bigButton__releaseOutline" />
+		<div class="iconButton__releaseOutline" />
 	</a>
 </template>
 
@@ -29,12 +28,8 @@
 	import { Popup } from '@/model/Popup';
 
 	export default defineComponent({
-		name: 'BigButton',
+		name: 'IconButton',
 		props: {
-			text: {
-				type: String,
-				required: true,
-			},
 			icon: {
 				type: String,
 			},
@@ -57,7 +52,7 @@
 				dataState.isReleased = true;
 				window.setTimeout(() => {
 					dataState.isReleased = false;
-					context.emit('bigButtonPressed');
+					context.emit('iconButtonPressed');
 				}, 500);
 			};
 
@@ -83,8 +78,8 @@
 </script>
 
 <style scoped lang="scss">
-	$buttonColor: #1a7a3e;
-	$buttonHeight: 2.8rem;
+	$buttonColor: #73172d;
+	$buttonHeight: 3.8rem;
 	$halfButtonHeight: $buttonHeight / 2;
 	$buttonDotSize: 0.8rem;
 	$halfButtonDotSize: $buttonDotSize / 2;
@@ -94,13 +89,12 @@
 	$outlineWidth: 1rem;
 	$outlineTravel: 2rem;
 
-	.bigButton {
+	.iconButton {
 		display: inline-block;
 		vertical-align: middle;
 		position: relative;
 		height: $buttonHeight;
-		font-size: 2rem;
-		color: white;
+		width: $buttonHeight;
 		cursor: pointer;
 		transition: filter 300ms;
 		filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.1));
@@ -109,8 +103,9 @@
 			pointer-events: none;
 		}
 
-		> .bigButton__contentWrapper {
+		> .iconButton__contentWrapper {
 			height: 100%;
+			width: 100%;
 		}
 
 		&:hover:not(&--isPressed) {
@@ -122,61 +117,41 @@
 			animation: shineGlide 200ms 0ms linear;
 		}
 
-		&.bigButton--isReleased &__releaseOutline {
+		&.iconButton--isReleased &__releaseOutline {
 			display: unset;
 			animation: outlineFade 500ms 0ms ease-out;
 		}
 
-		&.bigButton--isPressed::after {
+		&.iconButton--isPressed::after {
 			top: 50%;
-			bottom: -1px; //TODO: fix =(
+			bottom: 0;
 			clip-path: polygon(
-				/* Top */ $halfButtonHeight 100%,
-				calc(100% - #{$halfButtonHeight}) 100%,
-				100% 0%,
-				/* Right Dot*/ calc(100% - #{$buttonOffset}) 0%,
-				calc(100% - #{$buttonOffset} - #{$halfButtonDotSize}) calc(0% + #{$halfButtonDotSize}),
-				calc(100% - #{$buttonOffset} - #{$buttonDotSize}) 0%,
-				/* Left Dot */ calc(#{$buttonOffset} + #{$buttonDotSize}) 0%,
-				calc(#{$buttonOffset} + #{$halfButtonDotSize}) calc(0% + #{$halfButtonDotSize}),
-				$buttonOffset 0%,
-				0% 0%
+				 0% 0%,
+				 100% 0%,
+				 50% 100%,
 			);
 		}
 	}
 
-	.bigButton {
+	.iconButton {
 		&__contentWrapper {
 			clip-path: polygon(
-				/* Top */ $halfButtonHeight 0,
-				calc(100% - #{$halfButtonHeight}) 0,
+				50% 0%,
 				100% 50%,
-				/* Right Dot */ calc(100% - #{$buttonOffset}) 50%,
-				calc(100% - #{$buttonOffset} - #{$halfButtonDotSize}) calc(50% - #{$halfButtonDotSize}),
-				calc(100% - #{$buttonOffset} - #{$buttonDotSize}) 50%,
-				calc(100% - #{$buttonOffset} - #{$halfButtonDotSize}) calc(50% + #{$halfButtonDotSize}),
-				calc(100% - #{$buttonOffset}) 50%,
-				100% 50%,
-				/* Bottom */ calc(100% - #{$halfButtonHeight}) 100%,
-				$halfButtonHeight 100%,
-				0% 50%,
-				/* Left Dot */ $buttonOffset 50%,
-				calc(#{$buttonOffset} + #{$halfButtonDotSize}) calc(50% + #{$halfButtonDotSize}),
-				calc(#{$buttonOffset} + #{$buttonDotSize}) 50%,
-				calc(#{$buttonOffset} + #{$halfButtonDotSize}) calc(50% - #{$halfButtonDotSize}),
-				$buttonOffset 50%,
-				0% 50%
+				50% 100%,
+				0% 50%, 
 			);
 
-			> .bigButton__content {
+			> .iconButton__content {
 				height: 100%;
+				width: 100%;
 			}
 		}
 
 		&__content {
 			display: flex;
 			align-items: center;
-			padding: 0 $buttonHeight;
+			justify-content: center;
 			background-color: $buttonColor;
 		}
 
@@ -191,16 +166,9 @@
 			mix-blend-mode: overlay;
 			opacity: 0.3;
 			clip-path: polygon(
-				/* Top */ $halfButtonHeight 0,
-				calc(100% - #{$halfButtonHeight}) 0,
-				100% 100%,
-				/* Right Dot*/ calc(100% - #{$buttonOffset}) 100%,
-				calc(100% - #{$buttonOffset} - #{$halfButtonDotSize}) calc(100% - #{$halfButtonDotSize}),
-				calc(100% - #{$buttonOffset} - #{$buttonDotSize}) 100%,
-				/* Left Dot */ calc(#{$buttonOffset} + #{$buttonDotSize}) 100%,
-				calc(#{$buttonOffset} + #{$halfButtonDotSize}) calc(100% - #{$halfButtonDotSize}),
-				$buttonOffset 100%,
-				0% 100%
+				 0% 100%,
+				 50% 0%,
+				 100% 100%,
 			);
 		}
 
@@ -212,7 +180,7 @@
 			left: -2rem;
 			will-change: left;
 			width: $shineWidth + $shineSkew;
-			background-color: #0ff;
+			background-color: white;
 			mix-blend-mode: overlay;
 			clip-path: polygon(calc(100% - #{$shineWidth}) 0%, 100% 0%, $shineWidth 100%, 0% 100%);
 
@@ -269,7 +237,6 @@
 			width: 2rem;
 			height: 2rem;
 			image-rendering: pixelated;
-			padding-right: 1rem;
 			vertical-align: middle;
 		}
 	}
