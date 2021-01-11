@@ -4,7 +4,7 @@
 			<div class="formPopup__content">
 				<slot />
 			</div>
-			<icon-button  class="formPopup__closeBtn" icon="close.png" />
+			<icon-button  class="formPopup__closeBtn" icon="close.png" @iconButtonPressed="onClose" />
 		</div>
 	</div>
 </template>
@@ -19,11 +19,17 @@
 	export default defineComponent({
 		name: 'Form Popup',
 		components: { IconButton },
-		setup () {
+		setup (props, context) {
 			const store = useStore();
 			const router = useRouter();
 
-			return {};
+			const onClose = () => {
+				context.emit("formPopupClose");
+			};
+
+			return {
+				onClose,
+			};
 		},
 	});
 </script>

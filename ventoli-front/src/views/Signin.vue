@@ -1,6 +1,5 @@
 <template>
-	<form-popup>
-		<router-link to="/">Home</router-link>
+	<form-popup @formPopupClose="onClose">
 		<SigninForm />
 	</form-popup>
 </template>
@@ -10,6 +9,7 @@
 	import useNeedLoggedOut from '@/compositions/NeedLoggedOut';
 	import SigninForm from '@/components/SigninForm.vue';
 	import FormPopup from '@/components/popups/FormPopup.vue';
+	import { useRouter } from 'vue-router';
 
 	export default defineComponent({
 		name: 'SignIn',
@@ -18,8 +18,15 @@
 			FormPopup,
 		},
 		setup() {
+			const router = useRouter();
+			
+			const onClose = () => {
+				router.replace({ name: 'Welcome' });
+			};
+
 			return {
 				...useNeedLoggedOut(),
+				onClose
 			};
 		},
 	});

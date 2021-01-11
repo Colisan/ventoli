@@ -1,10 +1,7 @@
 <template>
-	<div>
-		<template v-if="!isLoading">
-			<router-link to="/">Home</router-link>
-			<LoginForm />
-		</template>
-	</div>
+	<form-popup v-if="!isLoading" @formPopupClose="onClose">
+		<LoginForm />
+	</form-popup>
 </template>
 
 <script lang="ts">
@@ -12,6 +9,7 @@
 	import { useStore } from 'vuex';
 	import { useRouter } from 'vue-router';
 	import LoginForm from '@/components/LoginForm.vue';
+	import FormPopup from '@/components/popups/FormPopup.vue';
 	import useNeedLoggedOut from '@/compositions/NeedLoggedOut';
 	import { ActionType } from '@/store/storeFront/actions';
 	import { MutationType } from '@/store/storeFront/mutations';
@@ -20,6 +18,7 @@
 		name: 'Login',
 		components: {
 			LoginForm,
+			FormPopup,
 		},
 		setup() {
 			const router = useRouter();
@@ -28,6 +27,10 @@
 			const dataState = reactive({
 				isLoading: true,
 			});
+
+			const onClose = () => {
+				router.replace({ name: 'Welcome' });
+			};
 
 			const lastToken = localStorage.getItem('auth-token');
 
@@ -56,6 +59,7 @@
 			return {
 				...useNeedLoggedOut(),
 				...toRefs(dataState),
+				onClose
 			};
 		},
 	});
