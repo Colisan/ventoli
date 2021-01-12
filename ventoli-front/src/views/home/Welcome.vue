@@ -19,11 +19,11 @@
 			const router = useRouter();
 
 			const onSignIn = () => {
-				router.push({ name: 'SignIn' });
+				router.push({ name: 'Create Account' });
 			};
 
 			const onLogIn = () => {
-				router.push({ name: 'LogIn' });
+				router.push({ name: 'Login' });
 			};
 
 			return {
@@ -37,6 +37,7 @@
 
 <style scoped lang="scss">
 	.welcome {
+		pointer-events: none;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -49,7 +50,11 @@
 		}
 	}
 
-	.bigButton:not(:last-child) {
-		margin-bottom: 3rem;
+	.bigButton {
+		pointer-events: auto;
+
+		&:not(:last-child) {
+			margin-bottom: 3rem;
+		}
 	}
 </style>

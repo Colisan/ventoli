@@ -4,7 +4,7 @@
 			<div class="formPopup__content">
 				<slot />
 			</div>
-			<icon-button  class="formPopup__closeBtn" icon="close.png" @iconButtonPressed="onClose" />
+			<icon-button class="formPopup__closeBtn" icon="close.png" @iconButtonPressed="onClose" />
 		</div>
 	</div>
 </template>
@@ -19,12 +19,12 @@
 	export default defineComponent({
 		name: 'Form Popup',
 		components: { IconButton },
-		setup (props, context) {
+		setup(props, context) {
 			const store = useStore();
 			const router = useRouter();
 
 			const onClose = () => {
-				context.emit("formPopupClose");
+				context.emit('formPopupClose');
 			};
 
 			return {
@@ -35,37 +35,36 @@
 </script>
 
 <style scoped lang="scss">
-$boxChamferSize: 1.5rem;
+	$boxChamferSize: 1.5rem;
 
-.formPopup {
-	position: relative;
-	
-	&__wrapper {
-		display: flex;
-		align-items: center;
-		justify-content: center;
+	.formPopup {
+		position: relative;
+
+		&__wrapper {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		&__content {
+			background-color: rgba(0, 0, 0, 0.6);
+			padding: $boxChamferSize;
+			clip-path: polygon(
+				$boxChamferSize 0%,
+				calc(100% - #{$boxChamferSize}) 0%,
+				100% $boxChamferSize,
+				100% calc(100% - #{$boxChamferSize}),
+				calc(100% - #{$boxChamferSize}) 100%,
+				$boxChamferSize 100%,
+				0% calc(100% - #{$boxChamferSize}),
+				0% $boxChamferSize
+			);
+		}
+
+		&__closeBtn {
+			position: absolute;
+			top: -1rem;
+			right: -1rem;
+		}
 	}
-
-	&__content {
-		background-color: rgba(0, 0, 0, 0.6);
-		padding: $boxChamferSize;
-		clip-path: polygon(
-			$boxChamferSize 0%,
-			calc(100% - #{$boxChamferSize}) 0%,
-			100% $boxChamferSize,
-			100% calc(100% - #{$boxChamferSize}),
-			calc(100% - #{$boxChamferSize}) 100%,
-			$boxChamferSize 100%,
-			0% calc(100% - #{$boxChamferSize}),
-			0% $boxChamferSize,
-		);
-	}
-
-	&__closeBtn {
-		position: absolute;
-		top: -1rem;
-		right: -1rem;
-	}
-}
-
 </style>

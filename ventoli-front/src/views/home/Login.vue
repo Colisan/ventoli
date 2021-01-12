@@ -1,6 +1,8 @@
 <template>
 	<form-popup v-if="!isLoading" @formPopupClose="onClose">
-		<LoginForm />
+		<styled-form>
+			<LoginForm />
+		</styled-form>
 	</form-popup>
 </template>
 
@@ -8,8 +10,9 @@
 	import { computed, onBeforeMount, ref, defineComponent, reactive, toRefs } from 'vue';
 	import { useStore } from 'vuex';
 	import { useRouter } from 'vue-router';
-	import LoginForm from '@/components/LoginForm.vue';
+	import LoginForm from '@/components/forms/LoginForm.vue';
 	import FormPopup from '@/components/popups/FormPopup.vue';
+	import StyledForm from '@/components/forms/StyledForm.vue';
 	import useNeedLoggedOut from '@/compositions/NeedLoggedOut';
 	import { ActionType } from '@/store/storeFront/actions';
 	import { MutationType } from '@/store/storeFront/mutations';
@@ -19,6 +22,7 @@
 		components: {
 			LoginForm,
 			FormPopup,
+			StyledForm,
 		},
 		setup() {
 			const router = useRouter();
@@ -59,7 +63,7 @@
 			return {
 				...useNeedLoggedOut(),
 				...toRefs(dataState),
-				onClose
+				onClose,
 			};
 		},
 	});

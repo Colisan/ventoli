@@ -8,10 +8,16 @@
 		"ventoli-server"
 	],
 	"scripts": {
-		"lint": "prettier --write **/*"
+		"lint": "prettier --write **/*.{fs,ts,vue,css,sass,scss,json}"
 	},
 	"devDependencies": {
+		"husky": "^4.3.7",
 		"lerna": "^3.22.1",
 		"prettier": "^2.2.1"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "npm test"
+		}
 	}
 }

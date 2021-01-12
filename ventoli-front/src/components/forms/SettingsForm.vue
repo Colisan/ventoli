@@ -7,7 +7,7 @@
 			:type="InputType.Password"
 			label="Confirm new password"
 		/>
-		<input type="submit" value="Save" />
+		<big-button text="Save" @bigButtonPressed="onSubmit" icon="save.png" />
 	</form>
 </template>
 
@@ -17,11 +17,12 @@
 	import { useRouter } from 'vue-router';
 	import { Player } from '@ventoli/ventoli-model';
 	import { ActionType } from '@/store/storeFront/actions';
-	import InputField, { InputType } from './InputField.vue';
+	import InputField, { InputType } from '@/components/forms/InputField.vue';
+	import BigButton from '@/components/BigButton.vue';
 
 	export default defineComponent({
 		name: 'SettingsForm',
-		components: { InputField },
+		components: { InputField, BigButton },
 		setup() {
 			const store = useStore();
 			const router = useRouter();

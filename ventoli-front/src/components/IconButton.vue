@@ -1,7 +1,7 @@
 <template>
 	<a
+		class="iconButton"
 		:class="{
-			iconButton: true,
 			'iconButton--isPressed': isPressed,
 			'iconButton--isReleased': isReleased,
 			'iconButton--isHover': isHover,
@@ -125,22 +125,13 @@
 		&.iconButton--isPressed::after {
 			top: 50%;
 			bottom: 0;
-			clip-path: polygon(
-				 0% 0%,
-				 100% 0%,
-				 50% 100%,
-			);
+			clip-path: polygon(0% 0%, 100% 0%, 50% 100%);
 		}
 	}
 
 	.iconButton {
 		&__contentWrapper {
-			clip-path: polygon(
-				50% 0%,
-				100% 50%,
-				50% 100%,
-				0% 50%, 
-			);
+			clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
 
 			> .iconButton__content {
 				height: 100%;
@@ -165,11 +156,7 @@
 			background-color: #ff0;
 			mix-blend-mode: overlay;
 			opacity: 0.3;
-			clip-path: polygon(
-				 0% 100%,
-				 50% 0%,
-				 100% 100%,
-			);
+			clip-path: polygon(0% 100%, 50% 0%, 100% 100%);
 		}
 
 		&__shine {

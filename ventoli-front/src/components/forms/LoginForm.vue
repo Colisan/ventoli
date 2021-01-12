@@ -3,7 +3,7 @@
 		<input-field v-model="login" label="Login" />
 		<input-field v-model="password" :type="InputType.Password" label="Password" />
 		<input-field v-model="willRemember" :type="InputType.Check" label="Remember me" />
-		<input type="submit" value="Enter the castle!" />
+		<big-button text="Enter the Castel" @bigButtonPressed="onSubmit" icon="key.png" />
 	</form>
 </template>
 
@@ -14,11 +14,12 @@
 	import { Game } from '@ventoli/ventoli-model';
 	import { ActionType } from '@/store/storeFront/actions';
 	import { MutationType } from '@/store/storeFront/mutations';
-	import InputField, { InputType } from './InputField.vue';
+	import InputField, { InputType } from '@/components/forms/InputField.vue';
+	import BigButton from '@/components/BigButton.vue';
 
 	export default defineComponent({
-		name: 'LoginForm',
-		components: { InputField },
+		name: 'Login Form',
+		components: { InputField, BigButton },
 		setup() {
 			const store = useStore();
 			const router = useRouter();

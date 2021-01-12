@@ -3,7 +3,7 @@
 		<input-field v-model="login" label="Login" />
 		<input-field v-model="password" :type="InputType.Password" label="Password" />
 		<input-field v-model="passwordAgain" :type="InputType.Password" label="Confirm password" />
-		<input type="submit" value="Create new account!" />
+		<big-button text="Enter the Castel" @bigButtonPressed="onSubmit" icon="add.png" />
 	</form>
 </template>
 
@@ -14,10 +14,11 @@
 	import { Player } from '@ventoli/ventoli-model';
 	import { ActionType } from '@/store/storeFront/actions';
 	import InputField, { InputType } from './InputField.vue';
+	import BigButton from '@/components/BigButton.vue';
 
 	export default defineComponent({
-		name: 'SigninForm',
-		components: { InputField },
+		name: 'Signin Form',
+		components: { InputField, BigButton },
 		setup() {
 			const store = useStore();
 			const router = useRouter();

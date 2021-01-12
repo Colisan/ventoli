@@ -1,12 +1,12 @@
 import VueRouter, { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
-import Welcome from '@/views/Welcome.vue';
 import Home from '@/views/Home.vue';
+import Welcome from '@/views/home/Welcome.vue';
+import Login from '@/views/home/Login.vue';
+import CreateAccount from '@/views/home/CreateAccount.vue';
 import Game from '@/views/Game.vue';
-import Login from '@/views/Login.vue';
-import SignIn from '@/views/SignIn.vue';
-import Settings from '@/views/Settings.vue';
-import Start from '@/views/Start.vue';
-import Play from '@/views/Play.vue';
+import Settings from '@/views/game/Settings.vue';
+import Start from '@/views/game/Start.vue';
+import Play from '@/views/game/Play.vue';
 
 export const routes: Array<RouteRecordRaw> = [
 	{
@@ -15,8 +15,8 @@ export const routes: Array<RouteRecordRaw> = [
 		component: Home,
 		children: [
 			{ path: '', name: 'Welcome', component: Welcome },
-			{ path: '/login', name: 'LogIn', component: Login },
-			{ path: '/signin', name: 'SignIn', component: SignIn },
+			{ path: '/login', name: 'Login', component: Login },
+			{ path: '/signin', name: 'Create Account', component: CreateAccount },
 		],
 	},
 	{

@@ -12,6 +12,7 @@
 	},
 	"dependencies": {
 		"@babylonjs/core": "^4.2.0",
+		"@babylonjs/loaders": "^4.2.0",
 		"@ventoli/ventoli-api": "*",
 		"@ventoli/ventoli-model": "*",
 		"axios": "^0.21.1",

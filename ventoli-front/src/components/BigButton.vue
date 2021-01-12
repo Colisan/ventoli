@@ -1,7 +1,7 @@
 <template>
 	<a
+		class="bigButton"
 		:class="{
-			bigButton: true,
 			'bigButton--isPressed': isPressed,
 			'bigButton--isReleased': isReleased,
 			'bigButton--isHover': isHover,
@@ -103,7 +103,7 @@
 		color: white;
 		cursor: pointer;
 		transition: filter 300ms;
-		filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.1));
+		filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.4));
 
 		* {
 			pointer-events: none;
@@ -114,7 +114,7 @@
 		}
 
 		&:hover:not(&--isPressed) {
-			filter: drop-shadow(0 0 1rem rgba(0, 0, 0, 0.4));
+			filter: drop-shadow(0 0 1.2rem rgba(0, 0, 0, 0.7));
 		}
 
 		&--isHover &__shine {

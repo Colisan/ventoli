@@ -1,7 +1,7 @@
 <template>
 	<div class="home__wrapper">
-		<router-view class="home__content" />
 		<home-background class="home__background" />
+		<router-view class="home__content" />
 	</div>
 </template>
 
@@ -20,7 +20,7 @@
 	});
 </script>
 
-<style scoper lang="scss">
+<style scoped lang="scss">
 	.home {
 		&__wrapper,
 		&__content,

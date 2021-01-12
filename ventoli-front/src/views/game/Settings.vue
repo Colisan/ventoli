@@ -8,7 +8,7 @@
 <script lang="ts">
 	import { defineComponent } from 'vue';
 	import useNeedLoggedIn from '@/compositions/NeedLoggedIn';
-	import SettingsForm from '@/components/SettingsForm.vue';
+	import SettingsForm from '@/components/forms/SettingsForm.vue';
 	import MainHeader from '@/components/MainHeader.vue';
 
 	export default defineComponent({
