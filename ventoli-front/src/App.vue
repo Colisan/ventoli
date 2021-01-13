@@ -7,9 +7,7 @@
 
 <script lang="ts">
 	import { defineComponent } from 'vue';
-	import { useStore } from 'vuex';
-	import { MutationType } from '@/store/storeFront/mutations';
-	import { ActionType } from '@/store/storeFront/actions';
+	import { useStore } from '@/stores/storeFront';
 	import Popups from '@/components/popups/Popups.vue';
 
 	export default defineComponent({

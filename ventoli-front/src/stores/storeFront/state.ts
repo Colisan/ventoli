@@ -5,7 +5,7 @@ export type State = {
 	authToken?: string;
 	currentPlayer?: Player;
 	currentGame?: Game;
-	popupList: { [key: number]: Popup };
+	popupList: Record<number, Popup>;
 	lastPopupIndex: number;
 };
 

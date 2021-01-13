@@ -7,7 +7,7 @@
 
 <script lang="ts">
 	import { computed, defineComponent, onBeforeMount, ref } from 'vue';
-	import { useStore } from 'vuex';
+	import { useStore } from '@/stores/storeFront';
 	import { Game } from '@ventoli/ventoli-model';
 	import useNeedLoggedIn from '@/compositions/NeedLoggedIn';
 	import MainHeader from '@/components/MainHeader.vue';

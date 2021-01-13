@@ -6,7 +6,7 @@
 
 <script lang="ts">
 	import { computed, onBeforeMount, ref, defineComponent } from 'vue';
-	import { useStore } from 'vuex';
+	import { useStore } from '@/stores/storeFront';
 	import { useRouter } from 'vue-router';
 	import MainHeader from '@/components/MainHeader.vue';
 	import MainGame from '@/components/MainGame.vue';

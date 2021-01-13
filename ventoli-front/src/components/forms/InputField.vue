@@ -17,10 +17,9 @@
 		watch,
 		toRef,
 	} from 'vue';
-	import { useStore } from 'vuex';
+	import { useStore } from '@/stores/storeFront';
 	import { useRouter } from 'vue-router';
 	import { Player } from '@ventoli/ventoli-model';
-	import { ActionType } from '@/store/storeFront/actions';
 
 	export enum InputType {
 		Text = 'TYPE_TEXT',
@@ -63,11 +62,11 @@
 				id: 'input_' + props.label.replaceAll(/(\W)/g, '_').toLowerCase(),
 			});
 
-			watch(toRef(props, 'modelValue'), modelValue => {
+			watch(toRef(props, 'modelValue'), (modelValue) => {
 				dataState.value = modelValue;
 			});
 
-			watch(toRef(dataState, 'value'), inputValue => {
+			watch(toRef(dataState, 'value'), (inputValue) => {
 				context.emit('update:modelValue', inputValue);
 			});
 

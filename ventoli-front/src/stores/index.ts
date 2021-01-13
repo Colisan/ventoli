@@ -1,6 +1,6 @@
 /*
 import { createStore, Store, useStore } from 'vuex';
-import storeFront, { GetStoreFrontPlugin, State } from '@/store/storeFront';
+import storeFront, { GetStoreFrontPlugin, State } from '@/stores/storeFront';
 
 const getStore = (storage: Storage): Store<State> =>
 	createStore({

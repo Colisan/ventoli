@@ -9,11 +9,9 @@
 
 <script lang="ts">
 	import { computed, defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
-	import { useStore } from 'vuex';
+	import { useStore } from '@/stores/storeFront';
 	import { useRouter } from 'vue-router';
 	import { Game } from '@ventoli/ventoli-model';
-	import { ActionType } from '@/store/storeFront/actions';
-	import { MutationType } from '@/store/storeFront/mutations';
 	import InputField, { InputType } from '@/components/forms/InputField.vue';
 	import BigButton from '@/components/BigButton.vue';
 
@@ -32,7 +30,7 @@
 
 			const onSubmit = () => {
 				store
-					.dispatch(ActionType.CallLogin, {
+					.dispatch('CallLogin', {
 						login: dataState.login,
 						password: dataState.password,
 						willRemember: dataState.willRemember,

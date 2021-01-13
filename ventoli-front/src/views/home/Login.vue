@@ -8,14 +8,12 @@
 
 <script lang="ts">
 	import { computed, onBeforeMount, ref, defineComponent, reactive, toRefs } from 'vue';
-	import { useStore } from 'vuex';
+	import { useStore } from '@/stores/storeFront';
 	import { useRouter } from 'vue-router';
 	import LoginForm from '@/components/forms/LoginForm.vue';
 	import FormPopup from '@/components/popups/FormPopup.vue';
 	import StyledForm from '@/components/forms/StyledForm.vue';
 	import useNeedLoggedOut from '@/compositions/NeedLoggedOut';
-	import { ActionType } from '@/store/storeFront/actions';
-	import { MutationType } from '@/store/storeFront/mutations';
 
 	export default defineComponent({
 		name: 'Login',
@@ -40,9 +38,9 @@
 
 			if (lastToken) {
 				store
-					.dispatch(ActionType.TestThenSetToken, lastToken)
+					.dispatch('TestThenCallSetToken', lastToken)
 					.then(() => {
-						store.dispatch(ActionType.CallGetSelfAccount).then(() => {
+						store.dispatch('CallGetSelfAccount').then(() => {
 							router.back();
 						});
 					})
@@ -54,7 +52,7 @@
 			}
 
 			store.subscribe((mutation, state) => {
-				if (mutation.type === MutationType.SetAuthToken) {
+				if (mutation.type === 'SetAuthToken') {
 					if (mutation.payload) localStorage.setItem('auth-token', mutation.payload);
 					else localStorage.removeItem('auth-token');
 				}

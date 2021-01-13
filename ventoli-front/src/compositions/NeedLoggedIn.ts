@@ -1,5 +1,5 @@
+import { useStore } from '@/stores/storeFront';
 import { computed, onBeforeMount } from 'vue';
-import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 
 export default function useNeedLoggedIn() {

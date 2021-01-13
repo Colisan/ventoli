@@ -7,7 +7,7 @@
 
 <script lang="ts">
 	import { computed, defineComponent, onBeforeMount, ref, Ref, onMounted } from 'vue';
-	import { useStore } from 'vuex';
+	import { useStore } from '@/stores/storeFront';
 	import { useRouter } from 'vue-router';
 	import { Popup } from '@/model/Popup';
 	import { MeshBuilder } from '@babylonjs/core/Meshes/meshBuilder';
@@ -61,7 +61,7 @@
 		private async addFuturePreload(dir: string, file: string): Promise<AbstractMesh> {
 			return new Promise((resolve, _) => {
 				let meshTask = this.m_assetsManager.addMeshTask('load ' + dir + '/' + file, '', dir, file);
-				meshTask.onSuccess = task => {
+				meshTask.onSuccess = (task) => {
 					resolve(task.loadedMeshes[0]);
 				};
 				meshTask.onError = console.error;
@@ -117,18 +117,18 @@
 				0.5,
 				this.m_camera
 			);
-			postProcess.onApply = function(effect: Effect) {
+			postProcess.onApply = function (effect: Effect) {
 				effect.setFloat2('screenSize', postProcess.width, postProcess.height);
 			};
 
-			window.addEventListener('resize', _ => {
+			window.addEventListener('resize', (_) => {
 				this.updateCanvasSize();
 				this.updateCameraBoundaries();
 			});
 			this.updateCanvasSize();
 			this.updateCameraBoundaries();
 
-			this.m_canvas.addEventListener('keydown', evt => {
+			this.m_canvas.addEventListener('keydown', (evt) => {
 				if (evt.key === 'ArrowRight') {
 					this.rotateRight();
 				}
@@ -158,10 +158,10 @@
 
 			this.m_assetsManager = new AssetsManager(this.m_scene);
 			this.m_assetsManager.useDefaultLoadingScreen = false;
-			let cb = this.addFuturePreload('landingPage/obj/', 'cursor.babylon').then(mesh => {
+			let cb = this.addFuturePreload('landingPage/obj/', 'cursor.babylon').then((mesh) => {
 				this.m_cursorBottomMesh = mesh;
 			});
-			let ct = this.addFuturePreload('landingPage/obj/', 'cursor2.obj').then(mesh => {
+			let ct = this.addFuturePreload('landingPage/obj/', 'cursor2.obj').then((mesh) => {
 				this.m_cursorTopMesh = mesh;
 			});
 			(async () => {
@@ -169,7 +169,7 @@
 				await ct;
 				this.hideCursor();
 			})();
-			this.addFuturePreload('/landingPage/obj/', 'grass.babylon').then(mesh => {
+			this.addFuturePreload('/landingPage/obj/', 'grass.babylon').then((mesh) => {
 				mesh.isVisible = false;
 				//console.log(mesh.getBoundingInfo())
 				let blocWidth = 1;
@@ -179,12 +179,12 @@
 						newInstance.position = new Vector3(i * blocWidth, -0.3, j * blocWidth);
 						newInstance.actionManager = new ActionManager(this.m_scene);
 						newInstance.actionManager.registerAction(
-							new ExecuteCodeAction(ActionManager.OnPointerOverTrigger, evt => {
+							new ExecuteCodeAction(ActionManager.OnPointerOverTrigger, (evt) => {
 								this.onMouseOverTile(evt);
 							})
 						);
 						newInstance.actionManager.registerAction(
-							new ExecuteCodeAction(ActionManager.OnPointerOutTrigger, evt => {
+							new ExecuteCodeAction(ActionManager.OnPointerOutTrigger, (evt) => {
 								this.onMouseOutTile(evt);
 							})
 						);
@@ -197,7 +197,7 @@
 					this.m_scene.textures[index].updateSamplingMode(Texture.NEAREST_SAMPLINGMODE);
 				}
 			};
-			this.m_scene.executeWhenReady(function() {
+			this.m_scene.executeWhenReady(function () {
 				convertToFlat();
 			});
 
@@ -307,7 +307,7 @@
 
 		private async preloadAll(): Promise<void> {
 			return new Promise((resolve, _) => {
-				this.m_assetsManager.onFinish = _ => resolve();
+				this.m_assetsManager.onFinish = (_) => resolve();
 				this.m_assetsManager.load();
 			});
 		}
@@ -357,16 +357,17 @@
 	});
 </script>
 
-<style lang="sass">
+<style lang="scss">
+	.isHidden {
+		display: none;
+	}
 
-	.isHidden
-		display: none
-
-	.ventoliDoor--mainCanvas
-		position: absolute
-		top: 0
-		left: 0
-		width: 100%
-		height: 100%
-		background-color: black
+	.ventoliDoor--mainCanvas {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: black;
+	}
 </style>

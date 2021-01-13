@@ -23,7 +23,7 @@ const swaggerDoc = swaggerJsdoc(docOptions);
 process.env.TZ = 'utc';
 
 createConnection()
-	.then(async connection => {
+	.then(async (connection) => {
 		// create express app
 		const app = express();
 		app.use(cors());
@@ -38,4 +38,4 @@ createConnection()
 
 		console.log('Express server has started on port 3000.');
 	})
-	.catch(error => console.log(error));
+	.catch((error) => console.log(error));

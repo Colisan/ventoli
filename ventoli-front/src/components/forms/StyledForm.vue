@@ -4,7 +4,7 @@
 
 <script lang="ts">
 	import { computed, defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
-	import { useStore } from 'vuex';
+	import { useStore } from '@/stores/storeFront';
 	import { useRouter } from 'vue-router';
 
 	export default defineComponent({

@@ -13,10 +13,9 @@
 
 <script lang="ts">
 	import { computed, defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
-	import { useStore } from 'vuex';
+	import { useStore } from '@/stores/storeFront';
 	import { useRouter } from 'vue-router';
 	import { Player } from '@ventoli/ventoli-model';
-	import { ActionType } from '@/store/storeFront/actions';
 	import InputField, { InputType } from '@/components/forms/InputField.vue';
 	import BigButton from '@/components/BigButton.vue';
 
@@ -35,8 +34,7 @@
 
 			const editAccount = () => {
 				return store
-					.dispatch(ActionType.CallEditSelfAccount, {
-						login: dataState.newPassword,
+					.dispatch('CallEditSelfAccount', {
 						oldPassword: dataState.oldPassword,
 						newPassword: dataState.newPassword,
 					})

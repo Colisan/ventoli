@@ -8,7 +8,7 @@
 
 <script lang="ts">
 	import { computed, defineComponent, onBeforeMount, ref } from 'vue';
-	import { useStore } from 'vuex';
+	import { useStore } from '@/stores/storeFront';
 	import { useRouter } from 'vue-router';
 	import SinglePopup from '@/components/popups/SinglePopup.vue';
 	import { Popup } from '@/model/Popup';

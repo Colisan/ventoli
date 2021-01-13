@@ -7,7 +7,7 @@
 
 <script lang="ts">
 	import { computed, defineComponent, onBeforeMount, reactive, ref, toRefs } from 'vue';
-	import { useStore } from 'vuex';
+	import { useStore } from '@/stores/storeFront';
 	import { useRouter } from 'vue-router';
 	import { Game } from '@ventoli/ventoli-model';
 
@@ -27,7 +27,7 @@
 					dataState.isLoading = true;
 				};
 
-				webSocket.onmessage = data => {
+				webSocket.onmessage = (data) => {
 					console.log('recieved', data);
 					dataState.isLoading = false;
 				};

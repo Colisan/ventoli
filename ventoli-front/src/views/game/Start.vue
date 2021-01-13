@@ -6,7 +6,7 @@
 
 <script lang="ts">
 	import { computed, defineComponent, onBeforeMount, ref } from 'vue';
-	import { useStore } from 'vuex';
+	import { useStore } from '@/stores/storeFront';
 	import { Game } from '@ventoli/ventoli-model';
 	import BigButton from '@/components/BigButton.vue';
 	import useNeedLoggedIn from '@/compositions/NeedLoggedIn';
