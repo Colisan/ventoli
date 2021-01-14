@@ -19,12 +19,15 @@ export type typedCommit = <K extends keyof typeof mutations>(
 	key: K,
 	payload: Parameters<typeof mutations[K]>[1]
 ) => ReturnType<typeof mutations[K]>;
+
 export type typedDispatch = <K extends keyof typeof actions>(
 	key: K,
 	payload?: Parameters<typeof actions[K]>[1],
 	options?: DispatchOptions
 ) => ReturnType<typeof actions[K]>;
+
 export type typedGetters = { [K in keyof typeof getters]: ReturnType<typeof getters[K]> };
+
 export type typedStore = {
 	commit: typedCommit;
 	dispatch: typedDispatch;

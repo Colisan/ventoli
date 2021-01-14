@@ -23,7 +23,7 @@
 				webSocket = new WebSocket(process.env.VUE_APP_VENTOLI_SERVER_URL as string);
 
 				webSocket.onopen = () => {
-					webSocket.send('something');
+					webSocket.send(JSON.stringify({ type: 'PING', payload: new Date() }));
 					dataState.isLoading = true;
 				};
 
