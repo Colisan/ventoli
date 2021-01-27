@@ -10,6 +10,7 @@
 		"run": "node ./dist/index.js"
 	},
 	"dependencies": {
+		"@ventoli/ventoli-model": "*",
 		"ws": "^7.3.1"
 	},
 	"devDependencies": {

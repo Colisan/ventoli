@@ -4,21 +4,27 @@ export type TypeAndPayload = {
 	HELLO: void;
 	PING: Date;
 	PONG: Date;
+	GET_GAME: void;
 };
 
-export class Message<T extends keyof TypeAndPayload> {
+export type Type = keyof TypeAndPayload;
+
+export class TypedMessage<T extends Type> {
 	public type: T;
 	public payload: TypeAndPayload[T];
+	public jwtToken: string | undefined;
 
-	constructor(type: Message<T>['type'], payload: Message<T>['payload']) {
+	constructor(type: TypedMessage<T>['type'], payload: TypedMessage<T>['payload']) {
 		this.type = type;
 		this.payload = payload;
 	}
 }
 
-export function onMessage(webSocket: WebSocket, callback: (_: Message<any>) => any): void {
+export type Message = TypedMessage<Type>;
+
+export function onMessage(webSocket: WebSocket, callback: (_: Message) => any): void {
 	webSocket.on('message', (stringifiedMessage) => {
-		let message: Message<any>;
+		let message: Message;
 		let isParsingOk = false;
 		try {
 			message = JSON.parse(stringifiedMessage as string);
@@ -31,6 +37,6 @@ export function onMessage(webSocket: WebSocket, callback: (_: Message<any>) => a
 	});
 }
 
-export function sendMessage(webSocket: WebSocket, message: Message<any>) {
+export function sendMessage(webSocket: WebSocket, message: Message) {
 	webSocket.send(JSON.stringify(message));
 }

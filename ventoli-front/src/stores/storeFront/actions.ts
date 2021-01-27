@@ -2,7 +2,7 @@ import { ActionContext, ActionTree } from 'vuex';
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { getInitialState, State } from '@/stores/storeFront/state';
 import { Player } from '@ventoli/ventoli-model';
-import { avaliableRoutes, RouteType } from '@ventoli/ventoli-api/src/route/routes';
+import { avaliableRoutes, RouteName } from '@ventoli/ventoli-api/src/route/routes';
 import { Popup } from '@/model/Popup';
 import { typedStore } from '@/stores/storeFront';
 import callApi from '@/services/callApi';
@@ -12,7 +12,7 @@ type TypedActionContext = Omit<ActionContext<State, State>, 'getters' | 'commit'
 
 export default {
 	async TestThenCallSetToken(context: TypedActionContext, token: string): Promise<any> {
-		return callApi(RouteType.ValidAuth, token).then((res: AxiosResponse<any>) => {
+		return callApi('VALID_AUTH', token).then((res: AxiosResponse<any>) => {
 			context.commit('SetAuthToken', token);
 		});
 	},
@@ -21,7 +21,7 @@ export default {
 		credentials: { login: string; password: string; willRemember: boolean }
 	): Promise<any> {
 		return callApi(
-			RouteType.PostLogin,
+			'POST_LOGIN',
 			context.state.authToken,
 			{},
 			{
@@ -35,7 +35,7 @@ export default {
 		});
 	},
 	async CallGetSelfAccount(context: TypedActionContext): Promise<any> {
-		return callApi(RouteType.GetSelfPlayer, context.state.authToken).then(
+		return callApi('GET_SELF_PLAYER', context.state.authToken).then(
 			(res: AxiosResponse<Player>) => {
 				context.commit('SetCurrentPlayer', res.data);
 			}
@@ -45,7 +45,7 @@ export default {
 		context: TypedActionContext,
 		credentials: { login: string; password: string }
 	): Promise<any> {
-		return callApi(RouteType.PostNewPlayer, context.state.authToken, {
+		return callApi('POST_NEW_PLAYER', context.state.authToken, {
 			playername: credentials.login,
 			password: credentials.password,
 		}).catch((err: any) => {
@@ -60,7 +60,7 @@ export default {
 		informations: { oldPassword: string; newPassword: string }
 	): Promise<any> {
 		if (context.state.currentPlayer)
-			return callApi(RouteType.PutSelfPlayer, context.state.authToken, {
+			return callApi('PUT_SELF_PLAYER', context.state.authToken, {
 				id: context.state.currentPlayer.id,
 				oldPassword: informations.oldPassword,
 				newPassword: informations.newPassword,

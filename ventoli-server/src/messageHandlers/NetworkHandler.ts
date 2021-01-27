@@ -1,5 +1,5 @@
 import WebSocket from 'ws';
-import { Message, sendMessage, TypeAndPayload } from '../Protocol';
+import { Message, sendMessage, Type, TypeAndPayload, TypedMessage } from '../Protocol';
 import GameHandler from './GameHandler';
 
 export default class NetworkHandler {
@@ -9,15 +9,15 @@ export default class NetworkHandler {
 		this.webSocket = webSocket;
 	}
 
-	public handleMessage(message: Message<any>) {
-		switch (message.type as keyof TypeAndPayload) {
+	public handleMessage(message: Message) {
+		switch (message.type as Type) {
 			case 'PING':
-				this.respondToPing(message);
+				this.respondToPing(message as TypedMessage<'PING'>);
 				break;
 		}
 	}
 
-	private respondToPing(message: Message<'HELLO'>) {
-		sendMessage(this.webSocket, new Message('PONG', new Date()));
+	private respondToPing(message: TypedMessage<'PING'>) {
+		sendMessage(this.webSocket, new TypedMessage('PONG', new Date()));
 	}
 }

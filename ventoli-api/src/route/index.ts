@@ -2,11 +2,11 @@ import { RequestHandler, Router } from 'express';
 import AuthController from '../controller/AuthController';
 import PlayerController from '../controller/PlayerController';
 import { validateJwt } from '../middleware/validateJwt';
-import { avaliableRoutes, RouteType } from './routes';
+import { avaliableRoutes, RouteName } from './routes';
 
 const router = Router();
 
-function plugRoute(route: RouteType, controller: RequestHandler) {
+function plugRoute(route: RouteName, controller: RequestHandler) {
 	let routeInfos = avaliableRoutes[route];
 	if (routeInfos.needAuth) router[routeInfos.method](routeInfos.url, [validateJwt], controller);
 	else router[routeInfos.method](routeInfos.url, controller);
@@ -19,7 +19,7 @@ function plugRoute(route: RouteType, controller: RequestHandler) {
  *   get:
  *     $ref: '#/definitions/AuthController_validateAuth'
  */
-plugRoute(RouteType.ValidAuth, AuthController.validateAuth);
+plugRoute('VALID_AUTH', AuthController.validateAuth);
 
 /**
  * @swagger
@@ -28,7 +28,7 @@ plugRoute(RouteType.ValidAuth, AuthController.validateAuth);
  *   post:
  *     $ref: '#/definitions/AuthController_login'
  */
-plugRoute(RouteType.PostLogin, AuthController.login);
+plugRoute('POST_LOGIN', AuthController.login);
 
 /**
  * @swagger
@@ -37,7 +37,7 @@ plugRoute(RouteType.PostLogin, AuthController.login);
  *   put:
  *     $ref: '#/definitions/PlayerController_editPlayer'
  */
-plugRoute(RouteType.PutSelfPlayer, PlayerController.editPlayer);
+plugRoute('PUT_SELF_PLAYER', PlayerController.editPlayer);
 
 /**
  * @swagger
@@ -46,7 +46,7 @@ plugRoute(RouteType.PutSelfPlayer, PlayerController.editPlayer);
  *   get:
  *     $ref: '#/definitions/PlayerController_findSelfByName'
  */
-plugRoute(RouteType.GetSelfPlayer, PlayerController.findSelf);
+plugRoute('GET_SELF_PLAYER', PlayerController.findSelf);
 
 /**
  * @swagger
@@ -55,7 +55,7 @@ plugRoute(RouteType.GetSelfPlayer, PlayerController.findSelf);
  *   post:
  *     $ref: '#/definitions/PlayerController_newPlayer'
  */
-plugRoute(RouteType.PostLogin, PlayerController.newPlayer);
+plugRoute('POST_LOGIN', PlayerController.newPlayer);
 
 /**
  * @swagger
@@ -64,6 +64,6 @@ plugRoute(RouteType.PostLogin, PlayerController.newPlayer);
  *   get:
  *     $ref: '#/definitions/PlayerController_findOneByName'
  */
-plugRoute(RouteType.GetOtherPlayer, PlayerController.findOneByName);
+plugRoute('GET_OTHER_PLAYER', PlayerController.findOneByName);
 
 export default router;

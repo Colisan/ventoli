@@ -1,8 +1,8 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { avaliableRoutes, RouteType } from '@ventoli/ventoli-api/src/route/routes';
+import { avaliableRoutes, RouteName } from '@ventoli/ventoli-api/src/route/routes';
 
 export default async function (
-	route: RouteType,
+	route: RouteName,
 	token?: string,
 	getParams: Record<string, { toString: Function }> = {},
 	postParams: Object = {}
