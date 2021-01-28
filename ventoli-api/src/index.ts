@@ -22,6 +22,11 @@ const swaggerDoc = swaggerJsdoc(docOptions);
 
 process.env.TZ = 'utc';
 
+let defaultLog = console.log;
+console.log = (...args) => {
+	defaultLog(`[${process.env.npm_package_name}]`, ...args);
+};
+
 createConnection()
 	.then(async (connection) => {
 		// create express app

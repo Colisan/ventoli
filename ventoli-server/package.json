@@ -6,7 +6,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "yarn run run-watch",
-		"run": "ts-node -r dotenv/config src/index.ts",
+		"run": "ts-node -r dotenv/config src/index.ts --files",
 		"run-watch": "nodemon --exec yarn run run"
 	},
 	"dependencies": {

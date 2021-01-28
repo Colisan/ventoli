@@ -6,7 +6,7 @@ export type RouteInfos = {
 	needAuth: boolean;
 };
 
-function getAvaliableRoutes<T extends { [name: string]: RouteInfos }>(routelist: T) {
+function getAvaliableRoutes<T extends Record<string, RouteInfos>>(routelist: T) {
 	return routelist;
 }
 
@@ -17,6 +17,7 @@ export const avaliableRoutes = getAvaliableRoutes({
 	GET_SELF_PLAYER: { method: 'get', url: '/player', needAuth: true },
 	POST_NEW_PLAYER: { method: 'post', url: '/player', needAuth: false },
 	GET_OTHER_PLAYER: { method: 'get', url: '/player/:playername', needAuth: false },
+	POST_GAMESERVER: { method: 'post', url: '/server', needAuth: false },
 });
 
 export type RouteName = keyof typeof avaliableRoutes;

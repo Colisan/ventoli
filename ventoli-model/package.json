@@ -7,10 +7,10 @@
 	"main": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"scripts": {
-		"dev": "npm run build -- -watch",
+		"dev": "yarn run build -- -watch",
 		"lint": "tsc --noEmit && eslint ./src/**/*.{js,ts,tsx} --quiet --fix",
 		"test": "mocha -r ts-node/register ./src/**/*.test.ts",
-		"test:watch": "npm run test -- --watch-extensions ts --watch",
+		"test:watch": "yarn run test -- --watch-extensions ts --watch",
 		"test:coverage": "nyc npm run test",
 		"build": "tsc --declaration"
 	},
