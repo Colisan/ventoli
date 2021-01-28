@@ -1,8 +1,9 @@
 import { RequestHandler, Router } from 'express';
-import AuthController from '../controller/AuthController';
-import PlayerController from '../controller/PlayerController';
 import { validateJwt } from '../middleware/validateJwt';
 import { avaliableRoutes, RouteName } from './routes';
+import AuthController from '../controller/AuthController';
+import PlayerController from '../controller/PlayerController';
+import ServerController from '../controller/ServerController';
 
 const router = Router();
 
@@ -65,5 +66,14 @@ plugRoute('POST_LOGIN', PlayerController.newPlayer);
  *     $ref: '#/definitions/PlayerController_findOneByName'
  */
 plugRoute('GET_OTHER_PLAYER', PlayerController.findOneByName);
+
+/**
+ * @swagger
+ *
+ * /api/player/{playername}:
+ *   get:
+ *     $ref: '#/definitions/ServerController_registerServer'
+ */
+plugRoute('POST_GAMESERVER', ServerController.registerServer);
 
 export default router;
